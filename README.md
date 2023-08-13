@@ -7,26 +7,23 @@
   - [Notes](#notes)
   - [Useful Links](#useful-links)
   - [Big O](#big-o)
-    - [Big O in a Nutshell](#big-o-in-a-nutshell)
-    - [Key Concepts](#key-concepts)
-    - [Big O Complexity Chart](#big-o-complexity-chart)
-    - [Big O Examples](#big-o-examples)
-      - [O(1) - Constant](#o1---constant)
-      - [O(n) - Linear](#on---linear)
-      - [O(n^2) - Quadratic](#on2---quadratic)
-      - [O(n^3) - Cubic](#on3---cubic)
-      - [O(log n) - Logarithmic](#olog-n---logarithmic)
-      - [O(n log n) - Linearithmic](#on-log-n---linearithmic)
-      - [O(2^n) - Exponential](#o2n---exponential)
-      - [O(n!) - Factorial](#on---factorial)
-    - [Big O Cheat Sheet](#big-o-cheat-sheet)
-      - [Common Big O Cases](#common-big-o-cases)
-  - [Arrays](#arrays)
-    - [Examples](#examples)
-      - [Creating an Array](#creating-an-array)
-      - [Getting an Element at a Specific Index](#getting-an-element-at-a-specific-index)
-      - [Insertion at a Specific Index](#insertion-at-a-specific-index)
-      - [Deletion at a Specific Index](#deletion-at-a-specific-index)
+      - [Big O in a Nutshell](#big-o-in-a-nutshell)
+      - [Key Concepts](#key-concepts)
+      - [Big O Complexity Chart](#big-o-complexity-chart)
+      - [Big O Examples](#big-o-examples)
+        - [O(1) - Constant](#o1---constant)
+        - [O(n) - Linear](#on---linear)
+        - [O(n^2) - Quadratic](#on2---quadratic)
+        - [O(n^3) - Cubic](#on3---cubic)
+        - [O(log n) - Logarithmic](#olog-n---logarithmic)
+        - [O(n log n) - Linearithmic](#on-log-n---linearithmic)
+        - [O(2^n) - Exponential](#o2n---exponential)
+        - [O(n!) - Factorial](#on---factorial)
+      - [Big O Cheat Sheet](#big-o-cheat-sheet)
+        - [Common Big O Cases](#common-big-o-cases)
+    - [Arrays](#arrays)
+      - [Fixed-Size Arrays](#fixed-size-arrays)
+      - [Dynamic Arrays](#dynamic-arrays)
     - [Big O of Dynamic Array Methods](#big-o-of-dynamic-array-methods)
     - [Big O of Fixed-Size Array Methods](#big-o-of-fixed-size-array-methods)
     - [Big O of Algorithms](#big-o-of-algorithms)
@@ -55,17 +52,17 @@
 
 Big O notation is a way to categorize an algorithm's time or memory requirements based on its input size. It provides a high-level understanding of how an algorithm's performance scales as the input grows. While it doesn't give precise measurements in terms of CPU cycles, it helps us understand the general growth pattern of the algorithm.
 
-### Big O in a Nutshell
+#### Big O in a Nutshell
 
 As the size of the input grows, how does the computational time or memory usage of the algorithm change?
 
-### Key Concepts
+#### Key Concepts
 
 - **Constants Are Dropped:** In Big O analysis, constant factors and lower-order terms are ignored since they have less impact on the overall growth rate.
 - **Worst Case Complexity:** Typically, the worst-case scenario is used to measure an algorithm's complexity.
 - **Growth Relative to Input:** The Big O notation describes the growth of an algorithm's efficiency in relation to the size of the input.
 
-### Big O Complexity Chart
+#### Big O Complexity Chart
 
 | Big O      | Name         |
 | ---------- | ------------ |
@@ -80,16 +77,17 @@ As the size of the input grows, how does the computational time or memory usage 
 
 ![Big O Chart](/images/big-o-face.png)
 
-### Big O Examples
+#### Big O Examples
 
-#### O(1) - Constant
+##### O(1) - Constant
 
-Python:
+C#:
 
-```python
-def constant_algorithm(items):
-    result = items[0] * items[0]
-    print(result)
+```csharp
+void ConstantAlgorithm(int[] items) {
+    int result = items[0] * items[0];
+    Console.WriteLine(result);
+}
 ```
 
 Typescript:
@@ -101,23 +99,24 @@ function constantAlgorithm(items: number[]): void {
 }
 ```
 
-C#:
-
-```csharp
-void ConstantAlgorithm(int[] items) {
-    int result = items[0] * items[0];
-    Console.WriteLine(result);
-}
-```
-
-#### O(n) - Linear
-
 Python:
 
 ```python
-def linear_algorithm(items):
-    for item in items:
-        print(item)
+def constant_algorithm(items):
+    result = items[0] * items[0]
+    print(result)
+```
+
+##### O(n) - Linear
+
+C#:
+
+```csharp
+void LinearAlgorithm(int[] items) {
+    foreach (int item in items) {
+        Console.WriteLine(item);
+    }
+}
 ```
 
 Typescript:
@@ -130,25 +129,26 @@ function linearAlgorithm(items: number[]): void {
 }
 ```
 
-C#:
-
-```csharp
-void LinearAlgorithm(int[] items) {
-    foreach (int item in items) {
-        Console.WriteLine(item);
-    }
-}
-```
-
-#### O(n^2) - Quadratic
-
 Python:
 
 ```python
-def quadratic_algorithm(items):
+def linear_algorithm(items):
     for item in items:
-        for item2 in items:
-            print(item, ' ', item2)
+        print(item)
+```
+
+##### O(n^2) - Quadratic
+
+C#:
+
+```csharp
+void QuadraticAlgorithm(int[] items) {
+    foreach (int item in items) {
+        foreach (int item2 in items) {
+            Console.WriteLine(item + " " + item2);
+        }
+    }
+}
 ```
 
 Typescript:
@@ -163,28 +163,29 @@ function quadraticAlgorithm(items: number[]): void {
 }
 ```
 
-C#:
-
-```csharp
-void QuadraticAlgorithm(int[] items) {
-    foreach (int item in items) {
-        foreach (int item2 in items) {
-            Console.WriteLine(item + " " + item2);
-        }
-    }
-}
-```
-
-#### O(n^3) - Cubic
-
 Python:
 
 ```python
-def cubic_algorithm(items):
+def quadratic_algorithm(items):
     for item in items:
         for item2 in items:
-            for item3 in items:
-                print(item, ' ', item2, ' ', item3)
+            print(item, ' ', item2)
+```
+
+##### O(n^3) - Cubic
+
+C#:
+
+```csharp
+void CubicAlgorithm(int[] items) {
+    foreach (int item in items) {
+        foreach (int item2 in items) {
+            foreach (int item3 in items) {
+                Console.WriteLine(item + " " + item2 + " " + item3);
+            }
+        }
+    }
+}
 ```
 
 Typescript:
@@ -201,28 +202,26 @@ function cubicAlgorithm(items: number[]): void {
 }
 ```
 
-C#:
-
-```csharp
-void CubicAlgorithm(int[] items) {
-    foreach (int item in items) {
-        foreach (int item2 in items) {
-            foreach (int item3 in items) {
-                Console.WriteLine(item + " " + item2 + " " + item3);
-            }
-        }
-    }
-}
-```
-
-#### O(log n) - Logarithmic
-
 Python:
 
 ```python
-def logarithmic_algorithm(items):
-    for index in range(0, len(items), 3):
-        print(items[index])
+def cubic_algorithm(items):
+    for item in items:
+        for item2 in items:
+            for item3 in items:
+                print(item, ' ', item2, ' ', item3)
+```
+
+##### O(log n) - Logarithmic
+
+C#:
+
+```csharp
+void LogarithmicAlgorithm(int[] items) {
+    for (int index = 0; index < items.Length; index += 3) {
+        Console.WriteLine(items[index]);
+    }
+}
 ```
 
 Typescript:
@@ -235,84 +234,15 @@ function logarithmicAlgorithm(items: number[]): void {
 }
 ```
 
-C#:
-
-```csharp
-void LogarithmicAlgorithm(int[] items) {
-    for (int index = 0; index < items.Length; index += 3) {
-        Console.WriteLine(items[index]);
-    }
-}
-```
-
-#### O(n log n) - Linearithmic
-
 Python:
 
 ```python
-def merge(left, right):
-    result = []
-    i = j = 0
-
-    while i < len(left) and j < len(right):
-        if left[i] < right[j]:
-            result.append(left[i])
-            i += 1
-        else:
-            result.append(right[j])
-            j += 1
-
-    result.extend(left[i:])
-    result.extend(right[j:])
-    return result
-
-def mergesort(items):
-    if len(items) <= 1:
-        return items
-
-    mid = len(items) // 2
-    left = items[:mid]
-    right = items[mid:]
-
-    left = mergesort(left)
-    right = mergesort(right)
-    return merge(left, right)
-
+def logarithmic_algorithm(items):
+    for index in range(0, len(items), 3):
+        print(items[index])
 ```
 
-Typescript:
-
-```typescript
-function merge(left: number[], right: number[]): number[] {
-	let result: number[] = [];
-	let i = 0,
-		j = 0;
-
-	while (i < left.length && j < right.length) {
-		if (left[i] < right[j]) {
-			result.push(left[i]);
-			i++;
-		} else {
-			result.push(right[j]);
-			j++;
-		}
-	}
-
-	return result.concat(left.slice(i)).concat(right.slice(j));
-}
-
-function mergesort(items: number[]): number[] {
-	if (items.length <= 1) {
-		return items;
-	}
-
-	let mid = Math.floor(items.length / 2);
-	let left = items.slice(0, mid);
-	let right = items.slice(mid);
-
-	return merge(mergesort(left), mergesort(right));
-}
-```
+##### O(n log n) - Linearithmic
 
 C#:
 
@@ -372,18 +302,85 @@ public class MergeSortAlgorithm
 }
 ```
 
-#### O(2^n) - Exponential
+Typescript:
 
-Python:
+```typescript
+function merge(left: number[], right: number[]): number[] {
+	let result: number[] = [];
+	let i = 0,
+		j = 0;
+
+	while (i < left.length && j < right.length) {
+		if (left[i] < right[j]) {
+			result.push(left[i]);
+			i++;
+		} else {
+			result.push(right[j]);
+			j++;
+		}
+	}
+
+	return result.concat(left.slice(i)).concat(right.slice(j));
+}
+
+function mergesort(items: number[]): number[] {
+	if (items.length <= 1) {
+		return items;
+	}
+
+	let mid = Math.floor(items.length / 2);
+	let left = items.slice(0, mid);
+	let right = items.slice(mid);
+
+	return merge(mergesort(left), mergesort(right));
+}
+```
 
 Python:
 
 ```python
-def fibonacci(n):
-    if n <= 1:
-        return n
-    else:
-        return fibonacci(n-1) + fibonacci(n-2)
+def merge(left, right):
+    result = []
+    i = j = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+def mergesort(items):
+    if len(items) <= 1:
+        return items
+
+    mid = len(items) // 2
+    left = items[:mid]
+    right = items[mid:]
+
+    left = mergesort(left)
+    right = mergesort(right)
+    return merge(left, right)
+
+```
+
+##### O(2^n) - Exponential
+
+C#:
+
+```csharp
+int Fibonacci(int n) {
+    if (n <= 1) {
+        return n;
+    } else {
+        return Fibonacci(n-1) + Fibonacci(n-2);
+    }
+}
 ```
 
 Typescript:
@@ -398,28 +395,28 @@ function fibonacci(n: number): number {
 }
 ```
 
-C#:
-
-```csharp
-int Fibonacci(int n) {
-    if (n <= 1) {
-        return n;
-    } else {
-        return Fibonacci(n-1) + Fibonacci(n-2);
-    }
-}
-```
-
-#### O(n!) - Factorial
-
 Python:
 
 ```python
-def factorial(n):
-    if n == 0:
-        return 1
+def fibonacci(n):
+    if n <= 1:
+        return n
     else:
-        return n * factorial(n-1)
+        return fibonacci(n-1) + fibonacci(n-2)
+```
+
+##### O(n!) - Factorial
+
+C#:
+
+```csharp
+int Factorial(int n) {
+    if (n == 0) {
+        return 1;
+    } else {
+        return n * Factorial(n-1);
+    }
+}
 ```
 
 Typescript:
@@ -434,127 +431,103 @@ function factorial(n: number): number {
 }
 ```
 
-C#:
+Python:
 
-```csharp
-int Factorial(int n) {
-    if (n == 0) {
-        return 1;
-    } else {
-        return n * Factorial(n-1);
-    }
-}
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n-1)
 ```
 
-### Big O Cheat Sheet
+#### Big O Cheat Sheet
 
-#### Common Big O Cases
+##### Common Big O Cases
 
 - O(1) Constant: No loops, direct access.
 - O(log N) Logarithmic: Typically for sorted data, like Binary Search.
 - O(n) Linear: Iterating through collections with a single loop.
 - O(n log(n)) Log Linear: Often seen in efficient sorting algorithms.
 - O(n^2) Quadratic: Nested loops, comparisons between all elements.
-- O(2^n) Exponential: Recursive algorithms that solve problems of size N.
+- O(2^n) Exponential: Recursive algorithms that often solve problems by dividing them into smaller sizes, like the recursive calculation of the Fibonacci sequence.
 - O(n!) Factorial: Highly inefficient, adding a loop for every element.
 
-## Arrays
+### Arrays
 
-Arrays are fixed-size, contiguous memory chunks that store elements of the same type. They have some limitations that you should be aware of:
+Arrays are a fundamental data structure that allows you to store elements of the same type. They are particularly efficient for direct access to individual elements. However, there are two primary types of arrays to consider: Fixed-size arrays and Dynamic arrays.
 
-- They cannot be resized dynamically.
-- Directly inserting or deleting elements is not straightforward, as shifting elements is required.
-- Inserting or deleting elements involves shifting other elements, making it inefficient.
+#### Fixed-Size Arrays
 
-### Examples
+Fixed-size arrays are arrays that have a predetermined length that can't be changed once they're initialized. This type of array is common in languages like C#.
 
-#### Creating an Array
+**Characteristics**:
+
+- They cannot be resized after initialization.
+- Inserting or deleting elements only means changing the value at a specific index. No shifts occur, and no space is freed up or added.
+- Direct access to any element using its index.
+
+**Examples**:
+
+_Note: Fixed-size arrays aren't commonly used in Python, but we can use a tuple as a close representation. However, remember that it's not strictly a fixed-size array._
 
 C#:
 
 ```csharp
-var items = new int[] { 1, 2, 3, 4, 5 };
+int[] fixedArray = new int[5];
+fixedArray[0] = 1;
+fixedArray[1] = 2;
 ```
 
 TypeScript:
 
 ```typescript
-const items = [1, 2, 3, 4, 5];
+let fixedArray: number[] = Array(5);
+fixedArray[0] = 1;
+fixedArray[1] = 2;
 ```
 
 Python:
 
 ```python
-items = [1, 2, 3, 4, 5]
+fixed_array = (1, 2, 3, 4, 5)
 ```
 
-#### Getting an Element at a Specific Index
+#### Dynamic Arrays
+
+Dynamic arrays (often just called "arrays" in some languages) can grow or shrink in size. They automatically handle resizing when elements are added or removed. Examples include Python's list or JavaScript's array.
+
+**Characteristics**:
+
+- They can be resized dynamically as elements are added or removed.
+- Inserting or deleting elements might involve shifting of subsequent elements.
+- Directly inserting or deleting in the middle involves shifting other elements, making such operations less efficient.
 
 C#:
 
 ```csharp
-var items = new int[] { 1, 2, 3, 4, 5 };
-var item = items[2];
+List<int> dynamicArray = new List<int>();
+dynamicArray.Add(1);
+dynamicArray.Add(2);
+dynamicArray.Remove(1);
 ```
 
 TypeScript:
 
 ```typescript
-const items = [1, 2, 3, 4, 5];
-const item = items[2];
+let dynamicArray: number[] = [];
+dynamicArray.push(1);
+dynamicArray.push(2);
+dynamicArray.splice(0, 1);
 ```
 
 Python:
 
 ```python
-items = [1, 2, 3, 4, 5]
-item = items[2]
-```
-
-#### Insertion at a Specific Index
-
-C#:
-
-```csharp
-var items = new int[] { 1, 2, 3, 4, 5 };
-items[2] = 6;
-```
-
-TypeScript:
-
-```typescript
-const items = [1, 2, 3, 4, 5];
-items[2] = 6;
-```
-
-Python:
-
-```python
-items = [1, 2, 3, 4, 5]
-items[2] = 6
-```
-
-#### Deletion at a Specific Index
-
-C#:
-
-```csharp
-var items = new int[] { 1, 2, 3, 4, 5 };
-items[2] = 0;
-```
-
-TypeScript:
-
-```typescript
-const items = [1, 2, 3, 4, 5];
-items[2] = 0;
-```
-
-Python:
-
-```python
-items = [1, 2, 3, 4, 5]
-items[2] = 0
+dynamic_array = []
+dynamic_array.append(1)
+dynamic_array.append(2)
+dynamic_array.remove(1)
 ```
 
 ### Big O of Dynamic Array Methods
@@ -568,12 +541,12 @@ items[2] = 0
 
 ### Big O of Fixed-Size Array Methods
 
-| Operation | Big O | Notes                                                              |
-| --------- | ----- | ------------------------------------------------------------------ |
-| Access    | O(1)  |                                                                    |
-| Search    | O(n)  | Because you have to go through all the elements                    |
-| Insertion | O(1)  | Since you know the size, you can just insert at the specific index |
-| Deletion  | O(1)  | Since you know the size, you can just delete at the specific index |
+| Operation | Big O | Notes                                                                |
+| --------- | ----- | -------------------------------------------------------------------- |
+| Access    | O(1)  |                                                                      |
+| Search    | O(n)  | Because you have to go through all the elements                      |
+| Insertion | O(1)  | Since you're simply changing the value at the specific index         |
+| Deletion  | O(1)  | As it involves setting the value to a default or a 'null' equivalent |
 
 ### Big O of Algorithms
 
@@ -601,6 +574,23 @@ Linear search is a simple search algorithm that iterates over a list and checks 
 
 #### Implementation
 
+C#:
+
+```csharp
+public static int LinearSearch(int[] list, int item)
+{
+    for (int i = 0; i < list.Length; i++)
+    {
+        if (list[i] == item)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+```
+
 TypeScript:
 
 ```typescript
@@ -626,23 +616,6 @@ def linear_search(list, item):
     return -1
 ```
 
-C#:
-
-```csharp
-public static int LinearSearch(int[] list, int item)
-{
-    for (int i = 0; i < list.Length; i++)
-    {
-        if (list[i] == item)
-        {
-            return i;
-        }
-    }
-
-    return -1;
-}
-```
-
 ### Binary Search
 
 #### Description
@@ -662,6 +635,38 @@ Binary search is a much faster form of search. Rather than eliminating one eleme
 5. **Time Complexity Analysis in Algorithms:** When analyzing the time complexity of an algorithm, binary search is often used in theoretical discussions as an example of an algorithm with a logarithmic time complexity. It's a good example for teaching the concept of divide and conquer strategies.
 
 #### Implementation
+
+C#:
+
+```csharp
+public static int BinarySearch(int[] list, int item)
+{
+    var low = 0;
+    var high = list.Length - 1;
+
+    while (low <= high)
+    {
+        var mid = (low + high) / 2;
+        var guess = list[mid];
+
+        if (guess == item)
+        {
+            return mid;
+        }
+
+        if (guess > item)
+        {
+            high = mid - 1;
+        }
+        else
+        {
+            low = mid + 1;
+        }
+    }
+
+    return -1;
+}
+```
 
 TypeScript:
 
@@ -709,38 +714,6 @@ def binary_search(list, item):
             low = mid + 1
 
     return -1
-```
-
-C#:
-
-```csharp
-public static int BinarySearch(int[] list, int item)
-{
-    var low = 0;
-    var high = list.Length - 1;
-
-    while (low <= high)
-    {
-        var mid = (low + high) / 2;
-        var guess = list[mid];
-
-        if (guess == item)
-        {
-            return mid;
-        }
-
-        if (guess > item)
-        {
-            high = mid - 1;
-        }
-        else
-        {
-            low = mid + 1;
-        }
-    }
-
-    return -1;
-}
 ```
 
 #### The Two Crystal Balls Problem
