@@ -35,6 +35,10 @@
       - [Description](#description)
       - [Use Cases](#use-cases)
       - [Implementation](#implementation)
+    - [Binary Search](#binary-search)
+      - [Description](#description-1)
+      - [Use Cases](#use-cases-1)
+      - [Implementation](#implementation-1)
 
 ## Useful Links
 
@@ -551,6 +555,106 @@ public static int LinearSearch(int[] list, int item)
         if (list[i] == item)
         {
             return i;
+        }
+    }
+
+    return -1;
+}
+```
+
+### Binary Search
+
+#### Description
+
+Binary search is a much faster form of search. Rather than eliminating one element at a time, you can eliminate half of the remaining elements at a time. Binary search only works on sorted arrays.
+
+#### Use Cases
+
+1. **Dictionary Lookup:** In a dictionary or phone book, where the entries are sorted by name, binary search can be used to quickly locate a specific entry by its name. This is much faster than sequentially flipping through the pages.
+
+2. **Library Catalogs:** In library catalogs or online databases, books are often categorized and sorted by various attributes such as title, author, or ISBN. Binary search can be applied to find books based on these attributes.
+
+3. **Finding a Word in a Sorted Text:** In sorted documents or lists, such as an index in a book or a sorted list of terms, binary search can help locate a specific term or word efficiently.
+
+4. **Searching in Computer Science Algorithms:** Binary search is used in a wide range of computer science algorithms, such as in binary search trees (BSTs) for efficient data storage and retrieval, and in certain algorithms for finding the median or dividing data efficiently.
+
+5. **Time Complexity Analysis in Algorithms:** When analyzing the time complexity of an algorithm, binary search is often used in theoretical discussions as an example of an algorithm with a logarithmic time complexity. It's a good example for teaching the concept of divide and conquer strategies.
+
+#### Implementation
+
+TypeScript:
+
+```typescript
+const binarySearch = (list: number[], item: number): number => {
+	let low = 0;
+	let high = list.length - 1;
+
+	while (low <= high) {
+		const mid = Math.floor((low + high) / 2);
+		const guess = list[mid];
+
+		if (guess === item) {
+			return mid;
+		}
+
+		if (guess > item) {
+			high = mid - 1;
+		} else {
+			low = mid + 1;
+		}
+	}
+
+	return -1;
+};
+```
+
+Python:
+
+```python
+def binary_search(list, item):
+    low = 0
+    high = len(list) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+        guess = list[mid]
+
+        if guess == item:
+            return mid
+
+        if guess > item:
+            high = mid - 1
+        else:
+            low = mid + 1
+
+    return -1
+```
+
+C#:
+
+```csharp
+public static int BinarySearch(int[] list, int item)
+{
+    var low = 0;
+    var high = list.Length - 1;
+
+    while (low <= high)
+    {
+        var mid = (low + high) / 2;
+        var guess = list[mid];
+
+        if (guess == item)
+        {
+            return mid;
+        }
+
+        if (guess > item)
+        {
+            high = mid - 1;
+        }
+        else
+        {
+            low = mid + 1;
         }
     }
 
