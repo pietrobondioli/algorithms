@@ -7,20 +7,20 @@
   - [Notes](#notes)
   - [Useful Links](#useful-links)
   - [Big O](#big-o)
-      - [Big O in a Nutshell](#big-o-in-a-nutshell)
-      - [Key Concepts](#key-concepts)
-      - [Big O Complexity Chart](#big-o-complexity-chart)
-      - [Big O Examples](#big-o-examples)
-        - [O(1) - Constant](#o1---constant)
-        - [O(n) - Linear](#on---linear)
-        - [O(n^2) - Quadratic](#on2---quadratic)
-        - [O(n^3) - Cubic](#on3---cubic)
-        - [O(log n) - Logarithmic](#olog-n---logarithmic)
-        - [O(n log n) - Linearithmic](#on-log-n---linearithmic)
-        - [O(2^n) - Exponential](#o2n---exponential)
-        - [O(n!) - Factorial](#on---factorial)
-      - [Big O Cheat Sheet](#big-o-cheat-sheet)
-        - [Common Big O Cases](#common-big-o-cases)
+    - [Big O in a Nutshell](#big-o-in-a-nutshell)
+    - [Key Concepts](#key-concepts)
+    - [Big O Complexity Chart](#big-o-complexity-chart)
+    - [Big O Examples](#big-o-examples)
+      - [O(1) - Constant](#o1---constant)
+      - [O(n) - Linear](#on---linear)
+      - [O(n^2) - Quadratic](#on2---quadratic)
+      - [O(n^3) - Cubic](#on3---cubic)
+      - [O(log n) - Logarithmic](#olog-n---logarithmic)
+      - [O(n log n) - Linearithmic](#on-log-n---linearithmic)
+      - [O(2^n) - Exponential](#o2n---exponential)
+      - [O(n!) - Factorial](#on---factorial)
+    - [Big O Cheat Sheet](#big-o-cheat-sheet)
+      - [Common Big O Cases](#common-big-o-cases)
     - [Arrays](#arrays)
       - [Fixed-Size Arrays](#fixed-size-arrays)
       - [Dynamic Arrays](#dynamic-arrays)
@@ -570,8 +570,6 @@ Linear search is a simple search algorithm that iterates over a list and checks 
 
 4. **Partial Matches:** In scenarios where you're looking for partial matches or patterns within a dataset (e.g., searching for a substring within strings), linear search can be used to find all occurrences of the pattern.
 
-5. **Search in Unordered Data:** If the data is not structured in a way that allows efficient binary search (e.g., when the dataset changes frequently and sorting is not feasible), linear search remains a viable option.
-
 #### Implementation
 
 C#:
@@ -620,7 +618,7 @@ def linear_search(list, item):
 
 #### Description
 
-Binary search is a much faster form of search. Rather than eliminating one element at a time, you can eliminate half of the remaining elements at a time. Binary search only works on sorted arrays.
+Binary search is a much faster form of search. Rather than eliminating one element at a time, you can eliminate half of the remaining elements at a time. Binary search only works on sorted arrays since it assumes that the middle item is the median, if the list isn't sorted, this assumption doesn't hold true, and the search might overlook the target item.
 
 #### Use Cases
 
@@ -632,7 +630,7 @@ Binary search is a much faster form of search. Rather than eliminating one eleme
 
 4. **Searching in Computer Science Algorithms:** Binary search is used in a wide range of computer science algorithms, such as in binary search trees (BSTs) for efficient data storage and retrieval, and in certain algorithms for finding the median or dividing data efficiently.
 
-5. **Time Complexity Analysis in Algorithms:** When analyzing the time complexity of an algorithm, binary search is often used in theoretical discussions as an example of an algorithm with a logarithmic time complexity. It's a good example for teaching the concept of divide and conquer strategies.
+5. **Time Complexity Analysis in Algorithms:** When analyzing the time complexity of an algorithm, binary search is often used in theoretical discussions as an example of an algorithm with logarithmic time complexity. It's a good example for teaching the concept of divide and conquer strategies.
 
 #### Implementation
 
@@ -718,18 +716,18 @@ def binary_search(list, item):
 
 #### The Two Crystal Balls Problem
 
-Imagine you have two crystal balls, and your goal is to find the exact floor in a 100-story building from which you can drop a ball without it breaking. The challenge is to minimize the number of drops needed to determine this floor. How can binary search and the square root of N approach help you efficiently solve this puzzle?
+Imagine you have two crystal balls, and your goal is to find the exact floor in a 100-story building from which you can drop a ball without it breaking. The challenge is to minimize the number of drops needed to determine this floor. How can binary search and the square root of "N" approach help you efficiently solve this puzzle?
 
 There is a code example in the [two-crystal-balls-problem.ts](./code-samples/two-crystal-balls-problem.ts) file, execute that using `npx ts-node code-samples/two-crystal-balls-problem.ts`. Explanation of the solution is below.
 
 ##### Binary Search Solution
 
-In the binary search solution, you start by dropping the first ball from the 50th floor. If it breaks, you know the target floor is somewhere between the 1st and 49th floors. If it doesn't break, the floor is between the 51st and 100th floors. By halving the search space with each drop, you significantly narrow down the possibilities. You then use the second ball to pinpoint the exact floor. If the first ball broke, drop the second ball from the 25th floor. If it didn't break, drop it from the 75th floor. This process continues, halving the remaining search space each time, until you find the precise floor.
+In the binary search solution, you start by dropping the first ball from the midpoint, which is the 50th floor. If it breaks, you know the target floor is somewhere between the 1st and 49th floors. If it doesn't break, the floor is between the 51st and 100th floors. Now, for the next drop, you would select the midpoint of your new range. For example, if the ball didn't break, your new range is 51st to 100th floors, and the midpoint would be the 75th floor. This process continues, halving the remaining search space each time, until you find the precise floor.
 
-This approach provides an efficient solution with a time complexity of O(log n), where n is the total number of floors. The space complexity remains constant (O(1)).
+This approach provides an efficient solution with a time complexity of O(log n), where n is the total number of floors. The space complexity remains constant (O(1)). The logarithmic time complexity arises because with each drop, the search space is reduced by half.
 
 ##### Square Root of N Approach
 
-The square root of N approach involves a systematic reduction in the number of possible floors by using the square root of N as the interval size. Start by dropping the first ball from the 10th floor. If it breaks, explore floors 1 through 9; if not, explore floors 11 through 19. Continue this process, reducing the problem by 10 floors each time. This ensures that the complexity remains O(sqrt(n)), where n represents the total number of floors.
+The square root of N approach involves a systematic reduction in the number of possible floors by using the square root of N as the interval size. Start by dropping the first ball from the square root of the total number of floors. For a 100-floor building, this would be the 10th floor. If it breaks, explore floors 1 through 9 with the second ball. If it doesn't break, move up another 10 floors and repeat the process. This ensures that the complexity remains O(sqrt(n)), where n represents the total number of floors.
 
-While not as efficient as binary search for larger datasets, the square root of N approach offers a practical alternative when the breaking floor is not known and needs to be determined efficiently with a moderate number of drops. The space complexity remains constant (O(1)), as in the binary search solution.
+This method offers a time complexity of O(sqrt(n)) because you're reducing the number of potential drops by the square root of the total floors with each interval. The space complexity remains constant (O(1)), as in the binary search solution.
