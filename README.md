@@ -39,6 +39,9 @@
       - [Description](#description-1)
       - [Use Cases](#use-cases-1)
       - [Implementation](#implementation-1)
+      - [The Two Crystal Balls Problem](#the-two-crystal-balls-problem)
+        - [Binary Search Solution](#binary-search-solution)
+        - [Square Root of N Approach](#square-root-of-n-approach)
 
 ## Useful Links
 
@@ -661,3 +664,21 @@ public static int BinarySearch(int[] list, int item)
     return -1;
 }
 ```
+
+#### The Two Crystal Balls Problem
+
+Imagine you have two crystal balls, and your goal is to find the exact floor in a 100-story building from which you can drop a ball without it breaking. The challenge is to minimize the number of drops needed to determine this floor. How can binary search and the square root of N approach help you efficiently solve this puzzle?
+
+There is a code example in the [two-crystal-balls-problem.ts](./code-samples/two-crystal-balls-problem.ts) file, execute that using `npx ts-node code-samples/two-crystal-balls-problem.ts`. Explanation of the solution is below.
+
+##### Binary Search Solution
+
+In the binary search solution, you start by dropping the first ball from the 50th floor. If it breaks, you know the target floor is somewhere between the 1st and 49th floors. If it doesn't break, the floor is between the 51st and 100th floors. By halving the search space with each drop, you significantly narrow down the possibilities. You then use the second ball to pinpoint the exact floor. If the first ball broke, drop the second ball from the 25th floor. If it didn't break, drop it from the 75th floor. This process continues, halving the remaining search space each time, until you find the precise floor.
+
+This approach provides an efficient solution with a time complexity of O(log n), where n is the total number of floors. The space complexity remains constant (O(1)).
+
+##### Square Root of N Approach
+
+The square root of N approach involves a systematic reduction in the number of possible floors by using the square root of N as the interval size. Start by dropping the first ball from the 10th floor. If it breaks, explore floors 1 through 9; if not, explore floors 11 through 19. Continue this process, reducing the problem by 10 floors each time. This ensures that the complexity remains O(sqrt(n)), where n represents the total number of floors.
+
+While not as efficient as binary search for larger datasets, the square root of N approach offers a practical alternative when the breaking floor is not known and needs to be determined efficiently with a moderate number of drops. The space complexity remains constant (O(1)), as in the binary search solution.
