@@ -68,13 +68,35 @@ As the size of the input grows, how does the computational time or memory usage 
 
 #### O(1) - Constant
 
+Python:
+
 ```python
 def constant_algo(items):
     result = items[0] * items[0]
     print(result)
 ```
 
+Typescript:
+
+```typescript
+function constantAlgo(items: number[]): void {
+	const result = items[0] * items[0];
+	console.log(result);
+}
+```
+
+C#:
+
+```csharp
+void ConstantAlgo(int[] items) {
+    int result = items[0] * items[0];
+    Console.WriteLine(result);
+}
+```
+
 #### O(n) - Linear
+
+Python:
 
 ```python
 def linear_algo(items):
@@ -82,7 +104,29 @@ def linear_algo(items):
         print(item)
 ```
 
+Typescript:
+
+```typescript
+function linearAlgo(items: number[]): void {
+	for (const item of items) {
+		console.log(item);
+	}
+}
+```
+
+C#:
+
+```csharp
+void LinearAlgo(int[] items) {
+    foreach (int item in items) {
+        Console.WriteLine(item);
+    }
+}
+```
+
 #### O(n^2) - Quadratic
+
+Python:
 
 ```python
 def quadratic_algo(items):
@@ -91,7 +135,33 @@ def quadratic_algo(items):
             print(item, ' ', item2)
 ```
 
+Typescript:
+
+```typescript
+function quadraticAlgo(items: number[]): void {
+	for (const item of items) {
+		for (const item2 of items) {
+			console.log(item, " ", item2);
+		}
+	}
+}
+```
+
+C#:
+
+```csharp
+void QuadraticAlgo(int[] items) {
+    foreach (int item in items) {
+        foreach (int item2 in items) {
+            Console.WriteLine(item + " " + item2);
+        }
+    }
+}
+```
+
 #### O(n^3) - Cubic
+
+Python:
 
 ```python
 def cubic_algo(items):
@@ -101,7 +171,37 @@ def cubic_algo(items):
                 print(item, ' ', item2, ' ', item3)
 ```
 
+Typescript:
+
+```typescript
+function cubicAlgo(items: number[]): void {
+	for (const item of items) {
+		for (const item2 of items) {
+			for (const item3 of items) {
+				console.log(item, " ", item2, " ", item3);
+			}
+		}
+	}
+}
+```
+
+C#:
+
+```csharp
+void CubicAlgo(int[] items) {
+    foreach (int item in items) {
+        foreach (int item2 in items) {
+            foreach (int item3 in items) {
+                Console.WriteLine(item + " " + item2 + " " + item3);
+            }
+        }
+    }
+}
+```
+
 #### O(log n) - Logarithmic
+
+Python:
 
 ```python
 def logarithmic_algo(items):
@@ -109,7 +209,29 @@ def logarithmic_algo(items):
         print(items[index])
 ```
 
+Typescript:
+
+```typescript
+function logarithmicAlgo(items: number[]): void {
+	for (let index = 0; index < items.length; index += 3) {
+		console.log(items[index]);
+	}
+}
+```
+
+C#:
+
+```csharp
+void LogarithmicAlgo(int[] items) {
+    for (int index = 0; index < items.Length; index += 3) {
+        Console.WriteLine(items[index]);
+    }
+}
+```
+
 #### O(n log n) - Linearithmic
+
+Python:
 
 ```python
 def linearithmic_algo(items):
@@ -120,7 +242,39 @@ def linearithmic_algo(items):
         print(item)
 ```
 
+Typescript:
+
+```typescript
+function linearithmicAlgo(items: number[]): void {
+	for (const item of items) {
+		for (const item2 of items) {
+			console.log(item, " ", item2);
+		}
+	}
+	for (const item of items) {
+		console.log(item);
+	}
+}
+```
+
+C#:
+
+```csharp
+void LinearithmicAlgo(int[] items) {
+    foreach (int item in items) {
+        foreach (int item2 in items) {
+            Console.WriteLine(item + " " + item2);
+        }
+    }
+    foreach (int item in items) {
+        Console.WriteLine(item);
+    }
+}
+```
+
 #### O(2^n) - Exponential
+
+Python:
 
 ```python
 def exponential_algo(items):
@@ -131,7 +285,35 @@ def exponential_algo(items):
         return exponential_algo(items) + exponential_algo(items)
 ```
 
+Typescript:
+
+```typescript
+function exponentialAlgo(items: number[]): number {
+	if (items.length === 0) {
+		return 1;
+	} else {
+		const item = items.pop();
+		return exponentialAlgo(items) + exponentialAlgo(items);
+	}
+}
+```
+
+C#:
+
+```csharp
+int ExponentialAlgo(List<int> items) {
+    if (items.Count == 0) {
+        return 1;
+    } else {
+        int item = items.Pop();
+        return ExponentialAlgo(items) + ExponentialAlgo(items);
+    }
+}
+```
+
 #### O(n!) - Factorial
+
+Python:
 
 ```python
 def factorial_algo(items):
@@ -140,6 +322,32 @@ def factorial_algo(items):
     else:
         return len(items) * factorial_algo(items[:-1])
 ```
+
+Typescript:
+
+```typescript
+function factorialAlgo(items: number[]): number {
+	if (items.length === 0) {
+		return 1;
+	} else {
+		return items.length * factorialAlgo(items.slice(0, -1));
+	}
+}
+```
+
+C#:
+
+```csharp
+int FactorialAlgo(List<int> items) {
+    if (items.Count == 0) {
+        return 1;
+    } else {
+        return items.Count * FactorialAlgo(items.GetRange(0, items.Count - 1));
+    }
+}
+```
+
+Feel free to adapt and modify these examples as needed to suit your context and purpose.
 
 ### Big O Cheat Sheet
 
