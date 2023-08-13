@@ -4,6 +4,7 @@
 
 - [Algorithms](#algorithms)
   - [Table of Contents](#table-of-contents)
+  - [Notes](#notes)
   - [Useful Links](#useful-links)
   - [Big O](#big-o)
     - [Big O in a Nutshell](#big-o-in-a-nutshell)
@@ -21,14 +22,13 @@
     - [Big O Cheat Sheet](#big-o-cheat-sheet)
       - [Common Big O Cases](#common-big-o-cases)
   - [Arrays](#arrays)
-    - [Important Concepts](#important-concepts)
     - [Examples](#examples)
       - [Creating an Array](#creating-an-array)
       - [Getting an Element at a Specific Index](#getting-an-element-at-a-specific-index)
       - [Insertion at a Specific Index](#insertion-at-a-specific-index)
       - [Deletion at a Specific Index](#deletion-at-a-specific-index)
     - [Big O of Dynamic Array Methods](#big-o-of-dynamic-array-methods)
-    - [Big O of Fixed-Size and Fixed-Type Arrays](#big-o-of-fixed-size-and-fixed-type-arrays)
+    - [Big O of Fixed-Size Array Methods](#big-o-of-fixed-size-array-methods)
     - [Big O of Algorithms](#big-o-of-algorithms)
   - [Search](#search)
     - [Linear Search](#linear-search)
@@ -42,6 +42,10 @@
       - [The Two Crystal Balls Problem](#the-two-crystal-balls-problem)
         - [Binary Search Solution](#binary-search-solution)
         - [Square Root of N Approach](#square-root-of-n-approach)
+
+## Notes
+
+- There is a portuguese version of this file on the [README-pt-BR.md](README-pt-BR.md) file.
 
 ## Useful Links
 
@@ -83,7 +87,7 @@ As the size of the input grows, how does the computational time or memory usage 
 Python:
 
 ```python
-def constant_algo(items):
+def constant_algorithm(items):
     result = items[0] * items[0]
     print(result)
 ```
@@ -91,7 +95,7 @@ def constant_algo(items):
 Typescript:
 
 ```typescript
-function constantAlgo(items: number[]): void {
+function constantAlgorithm(items: number[]): void {
 	const result = items[0] * items[0];
 	console.log(result);
 }
@@ -100,7 +104,7 @@ function constantAlgo(items: number[]): void {
 C#:
 
 ```csharp
-void ConstantAlgo(int[] items) {
+void ConstantAlgorithm(int[] items) {
     int result = items[0] * items[0];
     Console.WriteLine(result);
 }
@@ -111,7 +115,7 @@ void ConstantAlgo(int[] items) {
 Python:
 
 ```python
-def linear_algo(items):
+def linear_algorithm(items):
     for item in items:
         print(item)
 ```
@@ -119,7 +123,7 @@ def linear_algo(items):
 Typescript:
 
 ```typescript
-function linearAlgo(items: number[]): void {
+function linearAlgorithm(items: number[]): void {
 	for (const item of items) {
 		console.log(item);
 	}
@@ -129,7 +133,7 @@ function linearAlgo(items: number[]): void {
 C#:
 
 ```csharp
-void LinearAlgo(int[] items) {
+void LinearAlgorithm(int[] items) {
     foreach (int item in items) {
         Console.WriteLine(item);
     }
@@ -141,7 +145,7 @@ void LinearAlgo(int[] items) {
 Python:
 
 ```python
-def quadratic_algo(items):
+def quadratic_algorithm(items):
     for item in items:
         for item2 in items:
             print(item, ' ', item2)
@@ -150,7 +154,7 @@ def quadratic_algo(items):
 Typescript:
 
 ```typescript
-function quadraticAlgo(items: number[]): void {
+function quadraticAlgorithm(items: number[]): void {
 	for (const item of items) {
 		for (const item2 of items) {
 			console.log(item, " ", item2);
@@ -162,7 +166,7 @@ function quadraticAlgo(items: number[]): void {
 C#:
 
 ```csharp
-void QuadraticAlgo(int[] items) {
+void QuadraticAlgorithm(int[] items) {
     foreach (int item in items) {
         foreach (int item2 in items) {
             Console.WriteLine(item + " " + item2);
@@ -176,7 +180,7 @@ void QuadraticAlgo(int[] items) {
 Python:
 
 ```python
-def cubic_algo(items):
+def cubic_algorithm(items):
     for item in items:
         for item2 in items:
             for item3 in items:
@@ -186,7 +190,7 @@ def cubic_algo(items):
 Typescript:
 
 ```typescript
-function cubicAlgo(items: number[]): void {
+function cubicAlgorithm(items: number[]): void {
 	for (const item of items) {
 		for (const item2 of items) {
 			for (const item3 of items) {
@@ -200,7 +204,7 @@ function cubicAlgo(items: number[]): void {
 C#:
 
 ```csharp
-void CubicAlgo(int[] items) {
+void CubicAlgorithm(int[] items) {
     foreach (int item in items) {
         foreach (int item2 in items) {
             foreach (int item3 in items) {
@@ -216,7 +220,7 @@ void CubicAlgo(int[] items) {
 Python:
 
 ```python
-def logarithmic_algo(items):
+def logarithmic_algorithm(items):
     for index in range(0, len(items), 3):
         print(items[index])
 ```
@@ -224,7 +228,7 @@ def logarithmic_algo(items):
 Typescript:
 
 ```typescript
-function logarithmicAlgo(items: number[]): void {
+function logarithmicAlgorithm(items: number[]): void {
 	for (let index = 0; index < items.length; index += 3) {
 		console.log(items[index]);
 	}
@@ -234,7 +238,7 @@ function logarithmicAlgo(items: number[]): void {
 C#:
 
 ```csharp
-void LogarithmicAlgo(int[] items) {
+void LogarithmicAlgorithm(int[] items) {
     for (int index = 0; index < items.Length; index += 3) {
         Console.WriteLine(items[index]);
     }
@@ -246,40 +250,124 @@ void LogarithmicAlgo(int[] items) {
 Python:
 
 ```python
-def linearithmic_algo(items):
-    for item in items:
-        for item2 in items:
-            print(item, ' ', item2)
-    for item in items:
-        print(item)
+def merge(left, right):
+    result = []
+    i = j = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+def mergesort(items):
+    if len(items) <= 1:
+        return items
+
+    mid = len(items) // 2
+    left = items[:mid]
+    right = items[mid:]
+
+    left = mergesort(left)
+    right = mergesort(right)
+    return merge(left, right)
+
 ```
 
 Typescript:
 
 ```typescript
-function linearithmicAlgo(items: number[]): void {
-	for (const item of items) {
-		for (const item2 of items) {
-			console.log(item, " ", item2);
+function merge(left: number[], right: number[]): number[] {
+	let result: number[] = [];
+	let i = 0,
+		j = 0;
+
+	while (i < left.length && j < right.length) {
+		if (left[i] < right[j]) {
+			result.push(left[i]);
+			i++;
+		} else {
+			result.push(right[j]);
+			j++;
 		}
 	}
-	for (const item of items) {
-		console.log(item);
+
+	return result.concat(left.slice(i)).concat(right.slice(j));
+}
+
+function mergesort(items: number[]): number[] {
+	if (items.length <= 1) {
+		return items;
 	}
+
+	let mid = Math.floor(items.length / 2);
+	let left = items.slice(0, mid);
+	let right = items.slice(mid);
+
+	return merge(mergesort(left), mergesort(right));
 }
 ```
 
 C#:
 
 ```csharp
-void LinearithmicAlgo(int[] items) {
-    foreach (int item in items) {
-        foreach (int item2 in items) {
-            Console.WriteLine(item + " " + item2);
+using System;
+using System.Collections.Generic;
+
+public class MergeSortAlgorithm
+{
+    public static List<int> Merge(List<int> left, List<int> right)
+    {
+        List<int> result = new List<int>();
+        int i = 0, j = 0;
+
+        while (i < left.Count && j < right.Count)
+        {
+            if (left[i] < right[j])
+            {
+                result.Add(left[i]);
+                i++;
+            }
+            else
+            {
+                result.Add(right[j]);
+                j++;
+            }
         }
+
+        while (i < left.Count)
+        {
+            result.Add(left[i]);
+            i++;
+        }
+
+        while (j < right.Count)
+        {
+            result.Add(right[j]);
+            j++;
+        }
+
+        return result;
     }
-    foreach (int item in items) {
-        Console.WriteLine(item);
+
+    public static List<int> MergeSort(List<int> items)
+    {
+        if (items.Count <= 1)
+        {
+            return items;
+        }
+
+        int mid = items.Count / 2;
+        List<int> left = items.GetRange(0, mid);
+        List<int> right = items.GetRange(mid, items.Count - mid);
+
+        return Merge(MergeSort(left), MergeSort(right));
     }
 }
 ```
@@ -288,24 +376,24 @@ void LinearithmicAlgo(int[] items) {
 
 Python:
 
+Python:
+
 ```python
-def exponential_algo(items):
-    if len(items) == 0:
-        return 1
+def fibonacci(n):
+    if n <= 1:
+        return n
     else:
-        item = items.pop()
-        return exponential_algo(items) + exponential_algo(items)
+        return fibonacci(n-1) + fibonacci(n-2)
 ```
 
 Typescript:
 
 ```typescript
-function exponentialAlgo(items: number[]): number {
-	if (items.length === 0) {
-		return 1;
+function fibonacci(n: number): number {
+	if (n <= 1) {
+		return n;
 	} else {
-		const item = items.pop();
-		return exponentialAlgo(items) + exponentialAlgo(items);
+		return fibonacci(n - 1) + fibonacci(n - 2);
 	}
 }
 ```
@@ -313,12 +401,11 @@ function exponentialAlgo(items: number[]): number {
 C#:
 
 ```csharp
-int ExponentialAlgo(List<int> items) {
-    if (items.Count == 0) {
-        return 1;
+int Fibonacci(int n) {
+    if (n <= 1) {
+        return n;
     } else {
-        int item = items.Pop();
-        return ExponentialAlgo(items) + ExponentialAlgo(items);
+        return Fibonacci(n-1) + Fibonacci(n-2);
     }
 }
 ```
@@ -328,21 +415,21 @@ int ExponentialAlgo(List<int> items) {
 Python:
 
 ```python
-def factorial_algo(items):
-    if len(items) == 0:
+def factorial(n):
+    if n == 0:
         return 1
     else:
-        return len(items) * factorial_algo(items[:-1])
+        return n * factorial(n-1)
 ```
 
 Typescript:
 
 ```typescript
-function factorialAlgo(items: number[]): number {
-	if (items.length === 0) {
+function factorial(n: number): number {
+	if (n === 0) {
 		return 1;
 	} else {
-		return items.length * factorialAlgo(items.slice(0, -1));
+		return n * factorial(n - 1);
 	}
 }
 ```
@@ -350,16 +437,14 @@ function factorialAlgo(items: number[]): number {
 C#:
 
 ```csharp
-int FactorialAlgo(List<int> items) {
-    if (items.Count == 0) {
+int Factorial(int n) {
+    if (n == 0) {
         return 1;
     } else {
-        return items.Count * FactorialAlgo(items.GetRange(0, items.Count - 1));
+        return n * Factorial(n-1);
     }
 }
 ```
-
-Feel free to adapt and modify these examples as needed to suit your context and purpose.
 
 ### Big O Cheat Sheet
 
@@ -377,16 +462,9 @@ Feel free to adapt and modify these examples as needed to suit your context and 
 
 Arrays are fixed-size, contiguous memory chunks that store elements of the same type. They have some limitations that you should be aware of:
 
-- Arrays are fixed-size, contiguous memory chunks.
 - They cannot be resized dynamically.
 - Directly inserting or deleting elements is not straightforward, as shifting elements is required.
-
-### Important Concepts
-
-- Arrays have a fixed size and store elements of the same type.
-- You can't dynamically resize arrays.
 - Inserting or deleting elements involves shifting other elements, making it inefficient.
-- Directly inserting or deleting at the beginning, middle, or end is not efficient.
 
 ### Examples
 
@@ -481,14 +559,14 @@ items[2] = 0
 
 ### Big O of Dynamic Array Methods
 
-| Operation | Big O | Notes                                                   |
-| --------- | ----- | ------------------------------------------------------- |
-| Access    | O(1)  |                                                         |
-| Search    | O(n)  | Because you have to go through all the elements         |
-| Insertion | O(n)  | Because you have to shift all the elements to the right |
-| Deletion  | O(n)  | Because you have to shift all the elements to the left  |
+| Operation | Big O | Notes                                                  |
+| --------- | ----- | ------------------------------------------------------ |
+| Access    | O(1)  |                                                        |
+| Search    | O(n)  | Because you have to go through all the elements        |
+| Insertion | O(n)  | Due to potential dynamic resizing and element shifting |
+| Deletion  | O(n)  | Due to potential dynamic resizing and element shifting |
 
-### Big O of Fixed-Size and Fixed-Type Arrays
+### Big O of Fixed-Size Array Methods
 
 | Operation | Big O | Notes                                                              |
 | --------- | ----- | ------------------------------------------------------------------ |
