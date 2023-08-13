@@ -30,6 +30,11 @@
     - [Big O of Dynamic Array Methods](#big-o-of-dynamic-array-methods)
     - [Big O of Fixed-Size and Fixed-Type Arrays](#big-o-of-fixed-size-and-fixed-type-arrays)
     - [Big O of Algorithms](#big-o-of-algorithms)
+  - [Search](#search)
+    - [Linear Search](#linear-search)
+      - [Description](#description)
+      - [Use Cases](#use-cases)
+      - [Implementation](#implementation)
 
 ## Useful Links
 
@@ -488,3 +493,67 @@ items[2] = 0
 ### Big O of Algorithms
 
 For algorithms, understanding their Big O complexity is crucial. It allows you to predict how they will perform as the input grows. This knowledge can guide you in choosing the right algorithm for your problem and optimizing your code's efficiency.
+
+## Search
+
+### Linear Search
+
+#### Description
+
+Linear search is a simple search algorithm that iterates over a list and checks if the current element is equal to the target element. If the equality condition is met, the algorithm returns the current element's index. If the target element is not found, the algorithm returns -1.
+
+#### Use Cases
+
+1. **Small Datasets:** For very small datasets, where the overhead of sorting or using more complex search algorithms (like binary search) would be more than the time saved, linear search can be a reasonable choice. The simplicity of linear search makes it practical for such cases.
+
+2. **Unsorted Data:** When data is not sorted, or the order of elements doesn't matter, linear search is a straightforward approach to find a specific element in the list. Sorting the data before applying binary search can be an unnecessary overhead in such cases.
+
+3. **Finding First Occurrence:** If you need to find the first occurrence of an element in a list, linear search is sufficient and may even be faster than binary search. Once the element is found, there's no need to continue searching.
+
+4. **Partial Matches:** In scenarios where you're looking for partial matches or patterns within a dataset (e.g., searching for a substring within strings), linear search can be used to find all occurrences of the pattern.
+
+5. **Search in Unordered Data:** If the data is not structured in a way that allows efficient binary search (e.g., when the dataset changes frequently and sorting is not feasible), linear search remains a viable option.
+
+#### Implementation
+
+TypeScript:
+
+```typescript
+const linearSearch = (list: number[], item: number): number => {
+	for (let i = 0; i < list.length; i++) {
+		if (list[i] === item) {
+			return i;
+		}
+	}
+
+	return -1;
+};
+```
+
+Python:
+
+```python
+def linear_search(list, item):
+    for i in range(len(list)):
+        if list[i] == item:
+            return i
+
+    return -1
+```
+
+C#:
+
+```csharp
+public static int LinearSearch(int[] list, int item)
+{
+    for (int i = 0; i < list.Length; i++)
+    {
+        if (list[i] == item)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+```
