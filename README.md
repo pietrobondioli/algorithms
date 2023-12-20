@@ -31,10 +31,12 @@
     - [Linear Search](#linear-search)
       - [Description](#description)
       - [Use Cases](#use-cases)
+      - [Complexity](#complexity)
       - [Implementation](#implementation)
     - [Binary Search](#binary-search)
       - [Description](#description-1)
       - [Use Cases](#use-cases-1)
+      - [Complexity](#complexity-1)
       - [Implementation](#implementation-1)
       - [The Two Crystal Balls Problem](#the-two-crystal-balls-problem)
         - [Binary Search Solution](#binary-search-solution)
@@ -42,37 +44,63 @@
   - [Sort](#sort)
     - [Bubble Sort](#bubble-sort)
       - [Description](#description-2)
+      - [Complexity](#complexity-2)
       - [Implementation](#implementation-2)
+    - [Quick Sort](#quick-sort)
+      - [Description](#description-3)
+      - [Complexity](#complexity-3)
+      - [Implementation](#implementation-3)
+    - [Merge Sort](#merge-sort)
+      - [Description](#description-4)
+      - [Complexity](#complexity-4)
+      - [Implementation](#implementation-4)
   - [Data Structures](#data-structures)
     - [Linked Lists](#linked-lists)
-      - [Description](#description-3)
+      - [Description](#description-5)
       - [Characteristics](#characteristics)
       - [Real-World Examples](#real-world-examples)
       - [Interface](#interface)
-      - [Implementation](#implementation-3)
-    - [Queues](#queues)
-      - [Description](#description-4)
-      - [Real-World Examples](#real-world-examples-1)
-      - [Interface](#interface-1)
-      - [Implementation](#implementation-4)
-    - [Stacks](#stacks)
-      - [Description](#description-5)
-      - [Real-World Examples](#real-world-examples-2)
-      - [Interface](#interface-2)
+      - [Complexity](#complexity-5)
       - [Implementation](#implementation-5)
+    - [Doubly Linked Lists](#doubly-linked-lists)
+      - [Description](#description-6)
+      - [Interface](#interface-1)
+      - [Complexity](#complexity-6)
+      - [Implementation](#implementation-6)
+    - [Queues](#queues)
+      - [Description](#description-7)
+      - [Real-World Examples](#real-world-examples-1)
+      - [Interface](#interface-2)
+      - [Complexity](#complexity-7)
+      - [Implementation](#implementation-7)
+    - [Stacks](#stacks)
+      - [Description](#description-8)
+      - [Real-World Examples](#real-world-examples-2)
+      - [Interface](#interface-3)
+      - [Complexity](#complexity-8)
+      - [Implementation](#implementation-8)
     - [Arrays vs. Linked Lists](#arrays-vs-linked-lists)
     - [ArrayList](#arraylist)
-      - [Description](#description-6)
+      - [Description](#description-9)
       - [Characteristics](#characteristics-1)
       - [Real-World Examples](#real-world-examples-3)
-      - [Interface](#interface-3)
-      - [Implementation](#implementation-6)
+      - [Interface](#interface-4)
+      - [Complexity](#complexity-9)
+      - [Implementation](#implementation-9)
     - [ArrayBuffers](#arraybuffers)
-      - [Description](#description-7)
+      - [Description](#description-10)
       - [Characteristics](#characteristics-2)
       - [Real-World Examples](#real-world-examples-4)
-      - [Interface](#interface-4)
-      - [Implementation](#implementation-7)
+      - [Interface](#interface-5)
+      - [Complexity](#complexity-10)
+      - [Implementation](#implementation-10)
+  - [Recursion](#recursion)
+    - [Description](#description-11)
+    - [Simple Example](#simple-example)
+    - [Maze Example](#maze-example)
+      - [Description](#description-12)
+      - [Base Cases](#base-cases)
+      - [Implementation](#implementation-11)
 
 ## Notes
 
@@ -185,12 +213,7 @@ function quadraticAlgorithm(items: number[]): void {
 
 C#:
 
-```csharp
-void CubicAlgorithm(int[] items) {
-    foreach (int item in items) {
-        foreach (int item2 in items) {
-            foreach (int item3 in items) {
-                Console.WriteLine(item + " " + item2 + " " + item3);
+```csharpwonderful year with you. 😊 I wish everyone a relaxing and contemplative Christmas season and a good start to the em2 + " " + item3);
             }
         }
     }
@@ -493,6 +516,12 @@ Linear search is a simple search algorithm that iterates over a list and checks 
 
 4. **Partial Matches:** In scenarios where you're looking for partial matches or patterns within a dataset (e.g., searching for a substring within strings), linear search can be used to find all occurrences of the pattern.
 
+#### Complexity
+
+| Operation | Complexity |
+| --------- | ---------- |
+| Search    | O(n)       |
+
 #### Implementation
 
 C#:
@@ -540,6 +569,12 @@ Binary search is a much faster form of search. Rather than eliminating one eleme
 4. **Searching in Computer Science Algorithms:** Binary search is used in a wide range of computer science algorithms, such as in binary search trees (BSTs) for efficient data storage and retrieval, and in certain algorithms for finding the median or dividing data efficiently.
 
 5. **Time Complexity Analysis in Algorithms:** When analyzing the time complexity of an algorithm, binary search is often used in theoretical discussions as an example of an algorithm with logarithmic time complexity. It's a good example for teaching the concept of divide and conquer strategies.
+
+#### Complexity
+
+| Operation | Complexity |
+| --------- | ---------- |
+| Search    | O(log n)   |
 
 #### Implementation
 
@@ -627,6 +662,12 @@ This method offers a time complexity of O(sqrt(n)) because you're reducing the n
 
 Bubble sort is a sorting algorithm that works by repeatedly swapping the adjacent elements if they're in the wrong order. This process is repeated until no swaps are required, indicating that the list is sorted. For example, let's say we have the following list of numbers: [5, 3, 8]. The first iteration of the algorithm would compare the first two elements (5 and 3) and swap them since 5 is greater than 3. The list would then become [3, 5, 8]. The next iteration would compare the second and third elements (5 and 8) and leave them as is since they're already in the correct order. The list would then become [3, 5, 8]. Since no swaps are required, the algorithm would stop, and the list would be sorted.
 
+#### Complexity
+
+| Operation | Complexity |
+| --------- | ---------- |
+| Sort      | O(n^2)     |
+
 #### Implementation
 
 C#:
@@ -679,6 +720,185 @@ const bubbleSort = (items: number[]): number[] => {
 };
 ```
 
+### Quick Sort
+
+#### Description
+
+Quick sort is a sorting algorithm that uses the divide and conquer strategy to recursively divide the input array into two subarrays. A pivot element is chosen from the array. The elements smaller than the pivot are moved to the left of the pivot, and the elements greater than the pivot are moved to the right of the pivot. The pivot element is then placed between the two subarrays. This process continues until the array is sorted.
+
+#### Complexity
+
+| Operation | Complexity |
+| --------- | ---------- |
+| Sort      | O(n log n) |
+
+#### Implementation
+
+C#:
+
+```csharp
+public static int[] QuickSort(int[] items)
+{
+    if (items.Length <= 1)
+    {
+        return items;
+    }
+
+    var pivot = items[0];
+    var left = new List<int>();
+    var right = new List<int>();
+
+    for (int i = 1; i < items.Length; i++)
+    {
+        if (items[i] < pivot)
+        {
+            left.Add(items[i]);
+        }
+        else
+        {
+            right.Add(items[i]);
+        }
+    }
+
+    var result = new List<int>();
+    result.AddRange(QuickSort(left.ToArray()));
+    result.Add(pivot);
+    result.AddRange(QuickSort(right.ToArray()));
+
+    return result.ToArray();
+}
+```
+
+TypeScript:
+
+```typescript
+const quickSort = (items: number[]): number[] => {
+	if (items.length <= 1) {
+		return items;
+	}
+
+	const pivot = items[0];
+	const left: number[] = [];
+	const right: number[] = [];
+
+	for (let i = 1; i < items.length; i++) {
+		if (items[i] < pivot) {
+			left.push(items[i]);
+		} else {
+			right.push(items[i]);
+		}
+	}
+
+	const result: number[] = [];
+	result.push(...quickSort(left));
+	result.push(pivot);
+	result.push(...quickSort(right));
+
+	return result;
+};
+```
+
+### Merge Sort
+
+#### Description
+
+Merge sort is a sorting algorithm that uses the divide and conquer strategy to recursively divide the input array into two subarrays. The two subarrays are then sorted and merged to produce the final sorted array. This process continues until the array is sorted.
+
+#### Complexity
+
+| Operation | Complexity |
+| --------- | ---------- |
+| Sort      | O(n log n) |
+
+#### Implementation
+
+C#:
+
+```csharp
+public static int[] MergeSort(int[] items)
+{
+    if (items.Length <= 1)
+    {
+        return items;
+    }
+
+    var mid = items.Length / 2;
+    var left = items.Take(mid).ToArray();
+    var right = items.Skip(mid).ToArray();
+
+    return Merge(MergeSort(left), MergeSort(right));
+}
+
+public static int[] Merge(int[] left, int[] right)
+{
+    var result = new List<int>();
+    var i = 0;
+    var j = 0;
+
+    while (i < left.Length && j < right.Length)
+    {
+        if (left[i] < right[j])
+        {
+            result.Add(left[i]);
+            i++;
+        }
+        else
+        {
+            result.Add(right[j]);
+            j++;
+        }
+    }
+
+    while (i < left.Length)
+    {
+        result.Add(left[i]);
+        i++;
+    }
+
+    while (j < right.Length)
+    {
+        result.Add(right[j]);
+        j++;
+    }
+
+    return result.ToArray();
+}
+```
+
+TypeScript:
+
+```typescript
+const mergeSort = (items: number[]): number[] => {
+	if (items.length <= 1) {
+		return items;
+	}
+
+	const mid = Math.floor(items.length / 2);
+	const left = items.slice(0, mid);
+	const right = items.slice(mid);
+
+	return merge(mergeSort(left), mergeSort(right));
+};
+
+const merge = (left: number[], right: number[]): number[] => {
+	const result: number[] = [];
+	let i = 0;
+	let j = 0;
+
+	while (i < left.length && j < right.length) {
+		if (left[i] < right[j]) {
+			result.push(left[i]);
+			i++;
+		} else {
+			result.push(right[j]);
+			j++;
+		}
+	}
+
+	return result.concat(left.slice(i)).concat(right.slice(j));
+};
+```
+
 ## Data Structures
 
 ### Linked Lists
@@ -714,6 +934,21 @@ Linked lists are a fundamental data structure that allows you to store a collect
 - **Reverse:** Reverses the order of the items in the list.
 - **Print:** Prints the items in the list.
 - **Count:** Returns the number of items in the list.
+
+#### Complexity
+
+| Operation   | Complexity |
+| ----------- | ---------- |
+| InsertFirst | O(1)       |
+| InsertLast  | O(1)       |
+| InsertAt    | O(n)       |
+| RemoveFirst | O(1)       |
+| RemoveLast  | O(n)       |
+| Remove      | O(n)       |
+| RemoveAt    | O(n)       |
+| Reverse     | O(n)       |
+| Print       | O(n)       |
+| Count       | O(n)       |
 
 #### Implementation
 
@@ -1150,6 +1385,481 @@ class LinkedList<T> {
 }
 ```
 
+### Doubly Linked Lists
+
+#### Description
+
+Doubly linked lists are basically the same as singly linked lists, except that each node has a reference to the previous node as well as the next node. This allows you to traverse the list in both directions. However, this comes at the cost of additional memory, as each node now has to store a reference to the previous node.
+
+#### Interface
+
+- **InsertFirst:** Inserts an item at the beginning of the list.
+- **InsertLast:** Inserts an item at the end of the list.
+- **InsertAt:** Inserts an item at a specific position in the list.
+- **RemoveFirst:** Removes the item at the beginning of the list.
+- **RemoveLast:** Removes the item at the end of the list.
+- **Remove:** Removes the first occurrence of a specific item from the list.
+- **RemoveAt:** Removes the item at a specific position in the list.
+- **Reverse:** Reverses the order of the items in the list.
+- **Print:** Prints the items in the list.
+- **Count:** Returns the number of items in the list.
+
+#### Complexity
+
+| Operation   | Complexity |
+| ----------- | ---------- |
+| InsertFirst | O(1)       |
+| InsertLast  | O(1)       |
+| InsertAt    | O(n)       |
+| RemoveFirst | O(1)       |
+| RemoveLast  | O(1)       |
+| Remove      | O(n)       |
+| RemoveAt    | O(n)       |
+| Reverse     | O(n)       |
+| Print       | O(n)       |
+| Count       | O(n)       |
+
+#### Implementation
+
+C#:
+
+```csharp
+public class Node<T>
+{
+    public T Data { get; set; }
+    public Node<T> Next { get; set; }
+    public Node<T> Previous { get; set; }
+
+    public Node(T data)
+    {
+        Data = data;
+    }
+}
+
+public class DoublyLinkedList<T>
+{
+    public Node<T> Head { get; set; }
+    public Node<T> Tail { get; set; }
+
+    public int Count
+    {
+        get
+        {
+            var current = Head;
+            var count = 0;
+
+            while (current != null)
+            {
+                count++;
+                current = current.Next;
+            }
+
+            return count;
+        }
+    }
+
+    public void InsertFirst(T data)
+    {
+        var node = new Node<T>(data);
+
+        if (Head == null)
+        {
+            Head = node;
+            Tail = node;
+        }
+        else
+        {
+            node.Next = Head;
+            Head.Previous = node;
+            Head = node;
+        }
+    }
+
+    public void InsertLast(T data)
+    {
+        var node = new Node<T>(data);
+
+        if (Head == null)
+        {
+            Head = node;
+            Tail = node;
+        }
+        else
+        {
+            Tail.Next = node;
+            node.Previous = Tail;
+            Tail = node;
+        }
+    }
+
+    public void InsertAt(T data, int index)
+    {
+        if (index == 0)
+        {
+            InsertFirst(data);
+        }
+        else
+        {
+            var current = Head;
+
+            for (int i = 0; i < index - 1; i++)
+            {
+                if (current.Next == null)
+                {
+                    throw new InvalidOperationException();
+                }
+
+                current = current.Next;
+            }
+
+            var node = new Node<T>(data);
+            node.Next = current.Next;
+            node.Previous = current;
+            current.Next = node;
+        }
+    }
+
+    public void RemoveFirst()
+    {
+        if (Head == null)
+        {
+            throw new InvalidOperationException();
+        }
+
+        if (Head == Tail)
+        {
+            Head = null;
+            Tail = null;
+        }
+        else
+        {
+            Head = Head.Next;
+            Head.Previous = null;
+        }
+    }
+
+    public void RemoveLast()
+    {
+        if (Head == null)
+        {
+            throw new InvalidOperationException();
+        }
+
+        if (Head == Tail)
+        {
+            Head = null;
+            Tail = null;
+        }
+        else
+        {
+            Tail = Tail.Previous;
+            Tail.Next = null;
+        }
+    }
+
+    public void Remove(T data)
+    {
+        if (Head == null)
+        {
+            throw new InvalidOperationException();
+        }
+
+        if (Head == Tail && Head.Data.Equals(data))
+        {
+            Head = null;
+            Tail = null;
+        }
+        else if (Head.Data.Equals(data))
+        {
+            Head = Head.Next;
+            Head.Previous = null;
+        }
+        else
+        {
+            var current = Head;
+
+            while (current.Next != null && !current.Next.Data.Equals(data))
+            {
+                current = current.Next;
+            }
+
+            if (current.Next != null)
+            {
+                current.Next = current.Next.Next;
+                current.Next.Previous = current;
+            }
+        }
+    }
+
+    public void RemoveAt(int index)
+    {
+        if (Head == null)
+        {
+            throw new InvalidOperationException();
+        }
+
+        if (index == 0)
+        {
+            Head = Head.Next;
+            Head.Previous = null;
+        }
+        else
+        {
+            var current = Head;
+            var previous = Head;
+
+            for (int i = 0; i < index; i++)
+            {
+                if (current.Next == null)
+                {
+                    throw new InvalidOperationException();
+                }
+
+                previous = current;
+                current = current.Next;
+            }
+
+            previous.Next = current.Next;
+
+            if (current.Next != null)
+            {
+                current.Next.Previous = previous;
+            }
+        }
+    }
+
+    public void Reverse()
+    {
+        if (Head == null)
+        {
+            throw new InvalidOperationException();
+        }
+
+        if (Head == Tail)
+        {
+            return;
+        }
+
+        var current = Head;
+        Tail = Head;
+
+        while (current != null)
+        {
+            var next = current.Next;
+            current.Next = current.Previous;
+            current.Previous = next;
+            current = next;
+        }
+
+        Head = Tail;
+        Tail = current;
+    }
+
+    public void Print()
+    {
+        var current = Head;
+
+        while (current != null)
+        {
+            Console.WriteLine(current.Data);
+            current = current.Next;
+        }
+    }
+}
+```
+
+TypeScript:
+
+```typescript
+class Node<T> {
+	public data: T;
+	public next: Node<T> | null;
+	public previous: Node<T> | null;
+
+	constructor(data: T) {
+		this.data = data;
+		this.next = null;
+		this.previous = null;
+	}
+}
+
+class DoublyLinkedList<T> {
+	public head: Node<T> | null;
+	public tail: Node<T> | null;
+
+	constructor() {
+		this.head = null;
+		this.tail = null;
+	}
+
+	public count(): number {
+		let current = this.head;
+		let count = 0;
+
+		while (current !== null) {
+			count++;
+			current = current.next;
+		}
+
+		return count;
+	}
+
+	public insertFirst(data: T): void {
+		const node = new Node(data);
+
+		if (this.head === null) {
+			this.head = node;
+			this.tail = node;
+		} else {
+			node.next = this.head;
+			this.head.previous = node;
+			this.head = node;
+		}
+	}
+
+	public insertLast(data: T): void {
+		const node = new Node(data);
+
+		if (this.head === null) {
+			this.head = node;
+			this.tail = node;
+		} else {
+			this.tail.next = node;
+			node.previous = this.tail;
+			this.tail = node;
+		}
+	}
+
+	public insertAt(data: T, index: number): void {
+		if (index === 0) {
+			this.insertFirst(data);
+		} else {
+			let current = this.head;
+
+			for (let i = 0; i < index - 1; i++) {
+				if (current.next === null) {
+					throw new Error("Index out of bounds");
+				}
+
+				current = current.next;
+			}
+
+			const node = new Node(data);
+			node.next = current.next;
+			node.previous = current;
+			current.next = node;
+		}
+	}
+
+	public removeFirst(): void {
+		if (this.head === null) {
+			throw new Error("List is empty");
+		}
+
+		if (this.head === this.tail) {
+			this.head = null;
+			this.tail = null;
+		} else {
+			this.head = this.head.next;
+			this.head.previous = null;
+		}
+	}
+
+	public removeLast(): void {
+		if (this.head === null) {
+			throw new Error("List is empty");
+		}
+
+		if (this.head === this.tail) {
+			this.head = null;
+			this.tail = null;
+		} else {
+			this.tail = this.tail.previous;
+			this.tail.next = null;
+		}
+	}
+
+	public remove(data: T): void {
+		if (
+			this.head === null ||
+			this.head === this.tail ||
+			this.head.data === data
+		) {
+			this.removeFirst();
+		} else {
+			let current = this.head;
+
+			while (current.next !== null && current.next.data !== data) {
+				current = current.next;
+			}
+
+			if (current.next !== null) {
+				current.next = current.next.next;
+				current.next.previous = current;
+			}
+		}
+	}
+
+	public removeAt(index: number): void {
+		if (this.head === null) {
+			throw new Error("List is empty");
+		}
+
+		if (index === 0) {
+			this.removeFirst();
+		} else {
+			let current = this.head;
+
+			for (let i = 0; i < index; i++) {
+				if (current.next === null) {
+					throw new Error("Index out of bounds");
+				}
+
+				current = current.next;
+			}
+
+			current.previous.next = current.next;
+
+			if (current.next !== null) {
+				current.next.previous = current.previous;
+			}
+		}
+	}
+
+	public reverse(): void {
+		if (this.head === null) {
+			throw new Error("List is empty");
+		}
+
+		if (this.head === this.tail) {
+			return;
+		}
+
+		let current = this.head;
+		this.tail = this.head;
+
+		while (current !== null) {
+			const next = current.next;
+			current.next = current.previous;
+			current.previous = next;
+			current = next;
+		}
+
+		this.head = this.tail;
+		this.tail = current;
+	}
+
+	public print(): void {
+		let current = this.head;
+
+		while (current !== null) {
+			console.log(current.data);
+			current = current.next;
+		}
+	}
+}
+```
+
 ### Queues
 
 #### Description
@@ -1170,6 +1880,16 @@ Queues are a fundamental data structure that allows you to store a collection of
 - **Peek:** Returns the item at the front of the queue without deleting it.
 - **Clear:** Removes all items from the queue.
 - **Count:** Returns the number of items in the queue.
+
+#### Complexity
+
+| Operation | Complexity |
+| --------- | ---------- |
+| Enqueue   | O(1)       |
+| Dequeue   | O(1)       |
+| Peek      | O(1)       |
+| Clear     | O(1)       |
+| Count     | O(1)       |
 
 #### Implementation
 
@@ -1335,6 +2055,16 @@ Stacks are a fundamental data structure that allows you to store a collection of
 - **Peek:** Returns the top item from the stack without deleting it.
 - **Clear:** Removes all items from the stack.
 - **Count:** Returns the number of items in the stack.
+
+#### Complexity
+
+| Operation | Complexity |
+| --------- | ---------- |
+| Push      | O(1)       |
+| Pop       | O(1)       |
+| Peek      | O(1)       |
+| Clear     | O(1)       |
+| Count     | O(1)       |
 
 #### Implementation
 
@@ -1513,6 +2243,19 @@ An ArrayList is a dynamic array that can grow and shrink in size. It's similar t
 - **Contains:** Returns true if the list contains the specified element.
 - **Clear:** Removes all elements from the list.
 - **Count:** Returns the number of elements in the list.
+
+#### Complexity
+
+| Operation | Complexity |
+| --------- | ---------- |
+| Add       | O(1)       |
+| Insert    | O(n)       |
+| Remove    | O(n)       |
+| RemoveAt  | O(n)       |
+| IndexOf   | O(n)       |
+| Contains  | O(n)       |
+| Clear     | O(1)       |
+| Count     | O(1)       |
 
 #### Implementation
 
@@ -1742,6 +2485,19 @@ ArrayBuffers are fixed-size buffers that allow you to store a collection of elem
 - **ByteLength:** Returns the size of the buffer in bytes.
 - **ByteOffset:** Returns the offset of the buffer in bytes.
 
+#### Complexity
+
+| Operation  | Complexity |
+| ---------- | ---------- |
+| Get        | O(1)       |
+| Set        | O(1)       |
+| Slice      | O(n)       |
+| CopyTo     | O(n)       |
+| Clear      | O(n)       |
+| Count      | O(1)       |
+| ByteLength | O(1)       |
+| ByteOffset | O(1)       |
+
 #### Implementation
 
 C#:
@@ -1857,4 +2613,176 @@ public class ArrayBuffer
         return 0;
     }
 }
+```
+
+## Recursion
+
+### Description
+
+Recursion is a programming technique that allows you to solve a problem by breaking it down into smaller subproblems. It involves solving a problem by calling a function that calls itself until a base case is reached. A base case is a condition that stops the recursion. It's important to note that every recursive function must have a base case, otherwise it will run forever and cause a stack overflow.
+
+### Simple Example
+
+```csharp
+public static int Factorial(int n)
+{
+    if (n == 0)
+    {
+        return 1;
+    }
+
+    return n * Factorial(n - 1);
+}
+```
+
+```typescript
+const factorial = (n: number): number => {
+	if (n === 0) {
+		return 1;
+	}
+
+	return n * factorial(n - 1);
+};
+```
+
+### Maze Example
+
+#### Description
+
+In this example, we will use recursion to solve a maze. The maze is represented by a 2D array of cells. Each cell can be either a wall or a path. The goal is to find a path from the start cell to the end cell. The start cell is represented by the char S, and the end cell is represented by the char E. The path is represented by the char P. The walls are represented by the char #. The path can only contain cells that are adjacent to each other. The path can only contain cells that are not walls. The path can only contain cells that have not already been visited.
+
+#### Base Cases
+
+- If the current cell is outside the maze, return false.
+- If the current cell is the end cell, return true.
+- If the current cell is a wall, return false.
+- If the current cell has already been visited, return false.
+
+#### Implementation
+
+C#:
+
+```csharp
+public static bool SolveMaze(char[,] maze, int row, int col)
+{
+    if (row < 0 || row >= maze.GetLength(0) || col < 0 || col >= maze.GetLength(1))
+    {
+        return false;
+    }
+
+    if (maze[row, col] == 'E')
+    {
+        return true;
+    }
+
+    if (maze[row, col] == '#' || maze[row, col] == 'P')
+    {
+        return false;
+    }
+
+    maze[row, col] = 'P';
+
+    if (SolveMaze(maze, row - 1, col))
+    {
+        return true;
+    }
+
+    if (SolveMaze(maze, row + 1, col))
+    {
+        return true;
+    }
+
+    if (SolveMaze(maze, row, col - 1))
+    {
+        return true;
+    }
+
+    if (SolveMaze(maze, row, col + 1))
+    {
+        return true;
+    }
+
+    maze[row, col] = ' ';
+    return false;
+}
+
+// Test (5x7)
+
+var maze = new char[,]
+{
+    { '#', '#', '#', '#', '#', '#', '#' },
+    { '#', ' ', ' ', ' ', '#', ' ', '#' },
+    { '#', ' ', '#', ' ', '#', ' ', '#' },
+    { '#', ' ', '#', ' ', ' ', ' ', '#' },
+    { '#', ' ', '#', '#', '#', ' ', '#' },
+    { '#', ' ', ' ', ' ', '#', ' ', '#' },
+    { '#', '#', '#', '#', '#', 'E', '#' }
+};
+
+SolveMaze(maze, 1, 1);
+
+for (int i = 0; i < maze.GetLength(0); i++)
+{
+    for (int j = 0; j < maze.GetLength(1); j++)
+    {
+        Console.Write(maze[i, j]);
+    }
+
+    Console.WriteLine();
+}
+```
+
+TypeScript:
+
+```typescript
+const solveMaze = (maze: string[][], row: number, col: number): boolean => {
+	if (row < 0 || row >= maze.length || col < 0 || col >= maze[0].length) {
+		return false;
+	}
+
+	if (maze[row][col] === "E") {
+		return true;
+	}
+
+	if (maze[row][col] === "#" || maze[row][col] === "P") {
+		return false;
+	}
+
+	maze[row][col] = "P";
+
+	if (solveMaze(maze, row - 1, col)) {
+		return true;
+	}
+
+	if (solveMaze(maze, row + 1, col)) {
+		return true;
+	}
+
+	if (solveMaze(maze, row, col - 1)) {
+		return true;
+	}
+
+	if (solveMaze(maze, row, col + 1)) {
+		return true;
+	}
+
+	maze[row][col] = " ";
+	return false;
+};
+
+// Test (5x7)
+
+const maze = [
+	["#", "#", "#", "#", "#", "#", "#"],
+	["#", " ", " ", " ", "#", " ", "#"],
+	["#", " ", "#", " ", "#", " ", "#"],
+	["#", " ", "#", " ", " ", " ", "#"],
+	["#", " ", "#", "#", "#", " ", "#"],
+	["#", " ", " ", " ", "#", " ", "#"],
+	["#", "#", "#", "#", "#", "E", "#"],
+];
+
+solveMaze(maze, 1, 1);
+
+console.log(maze.map((row) => row.join("")).join("\n"));
 ```
