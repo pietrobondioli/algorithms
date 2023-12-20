@@ -48,15 +48,31 @@
       - [Description](#description-3)
       - [Characteristics](#characteristics)
       - [Real-World Examples](#real-world-examples)
+      - [Interface](#interface)
       - [Implementation](#implementation-3)
     - [Queues](#queues)
       - [Description](#description-4)
       - [Real-World Examples](#real-world-examples-1)
+      - [Interface](#interface-1)
       - [Implementation](#implementation-4)
     - [Stacks](#stacks)
       - [Description](#description-5)
       - [Real-World Examples](#real-world-examples-2)
+      - [Interface](#interface-2)
       - [Implementation](#implementation-5)
+    - [Arrays vs. Linked Lists](#arrays-vs-linked-lists)
+    - [ArrayList](#arraylist)
+      - [Description](#description-6)
+      - [Characteristics](#characteristics-1)
+      - [Real-World Examples](#real-world-examples-3)
+      - [Interface](#interface-3)
+      - [Implementation](#implementation-6)
+    - [ArrayBuffers](#arraybuffers)
+      - [Description](#description-7)
+      - [Characteristics](#characteristics-2)
+      - [Real-World Examples](#real-world-examples-4)
+      - [Interface](#interface-4)
+      - [Implementation](#implementation-7)
 
 ## Notes
 
@@ -686,6 +702,19 @@ Linked lists are a fundamental data structure that allows you to store a collect
 - **Music Playlist:** A music playlist can be implemented using a linked list. Each song would be a node in the list, and each node would contain a reference to the next song in the playlist.
 - **Browser History:** A browser history can be implemented using a doubly linked list. Each page would be a node in the list, and each node would contain a reference to the previous and next pages.
 
+#### Interface
+
+- **InsertFirst:** Inserts an item at the beginning of the list.
+- **InsertLast:** Inserts an item at the end of the list.
+- **InsertAt:** Inserts an item at a specific position in the list.
+- **RemoveFirst:** Removes the item at the beginning of the list.
+- **RemoveLast:** Removes the item at the end of the list.
+- **Remove:** Removes the first occurrence of a specific item from the list.
+- **RemoveAt:** Removes the item at a specific position in the list.
+- **Reverse:** Reverses the order of the items in the list.
+- **Print:** Prints the items in the list.
+- **Count:** Returns the number of items in the list.
+
 #### Implementation
 
 C#:
@@ -1134,6 +1163,14 @@ Queues are a fundamental data structure that allows you to store a collection of
 - **Buffer:** Queues are used to implement buffers in certain computer architectures. Buffers are temporary storage areas that are used to compensate for a difference in speed between two processes. For example, a queue can be used to hold data that is being transferred from one process to another.
 - **Asynchronous Data Transfer:** Queues are used to implement asynchronous data transfer between two processes. The queue temporarily holds the data before it is received by the other process. This is often used in computer networks.
 
+#### Interface
+
+- **Enqueue:** Adds an item to the rear of the queue.
+- **Dequeue:** Removes the item at the front of the queue.
+- **Peek:** Returns the item at the front of the queue without deleting it.
+- **Clear:** Removes all items from the queue.
+- **Count:** Returns the number of items in the queue.
+
 #### Implementation
 
 C#:
@@ -1291,6 +1328,14 @@ Stacks are a fundamental data structure that allows you to store a collection of
 - **Expression Evaluation:** Stacks are used to evaluate expressions in programming languages. For example, when evaluating the expression 2 + 3 \* 5, the numbers 2 and 3 would be pushed to the stack. When the multiplication operator is reached, the numbers 2 and 3 would be popped from the stack, multiplied, and the result, 6, would be pushed back to the stack. The addition operator would then be evaluated, and the final result, 11, would be returned.
 - **Backtracking:** Stacks are used to implement backtracking algorithms, such as depth-first search (DFS). In DFS, nodes are visited in the order of their depth, following the LIFO principle. This is often used in tree traversal algorithms.
 
+#### Interface
+
+- **Push:** Adds an item to the top of the stack.
+- **Pop:** Removes the top item from the stack.
+- **Peek:** Returns the top item from the stack without deleting it.
+- **Clear:** Removes all items from the stack.
+- **Count:** Returns the number of items in the stack.
+
 #### Implementation
 
 C#:
@@ -1425,5 +1470,391 @@ class Stack<T> {
 	public clear(): void {
 		this.top = null;
 	}
+}
+```
+
+### Arrays vs. Linked Lists
+
+- **Access:** Arrays allow for constant time access to any element in the array. Linked lists, on the other hand, require O(n) time to access an element in the list. This is because you have to traverse the list from the beginning to find the element.
+- **Search:** Both arrays and linked lists require O(n) time to search for an element. This is because you have to traverse the list from the beginning to find the element.
+- **Insertion:** Inserting an element into an array requires O(n) time since you have to shift all the elements after the inserted element to the right by one. Inserting an element into a linked list, however, only requires O(1) time since you only have to update the references of the adjacent nodes.
+- **Deletion:** Deleting an element from an array requires O(n) time since you have to shift all the elements after the deleted element to the left by one. Deleting an element from a linked list, however, only requires O(1) time since you only have to update the references of the adjacent nodes.
+- **Memory:** Arrays are stored in contiguous memory locations, meaning that all the elements are stored next to each other in memory. Linked lists, on the other hand, are stored in non-contiguous memory locations, meaning that the elements are stored at arbitrary memory locations. This means that accessing an element in an array is faster than accessing an element in a linked list since you can access any element in an array directly if you know its index. In a linked list, you have to traverse the list from the beginning to find the element.
+- **Size:** Arrays are fixed in size, meaning that you have to specify the size of the array when you initialize it. Linked lists, on the other hand, are dynamic in size, meaning that they can grow and shrink in size as needed.
+- **Sorting:** Arrays are easier to sort than linked lists since you can directly access any element in an array if you know its index. In a linked list, you have to traverse the list from the beginning to find the element. This means that sorting an array is faster than sorting a linked list.
+
+### ArrayList
+
+#### Description
+
+An ArrayList is a dynamic array that can grow and shrink in size. It's similar to an array, but it doesn't require you to specify the size when you initialize it. Instead, it automatically allocates more memory when needed. They way it grows depends on the implementation. For example, it can double in size each time more memory is needed, or it can grow by a fixed percentage each time. It can also shrink in size if the number of elements decreases.
+
+#### Characteristics
+
+- It's a dynamic array that can grow and shrink in size.
+- It's a linear data structure, meaning that there is a sequence and an order to how they are constructed and traversed.
+- It's a random access data structure, meaning that you can directly access any element in the list if you know its index.
+- It's mutable, meaning that you can modify the elements in the list.
+- It can be sorted or unsorted.
+
+#### Real-World Examples
+
+- **Shopping List:** An ArrayList can be used to implement a shopping list. Each item would be an element in the list, and each element would be associated with a quantity.
+- **To-Do List:** An ArrayList can be used to implement a to-do list. Each item would be an element in the list, and each element would be associated with a status (e.g., completed or not completed).
+- **Library Catalog:** An ArrayList can be used to implement a library catalog. Each book would be an element in the list, and each element would be associated with a status (e.g., available or checked out).
+
+#### Interface
+
+- **Add:** Adds an element to the end of the list.
+- **Insert:** Inserts an element at the specified index.
+- **Remove:** Removes the first occurrence of the specified element.
+- **RemoveAt:** Removes the element at the specified index.
+- **IndexOf:** Returns the index of the first occurrence of the specified element.
+- **Contains:** Returns true if the list contains the specified element.
+- **Clear:** Removes all elements from the list.
+- **Count:** Returns the number of elements in the list.
+
+#### Implementation
+
+C#:
+
+```csharp
+public class ArrayList<T>
+{
+    private T[] _items;
+
+    public int Count { get; private set; }
+
+    public ArrayList()
+    {
+        _items = new T[0];
+    }
+
+    public void Add(T item)
+    {
+        if (Count == _items.Length)
+        {
+            var newItems = new T[(Count == 0) ? 4 : Count * 2];
+            _items.CopyTo(newItems, 0);
+            _items = newItems;
+        }
+
+        _items[Count] = item;
+        Count++;
+    }
+
+    public void Insert(T item, int index)
+    {
+        if (index < 0 || index > Count)
+        {
+            throw new IndexOutOfRangeException();
+        }
+
+        if (Count == _items.Length)
+        {
+            var newItems = new T[(Count == 0) ? 4 : Count * 2];
+            _items.CopyTo(newItems, 0);
+            _items = newItems;
+        }
+
+        for (int i = Count; i > index; i--)
+        {
+            _items[i] = _items[i - 1];
+        }
+
+        _items[index] = item;
+        Count++;
+    }
+
+    public void RemoveAt(int index)
+    {
+        if (index < 0 || index >= Count)
+        {
+            throw new IndexOutOfRangeException();
+        }
+
+        for (int i = index; i < Count - 1; i++)
+        {
+            _items[i] = _items[i + 1];
+        }
+
+        Count--;
+    }
+
+    public void Remove(T item)
+    {
+        var index = IndexOf(item);
+
+        if (index != -1)
+        {
+            RemoveAt(index);
+        }
+    }
+
+    public int IndexOf(T item)
+    {
+        for (int i = 0; i < Count; i++)
+        {
+            if (_items[i].Equals(item))
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public bool Contains(T item)
+    {
+        return IndexOf(item) != -1;
+    }
+
+    public void Clear()
+    {
+        _items = new T[0];
+        Count = 0;
+    }
+
+    public T this[int index]
+    {
+        get
+        {
+            if (index < 0 || index >= Count)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            return _items[index];
+        }
+        set
+        {
+            if (index < 0 || index >= Count)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            _items[index] = value;
+        }
+    }
+}
+```
+
+TypeScript:
+
+```typescript
+class ArrayList<T> {
+	private items: T[];
+
+	constructor() {
+		this.items = [];
+	}
+
+	public get count(): number {
+		return this.items.length;
+	}
+
+	public add(item: T): void {
+		this.items.push(item);
+	}
+
+	public insert(item: T, index: number): void {
+		if (index < 0 || index > this.count) {
+			throw new Error("Index out of bounds");
+		}
+
+		this.items.splice(index, 0, item);
+	}
+
+	public removeAt(index: number): void {
+		if (index < 0 || index >= this.count) {
+			throw new Error("Index out of bounds");
+		}
+
+		this.items.splice(index, 1);
+	}
+
+	public remove(item: T): void {
+		const index = this.indexOf(item);
+
+		if (index !== -1) {
+			this.removeAt(index);
+		}
+	}
+
+	public indexOf(item: T): number {
+		return this.items.indexOf(item);
+	}
+
+	public contains(item: T): boolean {
+		return this.indexOf(item) !== -1;
+	}
+
+	public clear(): void {
+		this.items = [];
+	}
+
+	public get(index: number): T {
+		if (index < 0 || index >= this.count) {
+			throw new Error("Index out of bounds");
+		}
+
+		return this.items[index];
+	}
+
+	public set(index: number, item: T): void {
+		if (index < 0 || index >= this.count) {
+			throw new Error("Index out of bounds");
+		}
+
+		this.items[index] = item;
+	}
+}
+```
+
+### ArrayBuffers
+
+#### Description
+
+ArrayBuffers are fixed-size buffers that allow you to store a collection of elements. They are similar to arrays, but they don't allow you to add or remove elements. They are useful when you need to store a fixed number of elements and don't need to add or remove elements. They are also useful when you need to pass a large amount of data to a function.
+
+#### Characteristics
+
+- They are fixed-size buffers, meaning that you have to specify the size when you initialize them.
+- They are a linear data structure, meaning that there is a sequence and an order to how they are constructed and traversed.
+- They are a random access data structure, meaning that you can directly access any element in the buffer if you know its index.
+
+#### Real-World Examples
+
+- **Image Processing:** ArrayBuffers are used in image processing algorithms to store the pixel data of an image. Each pixel is represented by a single element in the buffer.
+- **Audio Processing:** ArrayBuffers are used in audio processing algorithms to store the audio data of a sound. Each sample is represented by a single element in the buffer.
+- **File Transfer:** ArrayBuffers are used in file transfer protocols to store the data of a file. Each byte is represented by a single element in the buffer.
+- **Networking:** ArrayBuffers are used in networking protocols to store the data of a packet. Each byte is represented by a single element in the buffer.
+- **Data Compression:** ArrayBuffers are used in data compression algorithms to store the compressed data. Each byte is represented by a single element in the buffer.
+
+#### Interface
+
+- **Get:** Returns the element at the specified index.
+- **Set:** Sets the element at the specified index.
+- **Slice:** Returns a new ArrayBuffer that contains a copy of the elements from the start index to the end index.
+- **CopyTo:** Copies the elements from the start index to the end index to the specified ArrayBuffer.
+- **Clear:** Sets all the elements in the buffer to zero.
+- **Count:** Returns the number of elements in the buffer.
+- **ByteLength:** Returns the size of the buffer in bytes.
+- **ByteOffset:** Returns the offset of the buffer in bytes.
+
+#### Implementation
+
+C#:
+
+```csharp
+public class ArrayBuffer
+{
+    private byte[] _items;
+
+    public ArrayBuffer(int size)
+    {
+        _items = new byte[size];
+    }
+
+    public byte Get(int index)
+    {
+        if (index < 0 || index >= _items.Length)
+        {
+            throw new IndexOutOfRangeException();
+        }
+
+        return _items[index];
+    }
+
+    public void Set(int index, byte item)
+    {
+        if (index < 0 || index >= _items.Length)
+        {
+            throw new IndexOutOfRangeException();
+        }
+
+        _items[index] = item;
+    }
+
+    public ArrayBuffer Slice(int start, int end)
+    {
+        if (start < 0 || start >= _items.Length)
+        {
+            throw new IndexOutOfRangeException();
+        }
+
+        if (end < 0 || end >= _items.Length)
+        {
+            throw new IndexOutOfRangeException();
+        }
+
+        if (start > end)
+        {
+            throw new InvalidOperationException();
+        }
+
+        var length = end - start + 1;
+        var buffer = new ArrayBuffer(length);
+
+        for (int i = 0; i < length; i++)
+        {
+            buffer.Set(i, _items[start + i]);
+        }
+
+        return buffer;
+    }
+
+    public void CopyTo(ArrayBuffer buffer, int start, int end)
+    {
+        if (start < 0 || start >= _items.Length)
+        {
+            throw new IndexOutOfRangeException();
+        }
+
+        if (end < 0 || end >= _items.Length)
+        {
+            throw new IndexOutOfRangeException();
+        }
+
+        if (start > end)
+        {
+            throw new InvalidOperationException();
+        }
+
+        var length = end - start + 1;
+
+        if (length > buffer.ByteLength)
+        {
+            throw new InvalidOperationException();
+        }
+
+        for (int i = 0; i < length; i++)
+        {
+            buffer.Set(i, _items[start + i]);
+        }
+    }
+
+    public void Clear()
+    {
+        for (int i = 0; i < _items.Length; i++)
+        {
+            _items[i] = 0;
+        }
+    }
+
+    public int Count()
+    {
+        return _items.Length;
+    }
+
+    public int ByteLength()
+    {
+        return _items.Length;
+    }
+
+    public int ByteOffset()
+    {
+        return 0;
+    }
 }
 ```
