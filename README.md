@@ -101,6 +101,16 @@
       - [Description](#description-12)
       - [Base Cases](#base-cases)
       - [Implementation](#implementation-11)
+  - [Trees](#trees)
+    - [Description](#description-13)
+    - [Characteristics](#characteristics-3)
+    - [Real-World Examples](#real-world-examples-5)
+    - [Terminology](#terminology)
+    - [Types of Traverse](#types-of-traverse)
+    - [Binary Trees](#binary-trees)
+      - [Interface](#interface-6)
+      - [Complexity](#complexity-11)
+      - [Implementation](#implementation-12)
 
 ## Notes
 
@@ -2785,4 +2795,486 @@ const maze = [
 solveMaze(maze, 1, 1);
 
 console.log(maze.map((row) => row.join("")).join("\n"));
+```
+
+## Trees
+
+### Description
+
+Trees are a fundamental data structure that allow you to store a collection of elements. Each element in a tree is called a node. The topmost node in a tree is called the root node. Each node can have zero or more child nodes. Nodes with no child nodes are called leaf nodes. Trees are often used to represent hierarchical data, such as the folders and files on your computer.
+
+### Characteristics
+
+- They are a hierarchical data structure, meaning that each node has zero or more child nodes.
+- They are a non-linear data structure, meaning that there is no sequential order to how they are constructed and traversed.
+- They are a random access data structure, meaning that you can directly access any node in the tree if you know its path.
+- They are mutable, meaning that you can modify the nodes in the tree.
+- They can be sorted or unsorted.
+- They can be balanced or unbalanced.
+- They can be directed or undirected.
+- They can be weighted or unweighted.
+- They can be rooted or unrooted.
+- They can be ordered or unordered.
+- They can be binary or non-binary.
+
+### Real-World Examples
+
+- **File System:** Trees are used to represent the folders and files on your computer. Each folder is a node, and each file is a leaf node.
+- **HTML DOM:** Trees are used to represent the HTML DOM. Each HTML element is a node, and each text node is a leaf node.
+- **Family Tree:** Trees are used to represent family trees. Each person is a node, and each parent-child relationship is an edge.
+- **Organization Chart:** Trees are used to represent organization charts. Each employee is a node, and each manager-employee relationship is an edge.
+- **Decision Tree:** Trees are used to represent decision trees. Each decision is a node, and each possible outcome is an edge.
+- **Abstract Syntax Tree:** Trees are used to represent abstract syntax trees. Each token is a node, and each rule is an edge.
+- **Minimax Tree:** Trees are used to represent minimax trees. Each move is a node, and each possible outcome is an edge.
+
+### Terminology
+
+- **Root:** The topmost node in a tree.
+- **Parent:** A node that has one or more child nodes.
+- **Child:** A node that has a parent node.
+- **Sibling:** A node that has the same parent node.
+- **Leaf:** A node that has no child nodes.
+- **Edge:** A connection between two nodes.
+- **Path:** A sequence of nodes that are connected by edges.
+- **Height:** The number of edges on the longest path from the root to a leaf.
+- **Depth:** The number of edges on the path from a node to the root.
+- **Degree:** The number of child nodes a node has.
+- **Degree of Tree:** The maximum degree of all the nodes in a tree.
+- **Level:** The number of edges on the path from a node to the root, plus one.
+- **Branching Factor:** The number of child nodes a node can have.
+- **Binary Tree:** A tree in which each node has at most two child nodes.
+- **Binary Search Tree:** A binary tree in which the left child node is less than the parent node, and the right child node is greater than the parent node.
+- **General Tree:** A tree in which each node can have zero or more child nodes.
+- **Balanced Tree:** A tree in which the height of the left and right subtrees of every node differs by at most one.
+- **Complete Tree:** A tree in which every level, except possibly the last, is completely filled, and all nodes are as far left as possible.
+- **Traversal:** The process of visiting every node in a tree.
+
+### Types of Traverse
+
+- **Pre-Order:** Visit the root node first, then visit the left subtree, and finally visit the right subtree. So for example, if you have the following tree:
+
+```
+    A
+   / \
+  B   C
+ / \
+D   E
+```
+
+The pre-order traversal would be A, B, D, E, C.
+
+- **In-Order:** Visit the left subtree first, then visit the root node, and finally visit the right subtree. So for example, if you have the following tree:
+
+```
+    A
+   / \
+  B   C
+ / \
+D   E
+```
+
+The in-order traversal would be D, B, E, A, C.
+
+- **Post-Order:** Visit the left subtree first, then visit the right subtree, and finally visit the root node. So for example, if you have the following tree:
+
+```
+    A
+   / \
+  B   C
+ / \
+D   E
+```
+
+The post-order traversal would be D, E, B, C, A.
+
+- **Level-Order:** Visit the nodes level by level, starting from the root node. So for example, if you have the following tree:
+
+```
+    A
+   / \
+  B   C
+ / \
+D   E
+```
+
+The level-order traversal would be A, B, C, D, E.
+
+### Binary Trees
+
+A binary tree is a tree in which each node has at most two child nodes. The left child node is called the left subtree, and the right child node is called the right subtree. A binary tree can be empty, meaning that it doesn't contain any nodes. A binary tree can also be full, meaning that every node has two child nodes. A binary tree can also be complete, meaning that every level, except possibly the last, is completely filled, and all nodes are as far left as possible.
+
+#### Interface
+
+- **Insert:** Inserts a node into the tree.
+- **Remove:** Removes a node from the tree.
+- **Contains:** Returns true if the tree contains the specified node.
+- **Clear:** Removes all nodes from the tree.
+- **Count:** Returns the number of nodes in the tree.
+- **Depth:** Returns the depth of the tree.
+- **Height:** Returns the height of the tree.
+- **IsBalanced:** Returns true if the tree is balanced.
+- **IsComplete:** Returns true if the tree is complete.
+- **Traversal:** Traverses the tree in the specified order.
+- **Print:** Prints the tree.
+
+#### Complexity
+
+https://www.youtube.com/@ThePrimeTimeagen
+| Operation | Complexity |
+| ------------------- | ---------- |
+| Insert | O(log n) |
+| Remove | O(log n) |
+| Contains | O(log n) |
+| Clear | O(1) |
+| Count | O(1) |
+| Depth | O(1) |
+| Height | O(1) |
+| IsBalanced | O(1) |
+| IsComplete | O(1) |
+| PreOrderTraversal | O(n) |
+| InOrderTraversal | O(n) |
+| PostOrderTraversal | O(n) |
+| LevelOrderTraversal | O(n) |
+| Print | O(n) |
+| PrintByLevel | O(n) |
+
+#### Implementation
+
+C#:
+
+```csharp
+public class Node<T>
+{
+    public T Data { get; set; }
+    public Node<T> Left { get; set; }
+    public Node<T> Right { get; set; }
+
+    public Node(T data)
+    {
+        Data = data;
+    }
+}
+
+public class BinaryTree<T>
+{
+    private Node<T> _root;
+
+    public int Count { get; private set; }
+
+    public void Insert(T data)
+    {
+        var node = new Node<T>(data);
+
+        if (_root == null)
+        {
+            _root = node;
+        }
+        else
+        {
+            var current = _root;
+
+            while (true)
+            {
+                if (Comparer<T>.Default.Compare(data, current.Data) < 0)
+                {
+                    if (current.Left == null)
+                    {
+                        current.Left = node;
+                        break;
+                    }
+
+                    current = current.Left;
+                }
+                else
+                {
+                    if (current.Right == null)
+                    {
+                        current.Right = node;
+                        break;
+                    }
+
+                    current = current.Right;
+                }
+            }
+        }
+
+        Count++;
+    }
+
+    public void Remove(T data)
+    {
+        _root = Remove(_root, data);
+    }
+
+    private Node<T> Remove(Node<T> node, T data)
+    {
+        if (node == null)
+        {
+            return null;
+        }
+
+        if (Comparer<T>.Default.Compare(data, node.Data) < 0)
+        {
+            node.Left = Remove(node.Left, data);
+        }
+        else if (Comparer<T>.Default.Compare(data, node.Data) > 0)
+        {
+            node.Right = Remove(node.Right, data);
+        }
+        else
+        {
+            if (node.Left == null)
+            {
+                return node.Right;
+            }
+
+            if (node.Right == null)
+            {
+                return node.Left;
+            }
+
+            var temp = node;
+            node = Min(temp.Right);
+            node.Right = RemoveMin(temp.Right);
+            node.Left = temp.Left;
+        }
+
+        return node;
+    }
+
+    public bool Contains(T data)
+    {
+        var current = _root;
+
+        while (current != null)
+        {
+            if (Comparer<T>.Default.Compare(data, current.Data) < 0)
+            {
+                current = current.Left;
+            }
+            else if (Comparer<T>.Default.Compare(data, current.Data) > 0)
+            {
+                current = current.Right;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void Clear()
+    {
+        _root = null;
+        Count = 0;
+    }
+
+    public int Depth()
+    {
+        return Depth(_root);
+    }
+
+    private int Depth(Node<T> node)
+    {
+        if (node == null)
+        {
+            return 0;
+        }
+
+        return 1 + Math.Max(Depth(node.Left), Depth(node.Right));
+    }
+
+    public int Height()
+    {
+        return Height(_root);
+    }
+
+    private int Height(Node<T> node)
+    {
+        if (node == null)
+        {
+            return -1;
+        }
+
+        return 1 + Math.Max(Height(node.Left), Height(node.Right));
+    }
+
+    public bool IsBalanced()
+    {
+        return IsBalanced(_root);
+    }
+
+    private bool IsBalanced(Node<T> node)
+    {
+        if (node == null)
+        {
+            return true;
+        }
+
+        var leftHeight = Height(node.Left);
+        var rightHeight = Height(node.Right);
+
+        if (Math.Abs(leftHeight - rightHeight) <= 1 && IsBalanced(node.Left) && IsBalanced(node.Right))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IsComplete()
+    {
+        return IsComplete(_root);
+    }
+
+    private bool IsComplete(Node<T> node)
+    {
+        if (node == null)
+        {
+            return true;
+        }
+
+        var leftHeight = Height(node.Left);
+        var rightHeight = Height(node.Right);
+
+        if (leftHeight == rightHeight)
+        {
+            return IsComplete(node.Right);
+        }
+
+        if (leftHeight == rightHeight + 1)
+        {
+            return IsComplete(node.Left) && IsComplete(node.Right);
+        }
+
+        return false;
+    }
+
+    public void PreOrderTraversal(Action<T> action)
+    {
+        PreOrderTraversal(_root, action);
+    }
+
+    private void PreOrderTraversal(Node<T> node, Action<T> action)
+    {
+        if (node == null)
+        {
+            return;
+        }
+
+        action(node.Data);
+        PreOrderTraversal(node.Left, action);
+        PreOrderTraversal(node.Right, action);
+    }
+
+    public void InOrderTraversal(Action<T> action)
+    {
+        InOrderTraversal(_root, action);
+    }
+
+    private void InOrderTraversal(Node<T> node, Action<T> action)
+    {
+        if (node == null)
+        {
+            return;
+        }
+
+        InOrderTraversal(node.Left, action);
+        action(node.Data);
+        InOrderTraversal(node.Right, action);
+    }
+
+    public void PostOrderTraversal(Action<T> action)
+    {
+        PostOrderTraversal(_root, action);
+    }
+
+    private void PostOrderTraversal(Node<T> node, Action<T> action)
+    {
+        if (node == null)
+        {
+            return;
+        }
+
+        PostOrderTraversal(node.Left, action);
+        PostOrderTraversal(node.Right, action);
+        action(node.Data);
+    }
+
+    public void LevelOrderTraversal(Action<T> action)
+    {
+        var queue = new Queue<Node<T>>();
+        queue.Enqueue(_root);
+
+        while (queue.Count > 0)
+        {
+            var node = queue.Dequeue();
+            action(node.Data);
+
+            if (node.Left != null)
+            {
+                queue.Enqueue(node.Left);
+            }
+
+            if (node.Right != null)
+            {
+                queue.Enqueue(node.Right);
+            }
+        }
+    }
+
+    public void Print()
+    {
+        Print(_root);
+    }
+
+    private void Print(Node<T> node)
+    {
+        if (node == null)
+        {
+            return;
+        }
+
+        Console.Write(node.Data + " ");
+
+        if (node.Left != null)
+        {
+            Console.Write("L: " + node.Left.Data + " ");
+        }
+
+        if (node.Right != null)
+        {
+            Console.Write("R: " + node.Right.Data + " ");
+        }
+
+        Console.WriteLine();
+
+        Print(node.Left);
+        Print(node.Right);
+    }
+
+    public void PrintByLevel()
+    {
+        var height = Height();
+        var width = (int)Math.Pow(2, height);
+        var array = new string[height + 1, width];
+        PrintByLevel(_root, array, 0, 0, width - 1);
+        Print(array);
+    }
+
+    private void PrintByLevel(Node<T> node, string[,] array, int level, int left, int right)
+    {
+        if (node == null)
+        {
+            return;
+        }
+
+        var mid = (left + right) / 2;
+        array[level, mid] = node.Data.ToString();
+        PrintByLevel(node.Left, array, level + 1, left, mid - 1);
+        PrintByLevel(node.Right, array, level + 1, mid + 1, right);
+    }
+}
 ```
