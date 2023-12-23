@@ -7,20 +7,20 @@
   - [Notes](#notes)
   - [Useful Links](#useful-links)
   - [Big O](#big-o)
-    - [Big O in a Nutshell](#big-o-in-a-nutshell)
-    - [Key Concepts](#key-concepts)
-    - [Big O Complexity Chart](#big-o-complexity-chart)
-    - [Big O Examples](#big-o-examples)
-      - [O(1) - Constant](#o1---constant)
-      - [O(n) - Linear](#on---linear)
-      - [O(n^2) - Quadratic](#on2---quadratic)
-      - [O(n^3) - Cubic](#on3---cubic)
-      - [O(log n) - Logarithmic](#olog-n---logarithmic)
-      - [O(n log n) - Linearithmic](#on-log-n---linearithmic)
-      - [O(2^n) - Exponential](#o2n---exponential)
-      - [O(n!) - Factorial](#on---factorial)
-    - [Big O Cheat Sheet](#big-o-cheat-sheet)
-      - [Common Big O Cases](#common-big-o-cases)
+      - [Big O in a Nutshell](#big-o-in-a-nutshell)
+      - [Key Concepts](#key-concepts)
+      - [Big O Complexity Chart](#big-o-complexity-chart)
+      - [Big O Examples](#big-o-examples)
+        - [O(1) - Constant](#o1---constant)
+        - [O(n) - Linear](#on---linear)
+        - [O(n^2) - Quadratic](#on2---quadratic)
+        - [O(n^3) - Cubic](#on3---cubic)
+        - [O(log n) - Logarithmic](#olog-n---logarithmic)
+        - [O(n log n) - Linearithmic](#on-log-n---linearithmic)
+        - [O(2^n) - Exponential](#o2n---exponential)
+        - [O(n!) - Factorial](#on---factorial)
+      - [Big O Cheat Sheet](#big-o-cheat-sheet)
+        - [Common Big O Cases](#common-big-o-cases)
     - [Arrays](#arrays)
       - [Fixed-Size Arrays](#fixed-size-arrays)
       - [Dynamic Arrays](#dynamic-arrays)
@@ -155,6 +155,9 @@
         - [Implementation](#implementation-19)
     - [Breadth-First Search and Depth-First Search](#breadth-first-search-and-depth-first-search)
       - [Implementation](#implementation-20)
+    - [Dijkstra's Algorithm](#dijkstras-algorithm)
+      - [Description](#description-21)
+      - [Implementation](#implementation-21)
 
 ## Notes
 
@@ -3856,6 +3859,233 @@ public class Graph
             _vertices[i].Visited = false;
             // Reset the parent
             _vertices[i].Parent = null;
+        }
+    }
+
+    // Print method to print the graph
+    public void Print()
+    {
+        // Loop through the vertices in the graph
+        for (int i = 0; i < _count; i++)
+        {
+            // Print the current vertex
+            Console.Write(_vertices[i].Data + ": ");
+
+            // Loop through the neighbors of the current vertex
+            foreach (var edge in _vertices[i].Neighbors)
+            {
+                // Print the current neighbor
+                Console.Write(edge.Destination + " ");
+            }
+
+            // Print a new line
+            Console.WriteLine();
+        }
+    }
+}
+```
+
+### Dijkstra's Algorithm
+
+#### Description
+
+Dijkstra's algorithm is an algorithm that finds the shortest path between two vertices in a graph. It's often used to implement a GPS navigation system. It's also called shortest path algorithm. It's a greedy algorithm, meaning that it always chooses the next step that's the best at the moment. It's similar to the breadth-first search algorithm for graphs, but it's slightly different.
+
+#### Implementation
+
+C#:
+
+```csharp
+public class Edge
+{
+    public int Source { get; set; } // Index of the source vertex
+    public int Destination { get; set; } // Index of the destination vertex
+    public int Weight { get; set; } // Weight of the edge
+
+    public Edge(int source, int destination, int weight)
+    {
+        Source = source;
+        Destination = destination;
+        Weight = weight;
+    }
+}
+
+public class Vertex
+{
+    public int Data { get; set; } // Data stored in the vertex
+    public bool Visited { get; set; } // Flag to indicate if the vertex has been visited
+    public List<Edge> Neighbors { get; set; } // List to store the neighbors of the vertex
+    public Vertex Parent { get; set; } // Parent of the vertex, going to be used to find the path
+    public int Distance { get; set; } // Distance of the vertex from the source vertex
+
+    public Vertex(int data)
+    {
+        Data = data;
+        Neighbors = new List<Edge>();
+        Distance = int.MaxValue;
+    }
+}
+
+public class Graph
+{
+    private Vertex[] _vertices; // Array to store the vertices in the graph
+    private int _count; // Number of vertices in the graph
+
+    // Constructor to initialize the graph
+    public Graph(int count)
+    {
+        _vertices = new Vertex[count];
+        _count = count;
+
+        // Loop through the vertices in the graph
+        for (int i = 0; i < _count; i++)
+        {
+            // Initialize the vertex
+            _vertices[i] = new Vertex(i);
+        }
+    }
+
+    // AddEdge method to add an edge to the graph
+    public void AddEdge(int source, int destination, int weight)
+    {
+        _vertices[source].Neighbors.Add(new Edge(source, destination, weight));
+    }
+
+    // RemoveEdge method to remove an edge from the graph
+    public void RemoveEdge(int source, int destination)
+    {
+        // Loop through the edges of the source vertex
+        for (int i = 0; i < _vertices[source].Neighbors.Count; i++)
+        {
+            // Check if the destination vertex is found
+            if (_vertices[source].Neighbors[i].Destination == destination)
+            {
+                // Remove the edge
+                _vertices[source].Neighbors.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    // ContainsEdge method to check if the graph contains an edge
+    public bool ContainsEdge(int source, int destination)
+    {
+        // Loop through the edges of the source vertex
+        foreach (var edge in _vertices[source].Neighbors)
+        {
+            // Check if the destination vertex is found
+            if (edge.Destination == destination)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Dijkstra method to find the shortest path between two vertices using Dijkstra's algorithm
+    public List<int> Dijkstra(int source, int destination)
+    {
+        var path = new List<int>();
+
+        Reset();
+
+        Dijkstra(source, destination, path);
+
+        return path;
+    }
+
+    // Recursive helper method to find the shortest path between two vertices using Dijkstra's algorithm
+    private void Dijkstra(int source, int destination, List<int> path)
+    {
+        var queue = new PriorityQueue<Vertex>();
+
+        // Set the distance of the source vertex to 0
+        _vertices[source].Distance = 0;
+
+        // Enqueue the source vertex
+        queue.Enqueue(_vertices[source]);
+
+        // Loop through the queue
+        while (queue.Count > 0)
+        {
+            // Dequeue the current vertex
+            var current = queue.Dequeue();
+
+            // Check if the current vertex has been visited
+            if (current.Visited)
+            {
+                continue;
+            }
+
+            // Check if the current vertex is the destination vertex
+            if (current.Data == destination)
+            {
+                // Add the current vertex to the path
+                path.Add(current.Data);
+
+                // Loop through the parents of the current vertex
+                while (current.Parent != null)
+                {
+                    // Add the parent to the path
+                    path.Add(current.Parent.Data);
+
+                    // Move to the parent
+                    current = current.Parent;
+                }
+
+                return;
+            }
+
+            // Set the visited flag to true
+            current.Visited = true;
+
+            // Loop through the neighbors of the current vertex
+            foreach (var edge in current.Neighbors)
+            {
+                // Get the neighbor
+                var neighbor = _vertices[edge.Destination];
+
+                // Check if the neighbor has been visited
+                if (neighbor.Visited)
+                {
+                    continue;
+                }
+
+                // Calculate the distance of the neighbor from the source vertex
+                var distance = current.Distance + edge.Weight;
+
+                // Check if the distance is less than the current distance
+                if (distance < neighbor.Distance)
+                {
+                    // Set the distance of the neighbor
+                    neighbor.Distance = distance;
+
+                    // Set the parent of the neighbor
+                    neighbor.Parent = current;
+
+                    // Enqueue the neighbor
+                    queue.Enqueue(neighbor);
+                }
+            }
+        }
+
+        // Reset the distances
+        Reset();
+    }
+
+    // Reset method to reset the visited flags, parent pointers, and distances
+    private void Reset()
+    {
+        // Loop through the vertices in the graph
+        for (int i = 0; i < _count; i++)
+        {
+            // Reset the visited flag
+            _vertices[i].Visited = false;
+            // Reset the parent
+            _vertices[i].Parent = null;
+            // Reset the distance
+            _vertices[i].Distance = int.MaxValue;
         }
     }
 
