@@ -7,20 +7,20 @@
   - [Notes](#notes)
   - [Useful Links](#useful-links)
   - [Big O](#big-o)
-      - [Big O in a Nutshell](#big-o-in-a-nutshell)
-      - [Key Concepts](#key-concepts)
-      - [Big O Complexity Chart](#big-o-complexity-chart)
-      - [Big O Examples](#big-o-examples)
-        - [O(1) - Constant](#o1---constant)
-        - [O(n) - Linear](#on---linear)
-        - [O(n^2) - Quadratic](#on2---quadratic)
-        - [O(n^3) - Cubic](#on3---cubic)
-        - [O(log n) - Logarithmic](#olog-n---logarithmic)
-        - [O(n log n) - Linearithmic](#on-log-n---linearithmic)
-        - [O(2^n) - Exponential](#o2n---exponential)
-        - [O(n!) - Factorial](#on---factorial)
-      - [Big O Cheat Sheet](#big-o-cheat-sheet)
-        - [Common Big O Cases](#common-big-o-cases)
+    - [Big O in a Nutshell](#big-o-in-a-nutshell)
+    - [Key Concepts](#key-concepts)
+    - [Big O Complexity Chart](#big-o-complexity-chart)
+    - [Big O Examples](#big-o-examples)
+      - [O(1) - Constant](#o1---constant)
+      - [O(n) - Linear](#on---linear)
+      - [O(n^2) - Quadratic](#on2---quadratic)
+      - [O(n^3) - Cubic](#on3---cubic)
+      - [O(log n) - Logarithmic](#olog-n---logarithmic)
+      - [O(n log n) - Linearithmic](#on-log-n---linearithmic)
+      - [O(2^n) - Exponential](#o2n---exponential)
+      - [O(n!) - Factorial](#on---factorial)
+    - [Big O Cheat Sheet](#big-o-cheat-sheet)
+      - [Common Big O Cases](#common-big-o-cases)
     - [Arrays](#arrays)
       - [Fixed-Size Arrays](#fixed-size-arrays)
       - [Dynamic Arrays](#dynamic-arrays)
@@ -111,6 +111,23 @@
       - [Interface](#interface-6)
       - [Complexity](#complexity-11)
       - [Implementation](#implementation-12)
+  - [Tree Search](#tree-search)
+    - [Breadth-First Search](#breadth-first-search)
+      - [Description](#description-14)
+      - [Characteristics](#characteristics-4)
+      - [Implementation](#implementation-13)
+    - [Depth-First Search](#depth-first-search)
+      - [Description](#description-15)
+      - [Characteristics](#characteristics-5)
+      - [Implementation](#implementation-14)
+    - [Compare Two Trees](#compare-two-trees)
+      - [Description](#description-16)
+      - [Why Breadth-First Search can't be used to compare the shape of the trees?](#why-breadth-first-search-cant-be-used-to-compare-the-shape-of-the-trees)
+      - [Implementation 1 - Compare Values](#implementation-1---compare-values)
+      - [Implementation 2 - Compare Values and Shape](#implementation-2---compare-values-and-shape)
+    - [Binary Search Tree](#binary-search-tree)
+      - [Description](#description-17)
+      - [Implementation](#implementation-15)
 
 ## Notes
 
@@ -162,15 +179,6 @@ void ConstantAlgorithm(int[] items) {
 }
 ```
 
-Typescript:
-
-```typescript
-function constantAlgorithm(items: number[]): void {
-	const result = items[0] * items[0];
-	console.log(result);
-}
-```
-
 ##### O(n) - Linear
 
 C#:
@@ -180,16 +188,6 @@ void LinearAlgorithm(int[] items) {
     foreach (int item in items) {
         Console.WriteLine(item);
     }
-}
-```
-
-Typescript:
-
-```typescript
-function linearAlgorithm(items: number[]): void {
-	for (const item of items) {
-		console.log(item);
-	}
 }
 ```
 
@@ -207,18 +205,6 @@ void QuadraticAlgorithm(int[] items) {
 }
 ```
 
-Typescript:
-
-```typescript
-function quadraticAlgorithm(items: number[]): void {
-	for (const item of items) {
-		for (const item2 of items) {
-			console.log(item, " ", item2);
-		}
-	}
-}
-```
-
 ##### O(n^3) - Cubic
 
 C#:
@@ -227,20 +213,6 @@ C#:
             }
         }
     }
-}
-```
-
-Typescript:
-
-```typescript
-function cubicAlgorithm(items: number[]): void {
-	for (const item of items) {
-		for (const item2 of items) {
-			for (const item3 of items) {
-				console.log(item, " ", item2, " ", item3);
-			}
-		}
-	}
 }
 ```
 
@@ -253,16 +225,6 @@ void LogarithmicAlgorithm(int[] items) {
     for (int index = 0; index < items.Length; index += 3) {
         Console.WriteLine(items[index]);
     }
-}
-```
-
-Typescript:
-
-```typescript
-function logarithmicAlgorithm(items: number[]): void {
-	for (let index = 0; index < items.length; index += 3) {
-		console.log(items[index]);
-	}
 }
 ```
 
@@ -326,40 +288,6 @@ public class MergeSortAlgorithm
 }
 ```
 
-Typescript:
-
-```typescript
-function merge(left: number[], right: number[]): number[] {
-	let result: number[] = [];
-	let i = 0,
-		j = 0;
-
-	while (i < left.length && j < right.length) {
-		if (left[i] < right[j]) {
-			result.push(left[i]);
-			i++;
-		} else {
-			result.push(right[j]);
-			j++;
-		}
-	}
-
-	return result.concat(left.slice(i)).concat(right.slice(j));
-}
-
-function mergesort(items: number[]): number[] {
-	if (items.length <= 1) {
-		return items;
-	}
-
-	let mid = Math.floor(items.length / 2);
-	let left = items.slice(0, mid);
-	let right = items.slice(mid);
-
-	return merge(mergesort(left), mergesort(right));
-}
-```
-
 ##### O(2^n) - Exponential
 
 C#:
@@ -374,18 +302,6 @@ int Fibonacci(int n) {
 }
 ```
 
-Typescript:
-
-```typescript
-function fibonacci(n: number): number {
-	if (n <= 1) {
-		return n;
-	} else {
-		return fibonacci(n - 1) + fibonacci(n - 2);
-	}
-}
-```
-
 ##### O(n!) - Factorial
 
 C#:
@@ -397,18 +313,6 @@ int Factorial(int n) {
     } else {
         return n * Factorial(n-1);
     }
-}
-```
-
-Typescript:
-
-```typescript
-function factorial(n: number): number {
-	if (n === 0) {
-		return 1;
-	} else {
-		return n * factorial(n - 1);
-	}
 }
 ```
 
@@ -450,14 +354,6 @@ fixedArray[0] = 1;
 fixedArray[1] = 2;
 ```
 
-TypeScript:
-
-```typescript
-let fixedArray: number[] = Array(5);
-fixedArray[0] = 1;
-fixedArray[1] = 2;
-```
-
 #### Dynamic Arrays
 
 Dynamic arrays (often just called "arrays" in some languages) can grow or shrink in size. They automatically handle resizing when elements are added or removed. Examples include Python's list or JavaScript's array.
@@ -475,15 +371,6 @@ List<int> dynamicArray = new List<int>();
 dynamicArray.Add(1);
 dynamicArray.Add(2);
 dynamicArray.Remove(1);
-```
-
-TypeScript:
-
-```typescript
-let dynamicArray: number[] = [];
-dynamicArray.push(1);
-dynamicArray.push(2);
-dynamicArray.splice(0, 1);
 ```
 
 ### Big O of Dynamic Array Methods
@@ -539,27 +426,20 @@ C#:
 ```csharp
 public static int LinearSearch(int[] list, int item)
 {
+    // Iterate over each element in the list
     for (int i = 0; i < list.Length; i++)
     {
+        // Check if the current element is equal to the target item
         if (list[i] == item)
         {
+            // Return the index of the element if found
             return i;
         }
     }
 
+    // Return -1 if the item is not found in the list
     return -1;
 }
-```
-
-TypeScript:
-
-```typescript
-const linearSearch = (list: number[], item: number): number => {
-	for (let i = 0; i < listExtrema
-	}
-
-	return -1;
-};
 ```
 
 ### Binary Search
@@ -593,57 +473,31 @@ C#:
 ```csharp
 public static int BinarySearch(int[] list, int item)
 {
-    var low = 0;
-    var high = list.Length - 1;
+    var low = 0; // Initialize the lower bound of the search range
+    var high = list.Length - 1; // Initialize the upper bound of the search range
 
-    while (low <= high)
+    while (low <= high) // Continue the loop until the search range is valid
     {
-        var mid = (low + high) / 2;
-        var guess = list[mid];
+        var mid = (low + high) / 2; // Calculate the middle index of the search range
+        var guess = list[mid]; // Get the value at the middle index
 
-        if (guess == item)
+        if (guess == item) // Check if the middle value is equal to the target item
         {
-            return mid;
+            return mid; // Return the index of the target item
         }
 
-        if (guess > item)
+        if (guess > item) // Check if the middle value is greater than the target item
         {
-            high = mid - 1;
+            high = mid - 1; // Update the upper bound to search the lower half of the range
         }
         else
         {
-            low = mid + 1;
+            low = mid + 1; // Update the lower bound to search the upper half of the range
         }
     }
 
-    return -1;
+    return -1; // Return -1 to indicate that the target item was not found
 }
-```
-
-TypeScript:
-
-```typescript
-const binarySearch = (list: number[], item: number): number => {
-	let low = 0;
-	let high = list.length - 1;
-
-	while (low <= high) {
-		const mid = Math.floor((low + high) / 2);
-		const guess = list[mid];
-
-		if (guess === item) {
-			return mid;
-		}
-
-		if (guess > item) {
-			high = mid - 1;
-		} else {
-			low = mid + 1;
-		}
-	}
-
-	return -1;
-};
 ```
 
 #### The Two Crystal Balls Problem
@@ -687,47 +541,24 @@ public static int[] BubbleSort(int[] items)
 {
     var sorted = false;
 
-    while (!sorted)
+    while (!sorted) // Loop until the array is sorted
     {
-        sorted = true;
+        sorted = true; // Assume the array is sorted initially
 
-        for (int i = 0; i < items.Length - 1; i++)
+        for (int i = 0; i < items.Length - 1; i++) // Iterate through the array
         {
-            if (items[i] > items[i + 1])
+            if (items[i] > items[i + 1]) // Check if adjacent elements are in the wrong order
             {
-                sorted = false;
-                var temp = items[i];
+                sorted = false; // If a swap is made, the array is not sorted yet
+                var temp = items[i]; // Swap the elements
                 items[i] = items[i + 1];
                 items[i + 1] = temp;
             }
         }
     }
 
-    return items;
+    return items; // Return the sorted array
 }
-```
-
-TypeScript:
-
-```typescript
-const bubbleSort = (items: number[]): number[] => {
-	let sorted = false;
-
-	while (!sorted) {
-		sorted = true;
-
-		for (let i = 0; i < items.length - 1; i++) {
-			if (items[i] > items[i + 1]) {
-				sorted = false;
-				const temp = items[i];
-				items[i] = items[i + 1];
-				items[i + 1] = temp;
-			}
-		}
-	}
-
-	return items;
-};
 ```
 
 ### Quick Sort
@@ -749,63 +580,49 @@ C#:
 ```csharp
 public static int[] QuickSort(int[] items)
 {
+    // Base case: if the array has 1 or fewer elements, it is already sorted
     if (items.Length <= 1)
     {
         return items;
     }
 
+    // Choose the first element as the pivot
     var pivot = items[0];
+
+    // Create two lists to store elements smaller than the pivot (left) and larger than the pivot (right)
     var left = new List<int>();
     var right = new List<int>();
 
+    // Iterate through the array starting from the second element
     for (int i = 1; i < items.Length; i++)
     {
+        // If the current element is smaller than the pivot, add it to the left list
         if (items[i] < pivot)
         {
             left.Add(items[i]);
         }
+        // Otherwise, add it to the right list
         else
         {
             right.Add(items[i]);
         }
     }
 
+    // Create a new list to store the sorted result
     var result = new List<int>();
+
+    // Recursively sort the left list and add the sorted elements to the result list
     result.AddRange(QuickSort(left.ToArray()));
+
+    // Add the pivot to the result list
     result.Add(pivot);
+
+    // Recursively sort the right list and add the sorted elements to the result list
     result.AddRange(QuickSort(right.ToArray()));
 
+    // Convert the result list to an array and return it
     return result.ToArray();
 }
-```
-
-TypeScript:
-
-```typescript
-const quickSort = (items: number[]): number[] => {
-	if (items.length <= 1) {
-		return items;
-	}
-
-	const pivot = items[0];
-	const left: number[] = [];
-	const right: number[] = [];
-
-	for (let i = 1; i < items.length; i++) {
-		if (items[i] < pivot) {
-			left.push(items[i]);
-		} else {
-			right.push(items[i]);
-		}
-	}
-
-	const result: number[] = [];
-	result.push(...quickSort(left));
-	result.push(pivot);
-	result.push(...quickSort(right));
-
-	return result;
-};
 ```
 
 ### Merge Sort
@@ -833,80 +650,46 @@ public static int[] MergeSort(int[] items)
     }
 
     var mid = items.Length / 2;
-    var left = items.Take(mid).ToArray();
-    var right = items.Skip(mid).ToArray();
+    var left = items.Take(mid).ToArray(); // Divide the array into left subarray
+    var right = items.Skip(mid).ToArray(); // Divide the array into right subarray
 
-    return Merge(MergeSort(left), MergeSort(right));
+    return Merge(MergeSort(left), MergeSort(right)); // Recursively merge and sort the subarrays
 }
 
 public static int[] Merge(int[] left, int[] right)
 {
-    var result = new List<int>();
-    var i = 0;
-    var j = 0;
+    var result = new List<int>(); // Create a new list to store the merged result
+    var i = 0; // Initialize a pointer for the left subarray
+    var j = 0; // Initialize a pointer for the right subarray
 
     while (i < left.Length && j < right.Length)
     {
-        if (left[i] < right[j])
+        if (left[i] < right[j]) // Compare the elements at the current positions
         {
-            result.Add(left[i]);
-            i++;
+            result.Add(left[i]); // Add the smaller element to the result list
+            i++; // Move the pointer in the left subarray
         }
         else
         {
-            result.Add(right[j]);
-            j++;
+            result.Add(right[j]); // Add the smaller element to the result list
+            j++; // Move the pointer in the right subarray
         }
     }
 
     while (i < left.Length)
     {
-        result.Add(left[i]);
+        result.Add(left[i]); // Add the remaining elements from the left subarray
         i++;
     }
 
     while (j < right.Length)
     {
-        result.Add(right[j]);
+        result.Add(right[j]); // Add the remaining elements from the right subarray
         j++;
     }
 
-    return result.ToArray();
+    return result.ToArray(); // Convert the list to an array and return
 }
-```
-
-TypeScript:
-
-```typescript
-const mergeSort = (items: number[]): number[] => {
-	if (items.length <= 1) {
-		return items;
-	}
-
-	const mid = Math.floor(items.length / 2);
-	const left = items.slice(0, mid);
-	const right = items.slice(mid);
-
-	return merge(mergeSort(left), mergeSort(right));
-};
-
-const merge = (left: number[], right: number[]): number[] => {
-	const result: number[] = [];
-	let i = 0;
-	let j = 0;
-
-	while (i < left.length && j < right.length) {
-		if (left[i] < right[j]) {
-			result.push(left[i]);
-			i++;
-		} else {
-			result.push(right[j]);
-			j++;
-		}
-	}
-
-	return result.concat(left.slice(i)).concat(right.slice(j));
-};
 ```
 
 ## Data Structures
@@ -967,10 +750,10 @@ C#:
 ```csharp
 public class Node<T>
 {
-    public T Data { get; set; }
-    public Node<T> Next { get; set; }
+    public T Data { get; set; }  // Represents the data stored in the node
+    public Node<T> Next { get; set; }  // Represents the reference to the next node in the linked list
 
-    public Node(T data)
+    public Node(T data)  // Constructor to initialize the node with data
     {
         Data = data;
     }
@@ -978,420 +761,228 @@ public class Node<T>
 
 public class LinkedList<T>
 {
-    public Node<T> Head { get; set; }
-    public Node<T> Tail { get; set; }
+    public Node<T> Head { get; set; }  // Represents the first node in the linked list
+    public Node<T> Tail { get; set; }  // Represents the last node in the linked list
 
-    public int Count
+    public int Count  // Property to get the number of nodes in the linked list
     {
         get
         {
-            var current = Head;
-            var count = 0;
+            var current = Head;  // Start from the head node
+            var count = 0;  // Initialize the count to 0
 
-            while (current != null)
+            while (current != null)  // Traverse the linked list until the end
             {
-                count++;
-                current = current.Next;
+                count++;  // Increment the count
+                current = current.Next;  // Move to the next node
             }
 
-            return count;
+            return count;  // Return the count
         }
     }
 
-    public void InsertFirst(T data)
+    public void InsertFirst(T data)  // Inserts a new node with the given data at the beginning of the linked list
     {
-        var node = new Node<T>(data);
+        var node = new Node<T>(data);  // Create a new node with the given data
 
-        if (Head == null)
+        if (Head == null)  // If the linked list is empty
         {
-            Head = node;
+            Head = node;  // Set the head and tail to the new node
             Tail = node;
         }
-        else
+        else  // If the linked list is not empty
         {
-            node.Next = Head;
-            Head = node;
+            node.Next = Head;  // Set the next reference of the new node to the current head
+            Head = node;  // Update the head to the new node
         }
     }
 
-    public void InsertLast(T data)
+    public void InsertLast(T data)  // Inserts a new node with the given data at the end of the linked list
     {
-        var node = new Node<T>(data);
+        var node = new Node<T>(data);  // Create a new node with the given data
 
-        if (Head == null)
+        if (Head == null)  // If the linked list is empty
         {
-            Head = node;
+            Head = node;  // Set the head and tail to the new node
             Tail = node;
         }
-        else
+        else  // If the linked list is not empty
         {
-            Tail.Next = node;
-            Tail = node;
+            Tail.Next = node;  // Set the next reference of the current tail to the new node
+            Tail = node;  // Update the tail to the new node
         }
     }
 
-    public void InsertAt(T data, int index)
+    public void InsertAt(T data, int index)  // Inserts a new node with the given data at the specified index in the linked list
     {
-        if (index == 0)
+        if (index == 0)  // If the index is 0, insert at the beginning
         {
             InsertFirst(data);
         }
-        else
+        else  // If the index is not 0
         {
-            var current = Head;
+            var current = Head;  // Start from the head node
 
-            for (int i = 0; i < index - 1; i++)
+            for (int i = 0; i < index - 1; i++)  // Traverse to the node before the specified index
             {
-                if (current.Next == null)
+                if (current.Next == null)  // If the end of the linked list is reached before the specified index
                 {
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException();  // Throw an exception
                 }
 
-                current = current.Next;
+                current = current.Next;  // Move to the next node
             }
 
-            var node = new Node<T>(data);
-            node.Next = current.Next;
-            current.Next = node;
+            var node = new Node<T>(data);  // Create a new node with the given data
+            node.Next = current.Next;  // Set the next reference of the new node to the next node of the current node
+            current.Next = node;  // Set the next reference of the current node to the new node
         }
     }
 
-    public void RemoveFirst()
+    public void RemoveFirst()  // Removes the first node from the linked list
     {
-        if (Head == null)
+        if (Head == null)  // If the linked list is empty
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException();  // Throw an exception
         }
 
-        if (Head == Tail)
+        if (Head == Tail)  // If there is only one node in the linked list
         {
-            Head = null;
+            Head = null;  // Set the head and tail to null
             Tail = null;
         }
-        else
+        else  // If there are more than one nodes in the linked list
         {
-            Head = Head.Next;
+            Head = Head.Next;  // Update the head to the next node
         }
     }
 
-    public void RemoveLast()
+    public void RemoveLast()  // Removes the last node from the linked list
     {
-        if (Head == null)
+        if (Head == null)  // If the linked list is empty
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException();  // Throw an exception
         }
 
-        if (Head == Tail)
+        if (Head == Tail)  // If there is only one node in the linked list
         {
-            Head = null;
+            Head = null;  // Set the head and tail to null
             Tail = null;
         }
-        else
+        else  // If there are more than one nodes in the linked list
         {
-            var current = Head;
+            var current = Head;  // Start from the head node
 
-            while (current.Next != Tail)
+            while (current.Next != Tail)  // Traverse to the node before the tail
             {
-                current = current.Next;
+                current = current.Next;  // Move to the next node
             }
 
-            current.Next = null;
-            Tail = current;
+            current.Next = null;  // Set the next reference of the current node to null
+            Tail = current;  // Update the tail to the current node
         }
     }
 
-    public void Remove(T data)
+    public void Remove(T data)  // Removes the first occurrence of the node with the given data from the linked list
     {
-        if (Head == null)
+        if (Head == null)  // If the linked list is empty
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException();  // Throw an exception
         }
 
-        if (Head == Tail && Head.Data.Equals(data))
+        if (Head == Tail && Head.Data.Equals(data))  // If there is only one node in the linked list and it contains the given data
         {
-            Head = null;
+            Head = null;  // Set the head and tail to null
             Tail = null;
         }
-        else if (Head.Data.Equals(data))
+        else if (Head.Data.Equals(data))  // If the head node contains the given data
         {
-            Head = Head.Next;
+            Head = Head.Next;  // Update the head to the next node
         }
-        else
+        else  // If the node with the given data is not the head node
         {
-            var current = Head;
+            var current = Head;  // Start from the head node
 
-            while (current.Next != null && !current.Next.Data.Equals(data))
+            while (current.Next != null && !current.Next.Data.Equals(data))  // Traverse until the end or the node with the given data is found
             {
-                current = current.Next;
+                current = current.Next;  // Move to the next node
             }
 
-            if (current.Next != null)
+            if (current.Next != null)  // If the node with the given data is found
             {
-                current.Next = current.Next.Next;
+                current.Next = current.Next.Next;  // Remove the node by updating the next reference of the current node
             }
         }
     }
 
-    public void RemoveAt(int index)
+    public void RemoveAt(int index)  // Removes the node at the specified index from the linked list
     {
-        if (Head == null)
+        if (Head == null)  // If the linked list is empty
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException();  // Throw an exception
         }
 
-        if (index == 0)
+        if (index == 0)  // If the index is 0, remove the first node
         {
-            Head = Head.Next;
+            Head = Head.Next;  // Update the head to the next node
         }
-        else
+        else  // If the index is not 0
         {
-            var current = Head;
-            var previous = Head;
+            var current = Head;  // Start from the head node
+            var previous = Head;  // Initialize the previous node as the head node
 
-            for (int i = 0; i < index; i++)
+            for (int i = 0; i < index; i++)  // Traverse to the node at the specified index
             {
-                if (current.Next == null)
+                if (current.Next == null)  // If the end of the linked list is reached before the specified index
                 {
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException();  // Throw an exception
                 }
 
-                previous = current;
-                current = current.Next;
+                previous = current;  // Update the previous node to the current node
+                current = current.Next;  // Move to the next node
             }
 
-            previous.Next = current.Next;
+            previous.Next = current.Next;  // Remove the node by updating the next reference of the previous node
         }
     }
 
-    public void Reverse()
+    public void Reverse()  // Reverses the order of the nodes in the linked list
     {
-        if (Head == null)
+        if (Head == null)  // If the linked list is empty
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException();  // Throw an exception
         }
 
-        if (Head == Tail)
+        if (Head == Tail)  // If there is only one node in the linked list
         {
-            return;
+            return;  // No need to reverse
         }
 
-        var current = Head;
-        Tail = Head;
-        Node<T> previous = null;
+        var current = Head;  // Start from the head node
+        Tail = Head;  // Update the tail to the head node
+        Node<T> previous = null;  // Initialize the previous node as null
 
-        while (current != null)
+        while (current != null)  // Traverse the linked list
         {
-            var next = current.Next;
-            current.Next = previous;
-            previous = current;
-            current = next;
+            var next = current.Next;  // Store the next node
+            current.Next = previous;  // Reverse the next reference of the current node to the previous node
+            previous = current;  // Update the previous node to the current node
+            current = next;  // Move to the next node
         }
 
-        Head = previous;
+        Head = previous;  // Update the head to the last node (previous node)
     }
 
-    public void Print()
+    public void Print()  // Prints the data of all nodes in the linked list
     {
-        var current = Head;
+        var current = Head;  // Start from the head node
 
-        while (current != null)
+        while (current != null)  // Traverse the linked list
         {
-            Console.WriteLine(current.Data);
-            current = current.Next;
+            Console.WriteLine(current.Data);  // Print the data of the current node
+            current = current.Next;  // Move to the next node
         }
     }
-}
-```
-
-TypeScript:
-
-```typescript
-class Node<T> {
-	public data: T;
-	public next: Node<T> | null;
-
-	constructor(data: T) {
-		this.data = data;
-		this.next = null;
-	}
-}
-
-class LinkedList<T> {
-	public head: Node<T> | null;
-	public tail: Node<T> | null;
-
-	constructor() {
-		this.head = null;
-		this.tail = null;
-	}
-
-	public count(): number {
-		let current = this.head;
-		let count = 0;
-
-		while (current !== null) {
-			count++;
-			current = current.next;
-		}
-
-		return count;
-	}
-
-	public insertFirst(data: T): void {
-		const node = new Node(data);
-
-		if (this.head === null) {
-			this.head = node;
-			this.tail = node;
-		} else {
-			node.next = this.head;
-			this.head = node;
-		}
-	}
-
-	public insertLast(data: T): void {
-		const node = new Node(data);
-
-		if (this.head === null) {
-			this.head = node;
-			this.tail = node;
-		} else {
-			this.tail.next = node;
-			this.tail = node;
-		}
-	}
-
-	public insertAt(data: T, index: number): void {
-		if (index === 0) {
-			this.insertFirst(data);
-		} else {
-			let current = this.head;
-
-			for (let i = 0; i < index - 1; i++) {
-				if (current.next === null) {
-					throw new Error("Index out of bounds");
-				}
-
-				current = current.next;
-			}
-
-			const node = new Node(data);
-			node.next = current.next;
-			current.next = node;
-		}
-	}
-
-	public removeFirst(): void {
-		if (this.head === null) {
-			throw new Error("List is empty");
-		}
-
-		if (this.head === this.tail) {
-			this.head = null;
-			this.tail = null;
-		} else {
-			this.head = this.head.next;
-		}
-	}
-
-	public removeLast(): void {
-		if (this.head === null) {
-			throw new Error("List is empty");
-		}
-
-		if (this.head === this.tail) {
-			this.head = null;
-			this.tail = null;
-		} else {
-			let current = this.head;
-
-			while (current.next !== this.tail) {
-				current = current.next;
-			}
-
-			current.next = null;
-			this.tail = current;
-		}
-	}
-
-	public remove(data: T): void {
-		if (this.head === null) {
-			throw new Error("List is empty");
-		}
-
-		if (this.head === this.tail && this.head.data === data) {
-			this.head = null;
-			this.tail = null;
-		} else if (this.head.data === data) {
-			this.head = this.head.next;
-		} else {
-			let current = this.head;
-
-			while (current.next !== null && current.next.data !== data) {
-				current = current.next;
-			}
-
-			if (current.next !== null) {
-				current.next = current.next.next;
-			}
-		}
-	}
-
-	public removeAt(index: number): void {
-		if (this.head === null) {
-			throw new Error("List is empty");
-		}
-
-		if (index === 0) {
-			this.head = this.head.next;
-		} else {
-			let current = this.head;
-			let previous = this.head;
-
-			for (let i = 0; i < index; i++) {
-				if (current.next === null) {
-					throw new Error("Index out of bounds");
-				}
-
-				previous = current;
-				current = current.next;
-			}
-
-			previous.next = current.next;
-		}
-	}
-
-	public reverse(): void {
-		if (this.head === null) {
-			throw new Error("List is empty");
-		}
-
-		if (this.head === this.tail) {
-			return;
-		}
-
-		let current = this.head;
-		this.tail = this.head;
-		let previous = null;
-
-		while (current !== null) {
-			const next = current.next;
-			current.next = previous;
-			previous = current;
-			current = next;
-		}
-
-		this.head = previous;
-	}
-
-	public print(): void {
-		let current = this.head;
-
-		while (current !== null) {
-			console.log(current.data);
-			current = current.next;
-		}
-	}
 }
 ```
 
@@ -1436,437 +1027,245 @@ C#:
 ```csharp
 public class Node<T>
 {
-    public T Data { get; set; }
-    public Node<T> Next { get; set; }
-    public Node<T> Previous { get; set; }
+    public T Data { get; set; } // Represents the data stored in the node
+    public Node<T> Next { get; set; } // Represents the reference to the next node
+    public Node<T> Previous { get; set; } // Represents the reference to the previous node
 
     public Node(T data)
     {
-        Data = data;
+        Data = data; // Initializes the node with the provided data
     }
 }
 
 public class DoublyLinkedList<T>
 {
-    public Node<T> Head { get; set; }
-    public Node<T> Tail { get; set; }
+    public Node<T> Head { get; set; } // Represents the first node in the doubly linked list
+    public Node<T> Tail { get; set; } // Represents the last node in the doubly linked list
 
     public int Count
     {
         get
         {
-            var current = Head;
-            var count = 0;
+            var current = Head; // Starts from the first node
+            var count = 0; // Initializes the count to 0
 
-            while (current != null)
+            while (current != null) // Loops until the end of the list
             {
-                count++;
-                current = current.Next;
+                count++; // Increments the count
+                current = current.Next; // Moves to the next node
             }
 
-            return count;
+            return count; // Returns the count of nodes in the list
         }
     }
 
     public void InsertFirst(T data)
     {
-        var node = new Node<T>(data);
+        var node = new Node<T>(data); // Creates a new node with the provided data
 
-        if (Head == null)
+        if (Head == null) // If the list is empty
         {
-            Head = node;
-            Tail = node;
+            Head = node; // Sets the new node as the head
+            Tail = node; // Sets the new node as the tail
         }
         else
         {
-            node.Next = Head;
-            Head.Previous = node;
-            Head = node;
+            node.Next = Head; // Sets the next reference of the new node to the current head
+            Head.Previous = node; // Sets the previous reference of the current head to the new node
+            Head = node; // Sets the new node as the new head
         }
     }
 
     public void InsertLast(T data)
     {
-        var node = new Node<T>(data);
+        var node = new Node<T>(data); // Creates a new node with the provided data
 
-        if (Head == null)
+        if (Head == null) // If the list is empty
         {
-            Head = node;
-            Tail = node;
+            Head = node; // Sets the new node as the head
+            Tail = node; // Sets the new node as the tail
         }
         else
         {
-            Tail.Next = node;
-            node.Previous = Tail;
-            Tail = node;
+            Tail.Next = node; // Sets the next reference of the current tail to the new node
+            node.Previous = Tail; // Sets the previous reference of the new node to the current tail
+            Tail = node; // Sets the new node as the new tail
         }
     }
 
     public void InsertAt(T data, int index)
     {
-        if (index == 0)
+        if (index == 0) // If the index is 0, insert at the beginning
         {
             InsertFirst(data);
         }
         else
         {
-            var current = Head;
+            var current = Head; // Starts from the head
 
-            for (int i = 0; i < index - 1; i++)
+            for (int i = 0; i < index - 1; i++) // Loops until the node before the desired index
             {
-                if (current.Next == null)
+                if (current.Next == null) // If the end of the list is reached before the desired index
                 {
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException(); // Throws an exception
                 }
 
-                current = current.Next;
+                current = current.Next; // Moves to the next node
             }
 
-            var node = new Node<T>(data);
-            node.Next = current.Next;
-            node.Previous = current;
-            current.Next = node;
+            var node = new Node<T>(data); // Creates a new node with the provided data
+            node.Next = current.Next; // Sets the next reference of the new node to the next node of the current node
+            node.Previous = current; // Sets the previous reference of the new node to the current node
+            current.Next = node; // Sets the next reference of the current node to the new node
         }
     }
 
     public void RemoveFirst()
     {
-        if (Head == null)
+        if (Head == null) // If the list is empty
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException(); // Throws an exception
         }
 
-        if (Head == Tail)
+        if (Head == Tail) // If there is only one node in the list
         {
-            Head = null;
-            Tail = null;
+            Head = null; // Sets the head to null
+            Tail = null; // Sets the tail to null
         }
         else
         {
-            Head = Head.Next;
-            Head.Previous = null;
+            Head = Head.Next; // Sets the head to the next node
+            Head.Previous = null; // Sets the previous reference of the new head to null
         }
     }
 
     public void RemoveLast()
     {
-        if (Head == null)
+        if (Head == null) // If the list is empty
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException(); // Throws an exception
         }
 
-        if (Head == Tail)
+        if (Head == Tail) // If there is only one node in the list
         {
-            Head = null;
-            Tail = null;
+            Head = null; // Sets the head to null
+            Tail = null; // Sets the tail to null
         }
         else
         {
-            Tail = Tail.Previous;
-            Tail.Next = null;
+            Tail = Tail.Previous; // Sets the tail to the previous node
+            Tail.Next = null; // Sets the next reference of the new tail to null
         }
     }
 
     public void Remove(T data)
     {
-        if (Head == null)
+        if (Head == null) // If the list is empty
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException(); // Throws an exception
         }
 
-        if (Head == Tail && Head.Data.Equals(data))
+        if (Head == Tail && Head.Data.Equals(data)) // If there is only one node in the list and it contains the desired data
         {
-            Head = null;
-            Tail = null;
+            Head = null; // Sets the head to null
+            Tail = null; // Sets the tail to null
         }
-        else if (Head.Data.Equals(data))
+        else if (Head.Data.Equals(data)) // If the head contains the desired data
         {
-            Head = Head.Next;
-            Head.Previous = null;
+            Head = Head.Next; // Sets the head to the next node
+            Head.Previous = null; // Sets the previous reference of the new head to null
         }
         else
         {
-            var current = Head;
+            var current = Head; // Starts from the head
 
-            while (current.Next != null && !current.Next.Data.Equals(data))
+            while (current.Next != null && !current.Next.Data.Equals(data)) // Loops until the end of the list or the desired data is found
             {
-                current = current.Next;
+                current = current.Next; // Moves to the next node
             }
 
-            if (current.Next != null)
+            if (current.Next != null) // If the desired data is found
             {
-                current.Next = current.Next.Next;
-                current.Next.Previous = current;
+                current.Next = current.Next.Next; // Sets the next reference of the current node to the next node of the next node
+                current.Next.Previous = current; // Sets the previous reference of the next node of the current node to the current node
             }
         }
     }
 
     public void RemoveAt(int index)
     {
-        if (Head == null)
+        if (Head == null) // If the list is empty
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException(); // Throws an exception
         }
 
-        if (index == 0)
+        if (index == 0) // If the index is 0, remove the first node
         {
-            Head = Head.Next;
-            Head.Previous = null;
+            Head = Head.Next; // Sets the head to the next node
+            Head.Previous = null; // Sets the previous reference of the new head to null
         }
         else
         {
-            var current = Head;
-            var previous = Head;
+            var current = Head; // Starts from the head
+            var previous = Head; // Keeps track of the previous node
 
-            for (int i = 0; i < index; i++)
+            for (int i = 0; i < index; i++) // Loops until the desired index
             {
-                if (current.Next == null)
+                if (current.Next == null) // If the end of the list is reached before the desired index
                 {
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException(); // Throws an exception
                 }
 
-                previous = current;
-                current = current.Next;
+                previous = current; // Updates the previous node
+                current = current.Next; // Moves to the next node
             }
 
-            previous.Next = current.Next;
+            previous.Next = current.Next; // Sets the next reference of the previous node to the next node of the current node
 
-            if (current.Next != null)
+            if (current.Next != null) // If the current node is not the last node
             {
-                current.Next.Previous = previous;
+                current.Next.Previous = previous; // Sets the previous reference of the next node of the current node to the previous node
             }
         }
     }
 
     public void Reverse()
     {
-        if (Head == null)
+        if (Head == null) // If the list is empty
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException(); // Throws an exception
         }
 
-        if (Head == Tail)
+        if (Head == Tail) // If there is only one node in the list
         {
-            return;
+            return; // Returns without reversing
         }
 
-        var current = Head;
-        Tail = Head;
+        var current = Head; // Starts from the head
+        Tail = Head; // Sets the tail to the head
 
-        while (current != null)
+        while (current != null) // Loops until the end of the list
         {
-            var next = current.Next;
-            current.Next = current.Previous;
-            current.Previous = next;
-            current = next;
+            var next = current.Next; // Stores the next node
+            current.Next = current.Previous; // Reverses the next reference of the current node
+            current.Previous = next; // Reverses the previous reference of the current node
+            current = next; // Moves to the next node
         }
 
-        Head = Tail;
-        Tail = current;
+        Head = Tail; // Sets the head to the tail
+        Tail = current; // Sets the tail to the current node
     }
 
     public void Print()
     {
-        var current = Head;
+        var current = Head; // Starts from the head
 
-        while (current != null)
+        while (current != null) // Loops until the end of the list
         {
-            Console.WriteLine(current.Data);
-            current = current.Next;
+            Console.WriteLine(current.Data); // Prints the data of the current node
+            current = current.Next; // Moves to the next node
         }
     }
-}
-```
-
-TypeScript:
-
-```typescript
-class Node<T> {
-	public data: T;
-	public next: Node<T> | null;
-	public previous: Node<T> | null;
-
-	constructor(data: T) {
-		this.data = data;
-		this.next = null;
-		this.previous = null;
-	}
-}
-
-class DoublyLinkedList<T> {
-	public head: Node<T> | null;
-	public tail: Node<T> | null;
-
-	constructor() {
-		this.head = null;
-		this.tail = null;
-	}
-
-	public count(): number {
-		let current = this.head;
-		let count = 0;
-
-		while (current !== null) {
-			count++;
-			current = current.next;
-		}
-
-		return count;
-	}
-
-	public insertFirst(data: T): void {
-		const node = new Node(data);
-
-		if (this.head === null) {
-			this.head = node;
-			this.tail = node;
-		} else {
-			node.next = this.head;
-			this.head.previous = node;
-			this.head = node;
-		}
-	}
-
-	public insertLast(data: T): void {
-		const node = new Node(data);
-
-		if (this.head === null) {
-			this.head = node;
-			this.tail = node;
-		} else {
-			this.tail.next = node;
-			node.previous = this.tail;
-			this.tail = node;
-		}
-	}
-
-	public insertAt(data: T, index: number): void {
-		if (index === 0) {
-			this.insertFirst(data);
-		} else {
-			let current = this.head;
-
-			for (let i = 0; i < index - 1; i++) {
-				if (current.next === null) {
-					throw new Error("Index out of bounds");
-				}
-
-				current = current.next;
-			}
-
-			const node = new Node(data);
-			node.next = current.next;
-			node.previous = current;
-			current.next = node;
-		}
-	}
-
-	public removeFirst(): void {
-		if (this.head === null) {
-			throw new Error("List is empty");
-		}
-
-		if (this.head === this.tail) {
-			this.head = null;
-			this.tail = null;
-		} else {
-			this.head = this.head.next;
-			this.head.previous = null;
-		}
-	}
-
-	public removeLast(): void {
-		if (this.head === null) {
-			throw new Error("List is empty");
-		}
-
-		if (this.head === this.tail) {
-			this.head = null;
-			this.tail = null;
-		} else {
-			this.tail = this.tail.previous;
-			this.tail.next = null;
-		}
-	}
-
-	public remove(data: T): void {
-		if (
-			this.head === null ||
-			this.head === this.tail ||
-			this.head.data === data
-		) {
-			this.removeFirst();
-		} else {
-			let current = this.head;
-
-			while (current.next !== null && current.next.data !== data) {
-				current = current.next;
-			}
-
-			if (current.next !== null) {
-				current.next = current.next.next;
-				current.next.previous = current;
-			}
-		}
-	}
-
-	public removeAt(index: number): void {
-		if (this.head === null) {
-			throw new Error("List is empty");
-		}
-
-		if (index === 0) {
-			this.removeFirst();
-		} else {
-			let current = this.head;
-
-			for (let i = 0; i < index; i++) {
-				if (current.next === null) {
-					throw new Error("Index out of bounds");
-				}
-
-				current = current.next;
-			}
-
-			current.previous.next = current.next;
-
-			if (current.next !== null) {
-				current.next.previous = current.previous;
-			}
-		}
-	}
-
-	public reverse(): void {
-		if (this.head === null) {
-			throw new Error("List is empty");
-		}
-
-		if (this.head === this.tail) {
-			return;
-		}
-
-		let current = this.head;
-		this.tail = this.head;
-
-		while (current !== null) {
-			const next = current.next;
-			current.next = current.previous;
-			current.previous = next;
-			current = next;
-		}
-
-		this.head = this.tail;
-		this.tail = current;
-	}
-
-	public print(): void {
-		let current = this.head;
-
-		while (current !== null) {
-			console.log(current.data);
-			current = current.next;
-		}
-	}
 }
 ```
 
@@ -1908,140 +1307,69 @@ C#:
 ```csharp
 public class Node<T>
 {
-    public T Data { get; set; }
-    public Node<T> Next { get; set; }
+    public T Data { get; set; }  // Represents the data stored in the node.
+    public Node<T> Next { get; set; }  // Represents the reference to the next node in the queue.
 
     public Node(T data)
     {
-        Data = data;
+        Data = data;  // Initializes the data of the node with the provided value.
     }
 }
 
 public class Queue<T>
 {
-    private Node<T> _head;
-    private Node<T> _tail;
+    private Node<T> _head;  // Represents the first node in the queue.
+    private Node<T> _tail;  // Represents the last node in the queue.
 
-    public int Count { get; private set; }
+    public int Count { get; private set; }  // Represents the number of items in the queue.
 
     public void Enqueue(T data)
     {
-        var node = new Node<T>(data);
+        var node = new Node<T>(data);  // Creates a new node with the provided data.
 
         if (_head == null)
         {
-            _head = node;
+            _head = node;  // If the queue is empty, sets the new node as both the head and tail.
             _tail = node;
         }
         else
         {
-            _tail.Next = node;
-            _tail = node;
+            _tail.Next = node;  // If the queue is not empty, sets the new node as the next node of the tail.
+            _tail = node;  // Updates the tail to be the new node.
         }
 
-        Count++;
+        Count++;  // Increases the count of items in the queue.
     }
 
     public T Dequeue()
     {
         if (_head == null)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException();  // Throws an exception if the queue is empty.
         }
 
-        var data = _head.Data;
-        _head = _head.Next;
-        Count--;
-        return data;
+        var data = _head.Data;  // Retrieves the data from the head node.
+        _head = _head.Next;  // Updates the head to be the next node.
+        Count--;  // Decreases the count of items in the queue.
+        return data;  // Returns the retrieved data.
     }
 
     public T Peek()
     {
         if (_head == null)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException();  // Throws an exception if the queue is empty.
         }
 
-        return _head.Data;
+        return _head.Data;  // Returns the data from the head node without removing it.
     }
 
     public void Clear()
     {
-        _head = null;
+        _head = null;  // Clears the queue by setting both head and tail to null.
         _tail = null;
-        Count = 0;
+        Count = 0;  // Resets the count of items in the queue to zero.
     }
-}
-```
-
-TypeScript:
-
-```typescript
-class Node<T> {
-	public data: T;
-	public next: Node<T> | null;
-
-	constructor(data: T) {
-		this.data = data;
-		this.next = null;
-	}
-}
-
-class Queue<T> {
-	private head: Node<T> | null;
-	private tail: Node<T> | null;
-
-	constructor() {
-		this.head = null;
-		this.tail = null;
-	}
-
-	public get count(): number {
-		let current = this.head;
-		let count = 0;
-
-		while (current !== null) {
-			count++;
-			current = current.next;
-		}
-
-		return count;
-	}
-
-	public enqueue(data: T): void {
-		const node = new Node(data);
-
-		if (this.head === null) {
-			this.head = node;
-			this.tail = node;
-		} else {
-			this.tail.next = node;
-			this.tail = node;
-		}
-	}
-
-	public dequeue(): T {
-		if (this.head === null) {
-			throw new Error("Queue is empty");
-		}
-
-		const data = this.head.data;
-		this.head = this.head.next;
-		return data;
-	}
-
-	public peek(): T {
-		if (this.head === null) {
-			throw new Error("Queue is empty");
-		}
-
-		return this.head.data;
-	}
-
-	public clear(): void {
-		this.head = null;
-		this.tail = null;
-	}
 }
 ```
 
@@ -2083,133 +1411,66 @@ C#:
 ```csharp
 public class Node<T>
 {
-    public T Data { get; set; }
-    public Node<T> Next { get; set; }
+    public T Data { get; set; }  // Represents the data stored in the node.
+    public Node<T> Next { get; set; }  // Represents the reference to the next node in the linked list.
 
     public Node(T data)
     {
-        Data = data;
+        Data = data;  // Initializes the data of the node with the provided value.
     }
 }
 
 public class Stack<T>
 {
-    private Node<T> _top;
+    private Node<T> _top;  // Represents the top node of the stack.
 
-    public int Count { get; private set; }
+    public int Count { get; private set; }  // Represents the number of elements in the stack.
 
     public void Push(T data)
     {
-        var node = new Node<T>(data);
+        var node = new Node<T>(data);  // Creates a new node with the provided data.
 
         if (_top == null)
         {
-            _top = node;
+            _top = node;  // If the stack is empty, the new node becomes the top node.
         }
         else
         {
-            node.Next = _top;
-            _top = node;
+            node.Next = _top;  // Sets the next reference of the new node to the current top node.
+            _top = node;  // Updates the top node to be the new node.
         }
 
-        Count++;
+        Count++;  // Increments the count of elements in the stack.
     }
 
     public T Pop()
     {
         if (_top == null)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException();  // Throws an exception if the stack is empty.
         }
 
-        var data = _top.Data;
-        _top = _top.Next;
-        Count--;
-        return data;
+        var data = _top.Data;  // Retrieves the data of the top node.
+        _top = _top.Next;  // Updates the top node to be the next node in the stack.
+        Count--;  // Decrements the count of elements in the stack.
+        return data;  // Returns the data of the popped node.
     }
 
     public T Peek()
     {
         if (_top == null)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException();  // Throws an exception if the stack is empty.
         }
 
-        return _top.Data;
+        return _top.Data;  // Returns the data of the top node without removing it.
     }
 
     public void Clear()
     {
-        _top = null;
-        Count = 0;
+        _top = null;  // Sets the top node to null, effectively clearing the stack.
+        Count = 0;  // Resets the count of elements in the stack to zero.
     }
-}
-```
-
-TypeScript:
-
-```typescript
-class Node<T> {
-	public data: T;
-	public next: Node<T> | null;
-
-	constructor(data: T) {
-		this.data = data;
-		this.next = null;
-	}
-}
-
-class Stack<T> {
-	private top: Node<T> | null;
-
-	constructor() {
-		this.top = null;
-	}
-
-	public get count(): number {
-		let current = this.top;
-		let count = 0;
-
-		while (current !== null) {
-			count++;
-			current = current.next;
-		}
-
-		return count;
-	}
-
-	public push(data: T): void {
-		const node = new Node(data);
-
-		if (this.top === null) {
-			this.top = node;
-		} else {
-			node.next = this.top;
-			this.top = node;
-		}
-	}
-
-	public pop(): T {
-		if (this.top === null) {
-			throw new Error("Stack is empty");
-		}
-
-		const data = this.top.data;
-		this.top = this.top.next;
-		return data;
-	}
-
-	public peek(): T {
-		if (this.top === null) {
-			throw new Error("Stack is empty");
-		}
-
-		return this.top.data;
-	}
-
-	public clear(): void {
-		this.top = null;
-	}
 }
 ```
 
@@ -2283,8 +1544,10 @@ public class ArrayList<T>
         _items = new T[0];
     }
 
+    // Adds an item to the end of the list
     public void Add(T item)
     {
+        // If the array is full, create a new array with double the capacity
         if (Count == _items.Length)
         {
             var newItems = new T[(Count == 0) ? 4 : Count * 2];
@@ -2292,17 +1555,21 @@ public class ArrayList<T>
             _items = newItems;
         }
 
+        // Add the item to the end of the array and increment the count
         _items[Count] = item;
         Count++;
     }
 
+    // Inserts an item at the specified index
     public void Insert(T item, int index)
     {
+        // Check if the index is out of range
         if (index < 0 || index > Count)
         {
             throw new IndexOutOfRangeException();
         }
 
+        // If the array is full, create a new array with double the capacity
         if (Count == _items.Length)
         {
             var newItems = new T[(Count == 0) ? 4 : Count * 2];
@@ -2310,40 +1577,50 @@ public class ArrayList<T>
             _items = newItems;
         }
 
+        // Shift the elements after the index to the right
         for (int i = Count; i > index; i--)
         {
             _items[i] = _items[i - 1];
         }
 
+        // Insert the item at the specified index and increment the count
         _items[index] = item;
         Count++;
     }
 
+    // Removes the item at the specified index
     public void RemoveAt(int index)
     {
+        // Check if the index is out of range
         if (index < 0 || index >= Count)
         {
             throw new IndexOutOfRangeException();
         }
 
+        // Shift the elements after the index to the left
         for (int i = index; i < Count - 1; i++)
         {
             _items[i] = _items[i + 1];
         }
 
+        // Decrement the count
         Count--;
     }
 
+    // Removes the first occurrence of the specified item
     public void Remove(T item)
     {
+        // Find the index of the item
         var index = IndexOf(item);
 
+        // If the item is found, remove it
         if (index != -1)
         {
             RemoveAt(index);
         }
     }
 
+    // Returns the index of the first occurrence of the specified item
     public int IndexOf(T item)
     {
         for (int i = 0; i < Count; i++)
@@ -2357,21 +1634,25 @@ public class ArrayList<T>
         return -1;
     }
 
+    // Returns true if the list contains the specified item
     public bool Contains(T item)
     {
         return IndexOf(item) != -1;
     }
 
+    // Removes all items from the list
     public void Clear()
     {
         _items = new T[0];
         Count = 0;
     }
 
+    // Indexer to access items by index
     public T this[int index]
     {
         get
         {
+            // Check if the index is out of range
             if (index < 0 || index >= Count)
             {
                 throw new IndexOutOfRangeException();
@@ -2381,6 +1662,7 @@ public class ArrayList<T>
         }
         set
         {
+            // Check if the index is out of range
             if (index < 0 || index >= Count)
             {
                 throw new IndexOutOfRangeException();
@@ -2389,78 +1671,6 @@ public class ArrayList<T>
             _items[index] = value;
         }
     }
-}
-```
-
-TypeScript:
-
-```typescript
-class ArrayList<T> {
-	private items: T[];
-
-	constructor() {
-		this.items = [];
-	}
-
-	public get count(): number {
-		return this.items.length;
-	}
-
-	public add(item: T): void {
-		this.items.push(item);
-	}
-
-	public insert(item: T, index: number): void {
-		if (index < 0 || index > this.count) {
-			throw new Error("Index out of bounds");
-		}
-
-		this.items.splice(index, 0, item);
-	}
-
-	public removeAt(index: number): void {
-		if (index < 0 || index >= this.count) {
-			throw new Error("Index out of bounds");
-		}
-
-		this.items.splice(index, 1);
-	}
-
-	public remove(item: T): void {
-		const index = this.indexOf(item);
-
-		if (index !== -1) {
-			this.removeAt(index);
-		}
-	}
-
-	public indexOf(item: T): number {
-		return this.items.indexOf(item);
-	}
-
-	public contains(item: T): boolean {
-		return this.indexOf(item) !== -1;
-	}
-
-	public clear(): void {
-		this.items = [];
-	}
-
-	public get(index: number): T {
-		if (index < 0 || index >= this.count) {
-			throw new Error("Index out of bounds");
-		}
-
-		return this.items[index];
-	}
-
-	public set(index: number, item: T): void {
-		if (index < 0 || index >= this.count) {
-			throw new Error("Index out of bounds");
-		}
-
-		this.items[index] = item;
-	}
 }
 ```
 
@@ -2517,11 +1727,13 @@ public class ArrayBuffer
 {
     private byte[] _items;
 
+    // Constructor that initializes the ArrayBuffer with a specified size
     public ArrayBuffer(int size)
     {
         _items = new byte[size];
     }
 
+    // Get method that returns the byte at the specified index
     public byte Get(int index)
     {
         if (index < 0 || index >= _items.Length)
@@ -2532,6 +1744,7 @@ public class ArrayBuffer
         return _items[index];
     }
 
+    // Set method that sets the byte at the specified index to the given value
     public void Set(int index, byte item)
     {
         if (index < 0 || index >= _items.Length)
@@ -2542,6 +1755,7 @@ public class ArrayBuffer
         _items[index] = item;
     }
 
+    // Slice method that returns a new ArrayBuffer containing a copy of the elements from the start index to the end index
     public ArrayBuffer Slice(int start, int end)
     {
         if (start < 0 || start >= _items.Length)
@@ -2570,6 +1784,7 @@ public class ArrayBuffer
         return buffer;
     }
 
+    // CopyTo method that copies the elements from the start index to the end index to the specified ArrayBuffer
     public void CopyTo(ArrayBuffer buffer, int start, int end)
     {
         if (start < 0 || start >= _items.Length)
@@ -2600,6 +1815,7 @@ public class ArrayBuffer
         }
     }
 
+    // Clear method that sets all the elements in the buffer to zero
     public void Clear()
     {
         for (int i = 0; i < _items.Length; i++)
@@ -2608,16 +1824,19 @@ public class ArrayBuffer
         }
     }
 
+    // Count method that returns the number of elements in the buffer
     public int Count()
     {
         return _items.Length;
     }
 
+    // ByteLength method that returns the size of the buffer in bytes
     public int ByteLength()
     {
         return _items.Length;
     }
 
+    // ByteOffset method that returns the offset of the buffer in bytes
     public int ByteOffset()
     {
         return 0;
@@ -2645,16 +1864,6 @@ public static int Factorial(int n)
 }
 ```
 
-```typescript
-const factorial = (n: number): number => {
-	if (n === 0) {
-		return 1;
-	}
-
-	return n * factorial(n - 1);
-};
-```
-
 ### Maze Example
 
 #### Description
@@ -2675,23 +1884,28 @@ C#:
 ```csharp
 public static bool SolveMaze(char[,] maze, int row, int col)
 {
+    // Check if the current cell is outside the maze boundaries
     if (row < 0 || row >= maze.GetLength(0) || col < 0 || col >= maze.GetLength(1))
     {
         return false;
     }
 
+    // Check if the current cell is the end cell
     if (maze[row, col] == 'E')
     {
         return true;
     }
 
+    // Check if the current cell is a wall or already visited
     if (maze[row, col] == '#' || maze[row, col] == 'P')
     {
         return false;
     }
 
+    // Mark the current cell as visited
     maze[row, col] = 'P';
 
+    // Recursively solve the maze by exploring neighboring cells
     if (SolveMaze(maze, row - 1, col))
     {
         return true;
@@ -2712,6 +1926,7 @@ public static bool SolveMaze(char[,] maze, int row, int col)
         return true;
     }
 
+    // If no path is found, backtrack and mark the current cell as empty
     maze[row, col] = ' ';
     return false;
 }
@@ -2729,8 +1944,10 @@ var maze = new char[,]
     { '#', '#', '#', '#', '#', 'E', '#' }
 };
 
+// Solve the maze starting from the given coordinates
 SolveMaze(maze, 1, 1);
 
+// Print the solved maze
 for (int i = 0; i < maze.GetLength(0); i++)
 {
     for (int j = 0; j < maze.GetLength(1); j++)
@@ -2740,61 +1957,6 @@ for (int i = 0; i < maze.GetLength(0); i++)
 
     Console.WriteLine();
 }
-```
-
-TypeScript:
-
-```typescript
-const solveMaze = (maze: string[][], row: number, col: number): boolean => {
-	if (row < 0 || row >= maze.length || col < 0 || col >= maze[0].length) {
-		return false;
-	}
-
-	if (maze[row][col] === "E") {
-		return true;
-	}
-
-	if (maze[row][col] === "#" || maze[row][col] === "P") {
-		return false;
-	}
-
-	maze[row][col] = "P";
-
-	if (solveMaze(maze, row - 1, col)) {
-		return true;
-	}
-
-	if (solveMaze(maze, row + 1, col)) {
-		return true;
-	}
-
-	if (solveMaze(maze, row, col - 1)) {
-		return true;
-	}
-
-	if (solveMaze(maze, row, col + 1)) {
-		return true;
-	}
-
-	maze[row][col] = " ";
-	return false;
-};
-
-// Test (5x7)
-
-const maze = [
-	["#", "#", "#", "#", "#", "#", "#"],
-	["#", " ", " ", " ", "#", " ", "#"],
-	["#", " ", "#", " ", "#", " ", "#"],
-	["#", " ", "#", " ", " ", " ", "#"],
-	["#", " ", "#", "#", "#", " ", "#"],
-	["#", " ", " ", " ", "#", " ", "#"],
-	["#", "#", "#", "#", "#", "E", "#"],
-];
-
-solveMaze(maze, 1, 1);
-
-console.log(maze.map((row) => row.join("")).join("\n"));
 ```
 
 ## Trees
@@ -2887,18 +2049,6 @@ D   E
 
 The post-order traversal would be D, E, B, C, A.
 
-- **Level-Order:** Visit the nodes level by level, starting from the root node. So for example, if you have the following tree:
-
-```
-    A
-   / \
-  B   C
- / \
-D   E
-```
-
-The level-order traversal would be A, B, C, D, E.
-
 ### Binary Trees
 
 A binary tree is a tree in which each node has at most two child nodes. The left child node is called the left subtree, and the right child node is called the right subtree. A binary tree can be empty, meaning that it doesn't contain any nodes. A binary tree can also be full, meaning that every node has two child nodes. A binary tree can also be complete, meaning that every level, except possibly the last, is completely filled, and all nodes are as far left as possible.
@@ -2945,9 +2095,9 @@ C#:
 ```csharp
 public class Node<T>
 {
-    public T Data { get; set; }
-    public Node<T> Left { get; set; }
-    public Node<T> Right { get; set; }
+    public T Data { get; set; } // Data stored in the node
+    public Node<T> Left { get; set; } // Reference to the left child node
+    public Node<T> Right { get; set; } // Reference to the right child node
 
     public Node(T data)
     {
@@ -2957,13 +2107,585 @@ public class Node<T>
 
 public class BinaryTree<T>
 {
-    private Node<T> _root;
+    private Node<T> _root; // Reference to the root node of the binary tree
 
-    public int Count { get; private set; }
+    public int Count { get; private set; } // Number of nodes in the binary tree
 
+    // Inserts a new node into the binary tree
     public void Insert(T data)
     {
-        var node = new Node<T>(data);
+        var node = new Node<T>(data); // Create a new node with the given data
+
+        if (_root == null) // If the binary tree is empty
+        {
+            _root = node; // Set the new node as the root node
+        }
+        else
+        {
+            var current = _root; // Start from the root node
+
+            while (true)
+            {
+                if (Comparer<T>.Default.Compare(data, current.Data) < 0) // If the data is less than the current node's data
+                {
+                    if (current.Left == null) // If the left child node is null
+                    {
+                        current.Left = node; // Set the new node as the left child node
+                        break;
+                    }
+
+                    current = current.Left; // Move to the left child node
+                }
+                else // If the data is greater than or equal to the current node's data
+                {
+                    if (current.Right == null) // If the right child node is null
+                    {
+                        current.Right = node; // Set the new node as the right child node
+                        break;
+                    }
+
+                    current = current.Right; // Move to the right child node
+                }
+            }
+        }
+
+        Count++; // Increment the count of nodes in the binary tree
+    }
+
+    // Removes a node from the binary tree
+    public void Remove(T data)
+    {
+        _root = Remove(_root, data); // Call the private Remove method to remove the node
+    }
+
+    private Node<T> Remove(Node<T> node, T data)
+    {
+        if (node == null) // If the node is null
+        {
+            return null; // Return null
+        }
+
+        if (Comparer<T>.Default.Compare(data, node.Data) < 0) // If the data is less than the current node's data
+        {
+            node.Left = Remove(node.Left, data); // Recursively remove the node from the left subtree
+        }
+        else if (Comparer<T>.Default.Compare(data, node.Data) > 0) // If the data is greater than the current node's data
+        {
+            node.Right = Remove(node.Right, data); // Recursively remove the node from the right subtree
+        }
+        else // If the data is equal to the current node's data
+        {
+            if (node.Left == null) // If the left child node is null
+            {
+                return node.Right; // Return the right child node
+            }
+
+            if (node.Right == null) // If the right child node is null
+            {
+                return node.Left; // Return the left child node
+            }
+
+            var temp = node; // Store the reference to the current node
+            node = Min(temp.Right); // Find the minimum node in the right subtree and set it as the current node
+            node.Right = RemoveMin(temp.Right); // Remove the minimum node from the right subtree and set its right child as the right child of the current node
+            node.Left = temp.Left; // Set the left child of the current node as the left child of the new current node
+        }
+
+        return node; // Return the updated node
+    }
+
+    // Checks if the binary tree contains a specific node
+    public bool Contains(T data)
+    {
+        var current = _root; // Start from the root node
+
+        while (current != null)
+        {
+            if (Comparer<T>.Default.Compare(data, current.Data) < 0) // If the data is less than the current node's data
+            {
+                current = current.Left; // Move to the left child node
+            }
+            else if (Comparer<T>.Default.Compare(data, current.Data) > 0) // If the data is greater than the current node's data
+            {
+                current = current.Right; // Move to the right child node
+            }
+            else // If the data is equal to the current node's data
+            {
+                return true; // Return true
+            }
+        }
+
+        return false; // Return false if the data is not found
+    }
+
+    // Clears the binary tree by setting the root node to null and count to 0
+    public void Clear()
+    {
+        _root = null; // Set the root node to null
+        Count = 0; // Set the count to 0
+    }
+
+    // Returns the depth of the binary tree
+    public int Depth()
+    {
+        return Depth(_root); // Call the private Depth method to calculate the depth of the binary tree
+    }
+
+    private int Depth(Node<T> node)
+    {
+        if (node == null) // If the node is null
+        {
+            return 0; // Return 0
+        }
+
+        return 1 + Math.Max(Depth(node.Left), Depth(node.Right)); // Return 1 plus the maximum depth of the left and right subtrees
+    }
+
+    // Returns the height of the binary tree
+    public int Height()
+    {
+        return Height(_root); // Call the private Height method to calculate the height of the binary tree
+    }
+
+    private int Height(Node<T> node)
+    {
+        if (node == null) // If the node is null
+        {
+            return -1; // Return -1
+        }
+
+        return 1 + Math.Max(Height(node.Left), Height(node.Right)); // Return 1 plus the maximum height of the left and right subtrees
+    }
+
+    // Checks if the binary tree is balanced
+    public bool IsBalanced()
+    {
+        return IsBalanced(_root); // Call the private IsBalanced method to check if the binary tree is balanced
+    }
+
+    private bool IsBalanced(Node<T> node)
+    {
+        if (node == null) // If the node is null
+        {
+            return true; // Return true
+        }
+
+        var leftHeight = Height(node.Left); // Calculate the height of the left subtree
+        var rightHeight = Height(node.Right); // Calculate the height of the right subtree
+
+        if (Math.Abs(leftHeight - rightHeight) <= 1 && IsBalanced(node.Left) && IsBalanced(node.Right)) // If the difference between the heights of the left and right subtrees is less than or equal to 1 and both subtrees are balanced
+        {
+            return true; // Return true
+        }
+
+        return false; // Return false if the binary tree is not balanced
+    }
+
+    // Checks if the binary tree is complete
+    public bool IsComplete()
+    {
+        return IsComplete(_root); // Call the private IsComplete method to check if the binary tree is complete
+    }
+
+    private bool IsComplete(Node<T> node)
+    {
+        if (node == null) // If the node is null
+        {
+            return true; // Return true
+        }
+
+        var leftHeight = Height(node.Left); // Calculate the height of the left subtree
+        var rightHeight = Height(node.Right); // Calculate the height of the right subtree
+
+        if (leftHeight == rightHeight) // If the heights of the left and right subtrees are equal
+        {
+            return IsComplete(node.Right); // Recursively check if the right subtree is complete
+        }
+
+        if (leftHeight == rightHeight + 1) // If the height of the left subtree is one more than the height of the right subtree
+        {
+            return IsComplete(node.Left) && IsComplete(node.Right); // Recursively check if both subtrees are complete
+        }
+
+        return false; // Return false if the binary tree is not complete
+    }
+
+    // Performs pre-order traversal on the binary tree
+    public void PreOrderTraversal(Action<T> action)
+    {
+        PreOrderTraversal(_root, action); // Call the private PreOrderTraversal method to perform pre-order traversal
+    }
+
+    private void PreOrderTraversal(Node<T> node, Action<T> action)
+    {
+        if (node == null) // If the node is null
+        {
+            return; // Return
+        }
+
+        action(node.Data); // Perform the action on the current node's data
+        PreOrderTraversal(node.Left, action); // Recursively perform pre-order traversal on the left subtree
+        PreOrderTraversal(node.Right, action); // Recursively perform pre-order traversal on the right subtree
+    }
+
+    // Performs in-order traversal on the binary tree
+    public void InOrderTraversal(Action<T> action)
+    {
+        InOrderTraversal(_root, action); // Call the private InOrderTraversal method to perform in-order traversal
+    }
+
+    private void InOrderTraversal(Node<T> node, Action<T> action)
+    {
+        if (node == null) // If the node is null
+        {
+            return; // Return
+        }
+
+        InOrderTraversal(node.Left, action); // Recursively perform in-order traversal on the left subtree
+        action(node.Data); // Perform the action on the current node's data
+        InOrderTraversal(node.Right, action); // Recursively perform in-order traversal on the right subtree
+    }
+
+    // Performs post-order traversal on the binary tree
+    public void PostOrderTraversal(Action<T> action)
+    {
+        PostOrderTraversal(_root, action); // Call the private PostOrderTraversal method to perform post-order traversal
+    }
+
+    private void PostOrderTraversal(Node<T> node, Action<T> action)
+    {
+        if (node == null) // If the node is null
+        {
+            return; // Return
+        }
+
+        PostOrderTraversal(node.Left, action); // Recursively perform post-order traversal on the left subtree
+        PostOrderTraversal(node.Right, action); // Recursively perform post-order traversal on the right subtree
+        action(node.Data); // Perform the action on the current node's data
+    }
+
+    // Prints the binary tree
+    public void Print()
+    {
+        Print(_root); // Call the private Print method to print the binary tree
+    }
+
+    private void Print(Node<T> node)
+    {
+        if (node == null) // If the node is null
+        {
+            return; // Return
+        }
+
+        Console.Write(node.Data + " "); // Print the current node's data
+
+        if (node.Left != null) // If the left child node is not null
+        {
+            Console.Write("L: " + node.Left.Data + " "); // Print the left child node's data
+        }
+
+        if (node.Right != null) // If the right child node is not null
+        {
+            Console.Write("R: " + node.Right.Data + " "); // Print the right child node's data
+        }
+
+        Console.WriteLine(); // Print a new line
+
+        Print(node.Left); // Recursively print the left subtree
+        Print(node.Right); // Recursively print the right subtree
+    }
+
+    // Prints the binary tree by level
+    public void PrintByLevel()
+    {
+        var height = Height(); // Calculate the height of the binary tree
+        var width = (int)Math.Pow(2, height); // Calculate the width of the binary tree
+        var array = new string[height + 1, width]; // Create a 2D array to store the nodes at each level
+        PrintByLevel(_root, array, 0, 0, width - 1); // Call the private PrintByLevel method to populate the array
+        Print(array); // Print the array
+    }
+
+    private void PrintByLevel(Node<T> node, string[,] array, int level, int left, int right)
+    {
+        if (node == null) // If the node is null
+        {
+            return; // Return
+        }
+
+        var mid = (left + right) / 2; // Calculate the mid index of the current level
+        array[level, mid] = node.Data.ToString(); // Store the current node's data in the array
+        PrintByLevel(node.Left, array, level + 1, left, mid - 1); // Recursively populate the array for the left subtree
+        PrintByLevel(node.Right, array, level + 1, mid + 1, right); // Recursively populate the array for the right subtree
+    }
+}
+```
+
+## Tree Search
+
+### Breadth-First Search
+
+#### Description
+
+Breadth-first search is a tree search algorithm that starts at the root node and explores the neighbor nodes first, before moving to the next level neighbors. It's a level-order tree traversal algorithm that uses a queue to keep track of the nodes to visit next. It's often used to find the shortest path between two nodes in a tree. It's also called level-order traversal. So for example for the below tree:
+
+```
+    A
+   / \
+  B   C
+ / \
+D   E
+```
+
+The breadth-first search would visit the nodes in the following order: A, B, C, D, E.
+
+#### Characteristics
+
+- It doesn't preserve the shape of the tree.
+
+#### Implementation
+
+C#:
+
+```csharp
+public static void BreadthFirstSearch(Node<T> root, T value)
+{
+    // Create a queue to store the nodes to visit
+    var queue = new Queue<Node<T>>();
+    // Enqueue the root node
+    queue.Enqueue(root);
+
+    // Continue the loop until the queue is empty
+    while (queue.Count > 0)
+    {
+        // Dequeue a node from the front of the queue
+        var node = queue.Dequeue();
+
+        // Check if the node's data matches the target value
+        if (node.Data.Equals(value))
+        {
+            // If a match is found, print "Found" and return
+            Console.WriteLine("Found");
+            return;
+        }
+
+        // Enqueue the left child if it exists
+        if (node.Left != null)
+        {
+            queue.Enqueue(node.Left);
+        }
+
+        // Enqueue the right child if it exists
+        if (node.Right != null)
+        {
+            queue.Enqueue(node.Right);
+        }
+    }
+
+    // If the loop completes without finding a match, print "Not found"
+    Console.WriteLine("Not found");
+}
+```
+
+### Depth-First Search
+
+#### Description
+
+Depth-first search is a tree search algorithm that starts at the root node and explores the neighbor nodes at the deepest level first, before moving to the next level neighbors. It's a pre-order tree traversal algorithm that uses a stack to keep track of the nodes to visit next. It's often used to find the shortest path between two nodes in a tree. It's also called pre-order traversal. So for example for the below tree:
+
+```
+    A
+   / \
+  B   C
+ / \
+D   E
+```
+
+The depth-first search would visit the nodes in the following order: A, B, D, E, C.
+
+#### Characteristics
+
+- It preserves the shape of the tree.
+
+#### Implementation
+
+C#:
+
+```csharp
+public static void DepthFirstSearch(Node<T> root, T value)
+{
+    // Check if the current node is null
+    if (root == null)
+    {
+        return;
+    }
+
+    // Check if the value of the current node matches the target value
+    if (root.Data.Equals(value))
+    {
+        Console.WriteLine("Found");
+        return;
+    }
+
+    // Recursively call DepthFirstSearch on the left child of the current node
+    DepthFirstSearch(root.Left, value);
+
+    // Recursively call DepthFirstSearch on the right child of the current node
+    DepthFirstSearch(root.Right, value);
+}
+```
+
+### Compare Two Trees
+
+#### Description
+
+In this example, we will compare two trees to see if they are equal. Depending on the case we will use either breadth-first search or depth-first search. If we want to compare just the values of the nodes, then we can use breadth-first search. If we want to consider also the shape of the trees, then we must use depth-first search.
+
+#### Why Breadth-First Search can't be used to compare the shape of the trees?
+
+Breadth-first search can't be used to compare the shape of the trees because it doesn't preserve the shape of the trees. It only preserves the order of the nodes. So for example, if we have the following two trees:
+
+```
+    A
+   / \
+  B   C
+```
+
+```
+     A
+    /
+   B
+  /
+ C
+```
+
+Breadth-first search would visit the nodes of both trees in the following order: A, B, C. So it would consider both trees to be equal, even though they are not.
+
+But if we use depth-first search, then it's possible for us to check that the childrens of B and C on the first tree are null, while the childrens of B on the second tree are not null. So we can use depth-first search to compare the shape of the trees.
+
+#### Implementation 1 - Compare Values
+
+C#:
+
+```csharp
+public static bool CompareTrees(Node<T> root1, Node<T> root2)
+{
+    // Create two queues to store the nodes of the trees
+    var queue1 = new Queue<Node<T>>();
+    var queue2 = new Queue<Node<T>>();
+
+    // Enqueue the root nodes of both trees
+    queue1.Enqueue(root1);
+    queue2.Enqueue(root2);
+
+    // Continue the loop until both queues are empty
+    while (queue1.Count > 0 && queue2.Count > 0)
+    {
+        // Dequeue a node from each queue
+        var node1 = queue1.Dequeue();
+        var node2 = queue2.Dequeue();
+
+        // Check if the data in the nodes is not equal
+        if (!node1.Data.Equals(node2.Data))
+        {
+            // Return false if the data is not equal, indicating different values
+            return false;
+        }
+
+        // Enqueue the left child of node1 if it exists
+        if (node1.Left != null)
+        {
+            queue1.Enqueue(node1.Left);
+        }
+
+        // Enqueue the right child of node1 if it exists
+        if (node1.Right != null)
+        {
+            queue1.Enqueue(node1.Right);
+        }
+
+        // Enqueue the left child of node2 if it exists
+        if (node2.Left != null)
+        {
+            queue2.Enqueue(node2.Left);
+        }
+
+        // Enqueue the right child of node2 if it exists
+        if (node2.Right != null)
+        {
+            queue2.Enqueue(node2.Right);
+        }
+    }
+
+    // Return true if both queues are empty, indicating equal values and shape
+    return queue1.Count == 0 && queue2.Count == 0;
+}
+```
+
+#### Implementation 2 - Compare Values and Shape
+
+C#:
+
+```csharp
+public static bool CompareTrees(Node<T> root1, Node<T> root2)
+{
+    // Check if both roots are null, indicating empty trees
+    if (root1 == null && root2 == null)
+    {
+        return true;
+    }
+
+    // Check if only one of the roots is null, indicating different tree shapes
+    if (root1 == null || root2 == null)
+    {
+        return false;
+    }
+
+    // Check if the data in the roots is equal
+    if (root1.Data.Equals(root2.Data))
+    {
+        // Recursively compare the left and right subtrees
+        return CompareTrees(root1.Left, root2.Left) && CompareTrees(root1.Right, root2.Right);
+    }
+
+    // If the data in the roots is not equal, the trees are different
+    return false;
+}
+```
+
+### Binary Search Tree
+
+#### Description
+
+A binary search tree is a binary tree in which the left child node is less than the parent node, and the right child node is greater than the parent node. It's often used to store a collection of elements. It's also called BST. That property allows us to search for an element in O(log n) time. This search algorithm is called binary search, half-interval search, logarithmic search, or binary chop. It looks very similar to the binary search algorithm for arrays, but it's slightly different. So for example, if we have the following tree:
+
+```
+    5
+   / \
+  3   7
+ / \
+1   4
+```
+
+The binary search would search for the value 4 in the following order: 5, 3, 4. Following this steps:
+
+- Compare the value 4 with the value 5. Since 4 is less than 5, we go to the left subtree.
+- Compare the value 4 with the value 3. Since 4 is greater than 3, we go to the right subtree.
+- Compare the value 4 with the value 4. Since 4 is equal to 4, we found the value.
+- Return the value 4.
+
+#### Implementation
+
+C#:
+
+```csharp
+public class BinarySearchTree
+{
+    private Node<int> _root;
+
+    // Insert method to add a new node to the binary search tree
+    public void Insert(int data)
+    {
+        var node = new Node<int>(data);
 
         if (_root == null)
         {
@@ -2973,9 +2695,10 @@ public class BinaryTree<T>
         {
             var current = _root;
 
+            // Traverse the tree to find the appropriate position for the new node
             while (true)
             {
-                if (Comparer<T>.Default.Compare(data, current.Data) < 0)
+                if (data < current.Data)
                 {
                     if (current.Left == null)
                     {
@@ -2997,42 +2720,45 @@ public class BinaryTree<T>
                 }
             }
         }
-
-        Count++;
     }
 
-    public void Remove(T data)
+    // Remove method to remove a node from the binary search tree
+    public void Remove(int data)
     {
         _root = Remove(_root, data);
     }
 
-    private Node<T> Remove(Node<T> node, T data)
+    // Recursive helper method to remove a node from the binary search tree
+    private Node<int> Remove(Node<int> node, int data)
     {
         if (node == null)
         {
             return null;
         }
 
-        if (Comparer<T>.Default.Compare(data, node.Data) < 0)
+        if (data < node.Data)
         {
             node.Left = Remove(node.Left, data);
         }
-        else if (Comparer<T>.Default.Compare(data, node.Data) > 0)
+        else if (data > node.Data)
         {
             node.Right = Remove(node.Right, data);
         }
         else
         {
+            // Case 1: Node to be removed has no children
             if (node.Left == null)
             {
                 return node.Right;
             }
 
+            // Case 2: Node to be removed has only one child
             if (node.Right == null)
             {
                 return node.Left;
             }
 
+            // Case 3: Node to be removed has two children
             var temp = node;
             node = Min(temp.Right);
             node.Right = RemoveMin(temp.Right);
@@ -3042,239 +2768,66 @@ public class BinaryTree<T>
         return node;
     }
 
-    public bool Contains(T data)
+    // Find the minimum value node in the binary search tree
+    public Node<int> Min()
+    {
+        return Min(_root);
+    }
+
+    // Recursive helper method to find the minimum value node in the binary search tree
+    private Node<int> Min(Node<int> node)
+    {
+        if (node.Left == null)
+        {
+            return node;
+        }
+
+        return Min(node.Left);
+    }
+
+    // Remove the minimum value node from the binary search tree
+    private Node<int> RemoveMin(Node<int> node)
+    {
+        if (node.Left == null)
+        {
+            return node.Right;
+        }
+
+        node.Left = RemoveMin(node.Left);
+        return node;
+    }
+
+    // Check if the binary search tree contains a specific value
+    public bool Contains(int data)
     {
         var current = _root;
 
-        while (current != null)
-        {
-            if (Comparer<T>.Default.Compare(data, current.Data) < 0)
-            {
-                current = current.Left;
-            }
-            else if (Comparer<T>.Default.Compare(data, current.Data) > 0)
-            {
-                current = current.Right;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return Contains(current, data);
     }
 
-    public void Clear()
-    {
-        _root = null;
-        Count = 0;
-    }
-
-    public int Depth()
-    {
-        return Depth(_root);
-    }
-
-    private int Depth(Node<T> node)
+    // Recursive helper method to check if the binary search tree contains a specific value
+    private bool Contains(Node<int> node, int data)
     {
         if (node == null)
         {
-            return 0;
+            return false;
         }
 
-        return 1 + Math.Max(Depth(node.Left), Depth(node.Right));
-    }
-
-    public int Height()
-    {
-        return Height(_root);
-    }
-
-    private int Height(Node<T> node)
-    {
-        if (node == null)
-        {
-            return -1;
-        }
-
-        return 1 + Math.Max(Height(node.Left), Height(node.Right));
-    }
-
-    public bool IsBalanced()
-    {
-        return IsBalanced(_root);
-    }
-
-    private bool IsBalanced(Node<T> node)
-    {
-        if (node == null)
+        if (node.Data == data)
         {
             return true;
         }
 
-        var leftHeight = Height(node.Left);
-        var rightHeight = Height(node.Right);
-
-        if (Math.Abs(leftHeight - rightHeight) <= 1 && IsBalanced(node.Left) && IsBalanced(node.Right))
+        if (data < node.Data)
         {
-            return true;
+            node = node.Left;
+        }
+        else
+        {
+            node = node.Right;
         }
 
-        return false;
-    }
-
-    public bool IsComplete()
-    {
-        return IsComplete(_root);
-    }
-
-    private bool IsComplete(Node<T> node)
-    {
-        if (node == null)
-        {
-            return true;
-        }
-
-        var leftHeight = Height(node.Left);
-        var rightHeight = Height(node.Right);
-
-        if (leftHeight == rightHeight)
-        {
-            return IsComplete(node.Right);
-        }
-
-        if (leftHeight == rightHeight + 1)
-        {
-            return IsComplete(node.Left) && IsComplete(node.Right);
-        }
-
-        return false;
-    }
-
-    public void PreOrderTraversal(Action<T> action)
-    {
-        PreOrderTraversal(_root, action);
-    }
-
-    private void PreOrderTraversal(Node<T> node, Action<T> action)
-    {
-        if (node == null)
-        {
-            return;
-        }
-
-        action(node.Data);
-        PreOrderTraversal(node.Left, action);
-        PreOrderTraversal(node.Right, action);
-    }
-
-    public void InOrderTraversal(Action<T> action)
-    {
-        InOrderTraversal(_root, action);
-    }
-
-    private void InOrderTraversal(Node<T> node, Action<T> action)
-    {
-        if (node == null)
-        {
-            return;
-        }
-
-        InOrderTraversal(node.Left, action);
-        action(node.Data);
-        InOrderTraversal(node.Right, action);
-    }
-
-    public void PostOrderTraversal(Action<T> action)
-    {
-        PostOrderTraversal(_root, action);
-    }
-
-    private void PostOrderTraversal(Node<T> node, Action<T> action)
-    {
-        if (node == null)
-        {
-            return;
-        }
-
-        PostOrderTraversal(node.Left, action);
-        PostOrderTraversal(node.Right, action);
-        action(node.Data);
-    }
-
-    public void LevelOrderTraversal(Action<T> action)
-    {
-        var queue = new Queue<Node<T>>();
-        queue.Enqueue(_root);
-
-        while (queue.Count > 0)
-        {
-            var node = queue.Dequeue();
-            action(node.Data);
-
-            if (node.Left != null)
-            {
-                queue.Enqueue(node.Left);
-            }
-
-            if (node.Right != null)
-            {
-                queue.Enqueue(node.Right);
-            }
-        }
-    }
-
-    public void Print()
-    {
-        Print(_root);
-    }
-
-    private void Print(Node<T> node)
-    {
-        if (node == null)
-        {
-            return;
-        }
-
-        Console.Write(node.Data + " ");
-
-        if (node.Left != null)
-        {
-            Console.Write("L: " + node.Left.Data + " ");
-        }
-
-        if (node.Right != null)
-        {
-            Console.Write("R: " + node.Right.Data + " ");
-        }
-
-        Console.WriteLine();
-
-        Print(node.Left);
-        Print(node.Right);
-    }
-
-    public void PrintByLevel()
-    {
-        var height = Height();
-        var width = (int)Math.Pow(2, height);
-        var array = new string[height + 1, width];
-        PrintByLevel(_root, array, 0, 0, width - 1);
-        Print(array);
-    }
-
-    private void PrintByLevel(Node<T> node, string[,] array, int level, int left, int right)
-    {
-        if (node == null)
-        {
-            return;
-        }
-
-        var mid = (left + right) / 2;
-        array[level, mid] = node.Data.ToString();
-        PrintByLevel(node.Left, array, level + 1, left, mid - 1);
-        PrintByLevel(node.Right, array, level + 1, mid + 1, right);
+        return Contains(node, data);
     }
 }
 ```
