@@ -141,6 +141,20 @@
     - [Interface](#interface-8)
     - [Complexity](#complexity-13)
     - [Implementation](#implementation-17)
+  - [Graphs](#graphs)
+    - [Description](#description-20)
+    - [Terminology](#terminology-1)
+    - [Real-World Examples](#real-world-examples-8)
+    - [What's the difference between a tree and a graph?](#whats-the-difference-between-a-tree-and-a-graph)
+    - [What's weight used for in a graph?](#whats-weight-used-for-in-a-graph)
+    - [What's direction used for in a graph?](#whats-direction-used-for-in-a-graph)
+    - [Adjacency Matrix vs. Adjacency List](#adjacency-matrix-vs-adjacency-list)
+      - [Adjacency Matrix](#adjacency-matrix)
+        - [Implementation](#implementation-18)
+      - [Adjacency List](#adjacency-list)
+        - [Implementation](#implementation-19)
+    - [Breadth-First Search and Depth-First Search](#breadth-first-search-and-depth-first-search)
+      - [Implementation](#implementation-20)
 
 ## Notes
 
@@ -3286,6 +3300,583 @@ public class Trie
         {
             // Recursively print the trie
             Print(child.Value);
+        }
+    }
+}
+```
+
+## Graphs
+
+### Description
+
+A graph is a data structure that consists of a set of vertices and a set of edges. It's often used to represent a network of connections. It's also called network. That property allows us to find the shortest path between two vertices in O(E + V log V) time, where E is the number of edges and V is the number of vertices. This search algorithm is called Dijkstra's algorithm. It looks very similar to the breadth-first search algorithm for trees, but it's slightly different.
+
+### Terminology
+
+- **Vertex:** A vertex is a node in a graph.
+- **Edge:** An edge is a connection between two vertices in a graph.
+- **Weight:** A weight is a value assigned to an edge in a graph.
+- **Degree:** The degree of a vertex is the number of edges connected to it.
+- **Path:** A path is a sequence of vertices connected by edges.
+- **Cycle:** A cycle is a path that starts and ends at the same vertex.
+- **Connected Graph:** A connected graph is a graph in which there is a path between every pair of vertices.
+- **Disconnected Graph:** A disconnected graph is a graph in which there is no path between every pair of vertices.
+- **Directed Graph:** A directed graph is a graph in which the edges have a direction.
+- **Undirected Graph:** An undirected graph is a graph in which the edges don't have a direction.
+- **Weighted Graph:** A weighted graph is a graph in which the edges have a weight.
+- **Unweighted Graph:** An unweighted graph is a graph in which the edges don't have a weight.
+- **Cyclic Graph:** A cyclic graph is a graph in which there is at least one cycle.
+- **Acyclic Graph:** An acyclic graph is a graph in which there are no cycles.
+- **Sparse Graph:** A sparse graph is a graph in which the number of edges is close to the minimum number of edges.
+- **Dense Graph:** A dense graph is a graph in which the number of edges is close to the maximum number of edges.
+- **Simple Graph:** A simple graph is a graph in which there is at most one edge between any two vertices.
+- **Multigraph:** A multigraph is a graph in which there can be multiple edges between any two vertices.
+- **Planar Graph:** A planar graph is a graph in which the edges don't intersect.
+- **Non-Planar Graph:** A non-planar graph is a graph in which the edges intersect.
+- **Bipartite Graph:** A bipartite graph is a graph in which the vertices can be divided into two disjoint sets such that every edge connects a vertex in one set to a vertex in the other set.
+- **Non-Bipartite Graph:** A non-bipartite graph is a graph in which the vertices can't be divided into two disjoint sets such that every edge connects a vertex in one set to a vertex in the other set.
+- **Complete Graph:** A complete graph is a graph in which there is an edge between every pair of vertices.
+- **Incomplete Graph:** An incomplete graph is a graph in which there is no edge between every pair of vertices.
+- **Regular Graph:** A regular graph is a graph in which every vertex has the same degree.
+- **Irregular Graph:** An irregular graph is a graph in which every vertex has a different degree.
+- **Isomorphic Graph:** Two graphs are isomorphic if one of them can be obtained from the other by renaming the vertices.
+- **Non-Isomorphic Graph:** Two graphs are non-isomorphic if one of them can't be obtained from the other by renaming the vertices.
+- **Subgraph:** A subgraph is a graph whose vertices and edges are a subset of the vertices and edges of another graph.
+- **Supergraph:** A supergraph is a graph whose vertices and edges are a superset of the vertices and edges of another graph.
+- **Induced Subgraph:** An induced subgraph is a subgraph that contains all the edges that connect the vertices in the subgraph.
+
+### Real-World Examples
+
+- **Social Networks:** Graphs are used to implement social networks. Each person in the social network is a vertex in the graph. The edges in the graph represent the relationships between the people.
+- **Road Networks:** Graphs are used to implement road networks. Each intersection in the road network is a vertex in the graph. The edges in the graph represent the roads between the intersections.
+- **Flight Networks:** Graphs are used to implement flight networks. Each airport in the flight network is a vertex in the graph. The edges in the graph represent the flights between the airports.
+- **Internet Networks:** Graphs are used to implement internet networks. Each computer in the internet network is a vertex in the graph. The edges in the graph represent the connections between the computers.
+- **Communication Networks:** Graphs are used to implement communication networks. Each device in the communication network is a vertex in the graph. The edges in the graph represent the connections between the devices.
+
+### What's the difference between a tree and a graph?
+
+A tree is a special type of graph. The main difference between a tree and a graph is that a tree can't have cycles, while a graph can have cycles.
+
+### What's weight used for in a graph?
+
+Weight is used to represent the cost of an edge in a graph. It can be used to represent the distance between two vertices in a graph, the time it takes to travel between two vertices in a graph, the price of a product in a graph, etc.
+
+### What's direction used for in a graph?
+
+Direction is used to represent the direction of an edge in a graph. It can be used to represent the direction of travel between two vertices in a graph, the direction of a relationship between two vertices in a graph, the direction of a flow between two vertices in a graph, etc.
+
+### Adjacency Matrix vs. Adjacency List
+
+#### Adjacency Matrix
+
+An adjacency matrix is a matrix in which the rows represent the source vertices and the columns represent the destination vertices. The value of each cell in the matrix represents the weight of the edge between the source vertex and the destination vertex. If there is no edge between the source vertex and the destination vertex, then the value of the cell is zero. It's often used to implement a weighted graph. It's also called connection matrix. Example:
+
+```
+    A   B   C   D
+A   0   1   0   1
+B   1   0   1   0
+C   0   1   0   1
+D   1   0   1   0
+```
+
+##### Implementation
+
+C#:
+
+```csharp
+public class Graph
+{
+    private int[,] _matrix; // Matrix to store the edges in the graph
+    private int _count; // Number of vertices in the graph
+
+    // Constructor to initialize the graph
+    public Graph(int count)
+    {
+        _matrix = new int[count, count];
+        _count = count;
+    }
+
+    // AddEdge method to add an edge to the graph
+    public void AddEdge(int source, int destination, int weight)
+    {
+        _matrix[source, destination] = weight;
+    }
+
+    // RemoveEdge method to remove an edge from the graph
+    public void RemoveEdge(int source, int destination)
+    {
+        _matrix[source, destination] = 0;
+    }
+
+    // ContainsEdge method to check if the graph contains an edge
+    public bool ContainsEdge(int source, int destination)
+    {
+        return _matrix[source, destination] != 0;
+    }
+
+    // Print method to print the graph
+    public void Print()
+    {
+        // Loop through the rows in the matrix
+        for (int i = 0; i < _count; i++)
+        {
+            // Loop through the columns in the matrix
+            for (int j = 0; j < _count; j++)
+            {
+                // Print the current cell
+                Console.Write(_matrix[i, j] + " ");
+            }
+
+            // Print a new line
+            Console.WriteLine();
+        }
+    }
+}
+```
+
+#### Adjacency List
+
+An adjacency list is a list in which each element represents a vertex in the graph. The value of each element is a list of the vertices that are connected to the vertex. It's often used to implement an unweighted graph. It's also called edge list. Example:
+
+```
+A: B, D
+B: A, C
+C: B, D
+D: A, C
+```
+
+##### Implementation
+
+C#:
+
+```csharp
+public class Graph
+{
+    private List<int>[] _list; // List to store the edges in the graph
+    private int _count; // Number of vertices in the graph
+
+    // Constructor to initialize the graph
+    public Graph(int count)
+    {
+        _list = new List<int>[count];
+        _count = count;
+
+        // Loop through the vertices in the graph
+        for (int i = 0; i < _count; i++)
+        {
+            // Initialize the list of edges for the current vertex
+            _list[i] = new List<int>();
+        }
+    }
+
+    // AddEdge method to add an edge to the graph
+    public void AddEdge(int source, int destination)
+    {
+        _list[source].Add(destination);
+    }
+
+    // RemoveEdge method to remove an edge from the graph
+    public void RemoveEdge(int source, int destination)
+    {
+        _list[source].Remove(destination);
+    }
+
+    // ContainsEdge method to check if the graph contains an edge
+    public bool ContainsEdge(int source, int destination)
+    {
+        return _list[source].Contains(destination);
+    }
+
+    // Print method to print the graph
+    public void Print()
+    {
+        // Loop through the vertices in the graph
+        for (int i = 0; i < _count; i++)
+        {
+            // Print the current vertex
+            Console.Write(i + ": ");
+
+            // Loop through the edges of the current vertex
+            foreach (var edge in _list[i])
+            {
+                // Print the current edge
+                Console.Write(edge + " ");
+            }
+
+            // Print a new line
+            Console.WriteLine();
+        }
+    }
+}
+```
+
+### Breadth-First Search and Depth-First Search
+
+#### Implementation
+
+The below graph is a weighted, directed graph.
+
+C#:
+
+```csharp
+public class Edge
+{
+    public int Source { get; set; } // Index of the source vertex
+    public int Destination { get; set; } // Index of the destination vertex
+    public int Weight { get; set; } // Weight of the edge
+
+    public Edge(int source, int destination, int weight)
+    {
+        Source = source;
+        Destination = destination;
+        Weight = weight;
+    }
+}
+
+public class Vertex
+{
+    public int Data { get; set; } // Data stored in the vertex
+    public bool Visited { get; set; } // Flag to indicate if the vertex has been visited
+    public List<Edge> Neighbors { get; set; } // List to store the neighbors of the vertex
+    public Vertex Parent { get; set; } // Parent of the vertex, going to be used to find the path
+
+    public Vertex(int data)
+    {
+        Data = data;
+        Neighbors = new List<Edge>();
+    }
+}
+
+public class Graph
+{
+    private Vertex[] _vertices; // Array to store the vertices in the graph
+    private int _count; // Number of vertices in the graph
+
+    // Constructor to initialize the graph
+    public Graph(int count)
+    {
+        _vertices = new Vertex[count];
+        _count = count;
+
+        // Loop through the vertices in the graph
+        for (int i = 0; i < _count; i++)
+        {
+            // Initialize the vertex
+            _vertices[i] = new Vertex(i);
+        }
+    }
+
+    // AddEdge method to add an edge to the graph
+    public void AddEdge(int source, int destination, int weight)
+    {
+        _vertices[source].Neighbors.Add(new Edge(source, destination, weight));
+    }
+
+    // RemoveEdge method to remove an edge from the graph
+    public void RemoveEdge(int source, int destination)
+    {
+        // Loop through the edges of the source vertex
+        for (int i = 0; i < _vertices[source].Neighbors.Count; i++)
+        {
+            // Check if the destination vertex is found
+            if (_vertices[source].Neighbors[i].Destination == destination)
+            {
+                // Remove the edge
+                _vertices[source].Neighbors.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    // ContainsEdge method to check if the graph contains an edge
+    public bool ContainsEdge(int source, int destination)
+    {
+        // Loop through the edges of the source vertex
+        foreach (var edge in _vertices[source].Neighbors)
+        {
+            // Check if the destination vertex is found
+            if (edge.Destination == destination)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // DepthFirstSearch method to search the graph using depth-first search
+    public void DepthFirstSearch(int index, int value)
+    {
+        // Reset the visited flags
+        Reset();
+
+        var current = _vertices[index];
+
+        // Check if the current vertex has been visited
+        if (current.Visited)
+        {
+            return;
+        }
+
+        // Check if the data in the current vertex matches the target value
+        if (current.Data == value)
+        {
+            Console.WriteLine("Found");
+            return;
+        }
+
+        // Set the visited flag to true
+        current.Visited = true;
+
+        // Loop through the neighbors of the current vertex
+        foreach (var edge in current.Neighbors)
+        {
+            // Recursively call DepthFirstSearch on the neighbor
+            DepthFirstSearch(edge.Destination, value);
+        }
+    }
+
+    // DepthFirstSearchIterative method to search the graph using depth-first search iteratively
+    public void DepthFirstSearchIterative(int index, int value)
+    {
+        // Reset the visited flags
+        Reset();
+
+        var stack = new Stack<int>();
+
+        // Push the index of the current vertex
+        stack.Push(index);
+
+        // Loop through the stack
+        while (stack.Count > 0)
+        {
+            // Pop the index of the current vertex
+            var currentIndex = stack.Pop();
+
+            // Get the current vertex
+            var current = _vertices[currentIndex];
+
+            // Check if the current vertex has been visited
+            if (current.Visited)
+            {
+                continue;
+            }
+
+            // Check if the data in the current vertex matches the target value
+            if (current.Data == value)
+            {
+                Console.WriteLine("Found");
+                return;
+            }
+
+            // Set the visited flag to true
+            current.Visited = true;
+
+            // Loop through the neighbors of the current vertex
+            foreach (var edge in current.Neighbors)
+            {
+                // Push the index of the neighbor
+                stack.Push(edge.Destination);
+            }
+        }
+    }
+
+    // DepthFirstSearchPath method to find the path between two vertices using depth-first search
+    public List<int> DepthFirstSearchPath(int source, int destination)
+    {
+        var path = new List<int>();
+
+        Reset();
+
+        DepthFirstSearchPath(source, destination, path);
+
+        return path;
+    }
+
+    // Recursive helper method to find the path between two vertices using depth-first search
+    private bool DepthFirstSearchPath(int source, int destination, List<int> path)
+    {
+        var current = _vertices[source];
+
+        // Check if the current vertex has been visited
+        if (current.Visited)
+        {
+            return false;
+        }
+
+        // Add the current vertex to the path
+        path.Add(current.Data);
+
+        // Check if the current vertex is the destination vertex
+        if (current.Data == destination)
+        {
+            return true;
+        }
+
+        // Set the visited flag to true
+        current.Visited = true;
+
+        // Loop through the neighbors of the current vertex
+        foreach (var edge in current.Neighbors)
+        {
+            // Recursively call DepthFirstSearchPath on the neighbor
+            if (DepthFirstSearchPath(edge.Destination, destination, path))
+            {
+                return true;
+            }
+        }
+
+        // Remove the current vertex from the path
+        path.RemoveAt(path.Count - 1);
+
+        return false;
+    }
+
+    // BreadthFirstSearch method to search the graph using breadth-first search
+    public void BreadthFirstSearch(int index, int value)
+    {
+        // Reset the visited flags
+        Reset();
+
+        var queue = new Queue<int>();
+
+        // Enqueue the index of the current vertex
+        queue.Enqueue(index);
+
+        // Loop through the queue
+        while (queue.Count > 0)
+        {
+            // Dequeue the index of the current vertex
+            var currentIndex = queue.Dequeue();
+
+            // Get the current vertex
+            var current = _vertices[currentIndex];
+
+            // Check if the current vertex has been visited
+            if (current.Visited)
+            {
+                continue;
+            }
+
+            // Check if the data in the current vertex matches the target value
+            if (current.Data == value)
+            {
+                Console.WriteLine("Found");
+                return;
+            }
+
+            // Set the visited flag to true
+            current.Visited = true;
+
+            // Loop through the neighbors of the current vertex
+            foreach (var edge in current.Neighbors)
+            {
+                // Enqueue the index of the neighbor
+                queue.Enqueue(edge.Destination);
+            }
+        }
+    }
+
+    // BreadthFirstSearchPath method to find the path between two vertices using breadth-first search
+    public List<int> BreadthFirstSearchPath(int source, int value)
+    {
+        var path = new List<int>();
+
+        Reset();
+
+        BreadthFirstSearchPath(source, value, path);
+
+        return path;
+    }
+
+    // Recursive helper method to find the path between two vertices using breadth-first search
+    private void BreadthFirstSearchPath(int source, int value, List<int> path)
+    {
+        var queue = new Queue<int>();
+
+        // Enqueue the index of the current vertex
+        queue.Enqueue(source);
+
+        // Loop through the queue
+        while (queue.Count > 0)
+        {
+            // Dequeue the index of the current vertex
+            var currentIndex = queue.Dequeue();
+
+            // Get the current vertex
+            var current = _vertices[currentIndex];
+
+            // Check if the current vertex has been visited
+            if (current.Visited)
+            {
+                continue;
+            }
+
+            // Check if the data in the current vertex matches the target value
+            if (current.Data == value)
+            {
+                // Add the current vertex to the path
+                path.Add(current.Data);
+
+                // Loop through the parents of the current vertex
+                while (current.Parent != null)
+                {
+                    // Add the parent to the path
+                    path.Add(current.Parent.Data);
+
+                    // Move to the parent
+                    current = current.Parent;
+                }
+
+                return;
+            }
+
+            // Set the visited flag to true
+            current.Visited = true;
+
+            // Loop through the neighbors of the current vertex
+            foreach (var edge in current.Neighbors)
+            {
+                // Enqueue the index of the neighbor
+                queue.Enqueue(edge.Destination);
+
+                // Set the parent of the neighbor
+                _vertices[edge.Destination].Parent = current;
+            }
+        }
+    }
+
+    // Reset method to reset the visited flags and parent pointers
+    private void Reset()
+    {
+        // Loop through the vertices in the graph
+        for (int i = 0; i < _count; i++)
+        {
+            // Reset the visited flag
+            _vertices[i].Visited = false;
+            // Reset the parent
+            _vertices[i].Parent = null;
+        }
+    }
+
+    // Print method to print the graph
+    public void Print()
+    {
+        // Loop through the vertices in the graph
+        for (int i = 0; i < _count; i++)
+        {
+            // Print the current vertex
+            Console.Write(_vertices[i].Data + ": ");
+
+            // Loop through the neighbors of the current vertex
+            foreach (var edge in _vertices[i].Neighbors)
+            {
+                // Print the current neighbor
+                Console.Write(edge.Destination + " ");
+            }
+
+            // Print a new line
+            Console.WriteLine();
         }
     }
 }
