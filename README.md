@@ -7,20 +7,20 @@
   - [Notes](#notes)
   - [Useful Links](#useful-links)
   - [Big O](#big-o)
-      - [Big O in a Nutshell](#big-o-in-a-nutshell)
-      - [Key Concepts](#key-concepts)
-      - [Big O Complexity Chart](#big-o-complexity-chart)
-      - [Big O Examples](#big-o-examples)
-        - [O(1) - Constant](#o1---constant)
-        - [O(n) - Linear](#on---linear)
-        - [O(n^2) - Quadratic](#on2---quadratic)
-        - [O(n^3) - Cubic](#on3---cubic)
-        - [O(log n) - Logarithmic](#olog-n---logarithmic)
-        - [O(n log n) - Linearithmic](#on-log-n---linearithmic)
-        - [O(2^n) - Exponential](#o2n---exponential)
-        - [O(n!) - Factorial](#on---factorial)
-      - [Big O Cheat Sheet](#big-o-cheat-sheet)
-        - [Common Big O Cases](#common-big-o-cases)
+    - [Big O in a Nutshell](#big-o-in-a-nutshell)
+    - [Key Concepts](#key-concepts)
+    - [Big O Complexity Chart](#big-o-complexity-chart)
+    - [Big O Examples](#big-o-examples)
+      - [O(1) - Constant](#o1---constant)
+      - [O(n) - Linear](#on---linear)
+      - [O(n^2) - Quadratic](#on2---quadratic)
+      - [O(n^3) - Cubic](#on3---cubic)
+      - [O(log n) - Logarithmic](#olog-n---logarithmic)
+      - [O(n log n) - Linearithmic](#on-log-n---linearithmic)
+      - [O(2^n) - Exponential](#o2n---exponential)
+      - [O(n!) - Factorial](#on---factorial)
+    - [Big O Cheat Sheet](#big-o-cheat-sheet)
+      - [Common Big O Cases](#common-big-o-cases)
     - [Arrays](#arrays)
       - [Fixed-Size Arrays](#fixed-size-arrays)
       - [Dynamic Arrays](#dynamic-arrays)
@@ -158,6 +158,20 @@
     - [Dijkstra's Algorithm](#dijkstras-algorithm)
       - [Description](#description-21)
       - [Implementation](#implementation-21)
+  - [Maps](#maps)
+    - [Description](#description-22)
+    - [Real-World Examples](#real-world-examples-9)
+    - [Hashing and Collision Resolution](#hashing-and-collision-resolution)
+      - [Chaining](#chaining)
+      - [Open Addressing](#open-addressing)
+    - [Interface](#interface-9)
+    - [Complexity](#complexity-14)
+    - [Implementation](#implementation-22)
+    - [LRU Cache](#lru-cache)
+      - [Description](#description-23)
+      - [Interface](#interface-10)
+      - [Complexity](#complexity-15)
+      - [Implementation](#implementation-23)
 
 ## Notes
 
@@ -4108,6 +4122,667 @@ public class Graph
             // Print a new line
             Console.WriteLine();
         }
+    }
+}
+```
+
+## Maps
+
+### Description
+
+A map is a data structure that consists of a set of keys and a set of values. It's often used to store a collection of key-value pairs. It's also called dictionary, associative array, or hash table. That property allows us to find a value by its key in O(1) time. This search algorithm is called map search. It looks very similar to the binary search algorithm for arrays, but it's slightly different.
+
+### Real-World Examples
+
+- **Phone Book:** Maps are used to implement phone books. Each name in the phone book is a key in the map. The phone number of the person is the value in the map.
+- **Dictionary:** Maps are used to implement dictionaries. Each word in the dictionary is a key in the map. The definition of the word is the value in the map.
+- **Cache:** Maps are used to implement caches. Each key in the cache is a key in the map. The value of the key is the value in the map.
+- **Symbol Table:** Maps are used to implement symbol tables. Each symbol in the symbol table is a key in the map. The address of the symbol is the value in the map.
+- **File System:** Maps are used to implement file systems. Each file in the file system is a key in the map. The location of the file is the value in the map.
+- **Database:** Maps are used to implement databases. Each record in the database is a key in the map. The data in the record is the value in the map.
+- **Configuration:** Maps are used to implement configurations. Each setting in the configuration is a key in the map. The value of the setting is the value in the map.
+- **Graphs:** Maps are used to implement graphs. Each vertex in the graph is a key in the map. The neighbors of the vertex are the values in the map.
+
+### Hashing and Collision Resolution
+
+For maps to have O(1) search time, they need to use hashing. Hashing is a technique that's used to map a key to a value. So, given some key, we can apply a hash function to it to get the value, this value usually represents the position of the (key,value) pair on a list. But that doesn't mean that the hash function is perfect, it's possible that two different keys can have the same hash value, this is called a collision. There are two ways to resolve collisions, chaining and open addressing.
+
+#### Chaining
+
+Chaining is a technique that's used to resolve collisions by storing the (key,value) pairs in a linked list. So, when a collision occurs, we can just append the (key,value) pair to the linked list. This is the simplest way to resolve collisions, but it has some disadvantages. The main disadvantage is that it uses extra space to store the linked lists. Another disadvantage is that it's not cache-friendly, meaning that the (key,value) pairs are not stored contiguously in memory.
+
+#### Open Addressing
+
+Open addressing is a technique that's used to resolve collisions by storing the (key,value) pairs in the map itself. So, when a collision occurs, we can just find another position in the map to store the (key,value) pair. This is a more complicated way to resolve collisions, but it has some advantages. The main advantage is that it doesn't use extra space to store the (key,value) pairs. Another advantage is that it's cache-friendly, meaning that the (key,value) pairs are stored contiguously in memory.
+
+### Interface
+
+- **Insert:** Inserts a new (key,value) pair into the map.
+- **Remove:** Removes a (key,value) pair from the map.
+- **ContainsKey:** Checks if the map contains a key.
+- **ContainsValue:** Checks if the map contains a value.
+- **Get:** Gets the value of a key.
+- **Set:** Sets the value of a key.
+- **Clear:** Removes all the (key,value) pairs from the map.
+- **Size:** Gets the number of (key,value) pairs in the map.
+- **IsEmpty:** Checks if the map is empty.
+- **Keys:** Gets the keys in the map.
+- **Values:** Gets the values in the map.
+- **Print:** Prints the map.
+
+### Complexity
+
+| Operation     | Complexity |
+| ------------- | ---------- |
+| Insert        | O(1)       |
+| Remove        | O(1)       |
+| ContainsKey   | O(1)       |
+| ContainsValue | O(n)       |
+| Get           | O(1)       |
+| Set           | O(1)       |
+| Clear         | O(n)       |
+| Size          | O(1)       |
+| IsEmpty       | O(1)       |
+| Keys          | O(n)       |
+| Values        | O(n)       |
+| Print         | O(n)       |
+
+### Implementation
+
+C#:
+
+```csharp
+public class KeyValuePair<TKey, TValue>
+{
+    public TKey Key { get; set; } // Key of the key-value pair
+    public TValue Value { get; set; } // Value of the key-value pair
+
+    public KeyValuePair(TKey key, TValue value)
+    {
+        Key = key;
+        Value = value;
+    }
+}
+
+public class Map<TKey, TValue>
+{
+    private KeyValuePair<TKey, TValue>[] _array; // Array to store the key-value pairs in the map
+    private int _count; // Number of key-value pairs in the map
+
+    // Constructor to initialize the map
+    public Map(int capacity)
+    {
+        _array = new KeyValuePair<TKey, TValue>[capacity];
+        _count = 0;
+    }
+
+    // Insert method to insert a new key-value pair into the map
+    public void Insert(TKey key, TValue value)
+    {
+        // Check if the map is full
+        if (_count == _array.Length)
+        {
+            // Return if the map is full
+            return;
+        }
+
+        // Get the hash code of the key
+        var hashCode = GetHash(key);
+
+        // Loop through the array
+        for (int i = 0; i < _array.Length; i++)
+        {
+            // Get the index of the current key-value pair
+            var index = (hashCode + i) % _array.Length;
+
+            // Check if the current key-value pair is empty
+            if (_array[index] == null)
+            {
+                // Insert the key-value pair
+                _array[index] = new KeyValuePair<TKey, TValue>(key, value);
+                _count++;
+                return;
+            }
+        }
+    }
+
+    // Remove method to remove a key-value pair from the map
+    public void Remove(TKey key)
+    {
+        // Get the hash code of the key
+        var hashCode = GetHash(key);
+
+        // Loop through the array
+        for (int i = 0; i < _array.Length; i++)
+        {
+            // Get the index of the current key-value pair
+            var index = (hashCode + i) % _array.Length;
+
+            // Check if the current key-value pair is empty
+            if (_array[index] == null)
+            {
+                // Return if the key-value pair is not found
+                return;
+            }
+
+            // Check if the current key-value pair has the key
+            if (_array[index].Key.Equals(key))
+            {
+                // Remove the key-value pair
+                _array[index] = null;
+                _count--;
+                return;
+            }
+        }
+    }
+
+    // ContainsKey method to check if the map contains a key
+    public bool ContainsKey(TKey key)
+    {
+        // Get the hash code of the key
+        var hashCode = GetHash(key);
+
+        // Loop through the array
+        for (int i = 0; i < _array.Length; i++)
+        {
+            // Get the index of the current key-value pair
+            var index = (hashCode + i) % _array.Length;
+
+            // Check if the current key-value pair is empty
+            if (_array[index] == null)
+            {
+                // Return if the key-value pair is not found
+                return false;
+            }
+
+            // Check if the current key-value pair has the key
+            if (_array[index].Key.Equals(key))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // ContainsValue method to check if the map contains a value
+    public bool ContainsValue(TValue value)
+    {
+        // Loop through the array
+        for (int i = 0; i < _array.Length; i++)
+        {
+            // Check if the current key-value pair is empty
+            if (_array[i] == null)
+            {
+                continue;
+            }
+
+            // Check if the current key-value pair has the value
+            if (_array[i].Value.Equals(value))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Get method to get the value of a key
+    public TValue Get(TKey key)
+    {
+        // Get the hash code of the key
+        var hashCode = GetHash(key);
+
+        // Loop through the array
+        for (int i = 0; i < _array.Length; i++)
+        {
+            // Get the index of the current key-value pair
+            var index = (hashCode + i) % _array.Length;
+
+            // Check if the current key-value pair is empty
+            if (_array[index] == null)
+            {
+                // Return the default value if the key-value pair is not found
+                return default;
+            }
+
+            // Check if the current key-value pair has the key
+            if (_array[index].Key.Equals(key))
+            {
+                return _array[index].Value;
+            }
+        }
+
+        return default;
+    }
+
+    // Set method to set the value of a key
+    public void Set(TKey key, TValue value)
+    {
+        // Get the hash code of the key
+        var hashCode = GetHash(key);
+
+        // Loop through the array
+        for (int i = 0; i < _array.Length; i++)
+        {
+            // Get the index of the current key-value pair
+            var index = (hashCode + i) % _array.Length;
+
+            // Check if the current key-value pair is empty
+            if (_array[index] == null)
+            {
+                // Return if the key-value pair is not found
+                return;
+            }
+
+            // Check if the current key-value pair has the key
+            if (_array[index].Key.Equals(key))
+            {
+                // Set the value of the key-value pair
+                _array[index].Value = value;
+                return;
+            }
+        }
+    }
+
+    // Clear method to remove all the key-value pairs from the map
+    public void Clear()
+    {
+        // Loop through the array
+        for (int i = 0; i < _array.Length; i++)
+        {
+            // Remove the current key-value pair
+            _array[i] = null;
+        }
+
+        _count = 0;
+    }
+
+    // Size method to get the number of key-value pairs in the map
+    public int Size()
+    {
+        return _count;
+    }
+
+    // IsEmpty method to check if the map is empty
+    public bool IsEmpty()
+    {
+        return _count == 0;
+    }
+
+    // Keys method to get the keys in the map
+    public List<TKey> Keys()
+    {
+        var keys = new List<TKey>();
+
+        // Loop through the array
+        for (int i = 0; i < _array.Length; i++)
+        {
+            // Check if the current key-value pair is empty
+            if (_array[i] == null)
+            {
+                continue;
+            }
+
+            // Add the key to the list
+            keys.Add(_array[i].Key);
+        }
+
+        return keys;
+    }
+
+    // Values method to get the values in the map
+    public List<TValue> Values()
+    {
+        var values = new List<TValue>();
+
+        // Loop through the array
+        for (int i = 0; i < _array.Length; i++)
+        {
+            // Check if the current key-value pair is empty
+            if (_array[i] == null)
+            {
+                continue;
+            }
+
+            // Add the value to the list
+            values.Add(_array[i].Value);
+        }
+
+        return values;
+    }
+
+    // Print method to print the map
+    public void Print()
+    {
+        // Loop through the array
+        for (int i = 0; i < _array.Length; i++)
+        {
+            // Check if the current key-value pair is empty
+            if (_array[i] == null)
+            {
+                continue;
+            }
+
+            // Print the current key-value pair
+            Console.WriteLine(_array[i].Key + ": " + _array[i].Value);
+        }
+    }
+
+    // GetHash method to get the hash code of a key
+    private int GetHash(TKey key)
+    {
+        return key.GetHashCode() % _array.Length;
+    }
+}
+```
+
+### LRU Cache
+
+#### Description
+
+An LRU cache is a map that has a maximum capacity. When the map is full and we try to insert a new key-value pair into the map, we need to remove the least recently used key-value pair from the map. It's often used to implement caches. It's also called least recently used cache.
+
+#### Interface
+
+- **Insert:** Inserts a new key-value pair into the LRU cache.
+- **Remove:** Removes a key-value pair from the LRU cache.
+- **ContainsKey:** Checks if the LRU cache contains a key.
+- **ContainsValue:** Checks if the LRU cache contains a value.
+- **Get:** Gets the value of a key.
+- **Set:** Sets the value of a key.
+- **Clear:** Removes all the key-value pairs from the LRU cache.
+- **Size:** Gets the number of key-value pairs in the LRU cache.
+- **IsEmpty:** Checks if the LRU cache is empty.
+- **Keys:** Gets the keys in the LRU cache.
+- **Values:** Gets the values in the LRU cache.
+- **Print:** Prints the LRU cache.
+
+#### Complexity
+
+| Operation     | Complexity |
+| ------------- | ---------- |
+| Insert        | O(1)       |
+| Remove        | O(1)       |
+| ContainsKey   | O(1)       |
+| ContainsValue | O(n)       |
+| Get           | O(1)       |
+| Set           | O(1)       |
+| Clear         | O(n)       |
+| Size          | O(1)       |
+| IsEmpty       | O(1)       |
+| Keys          | O(n)       |
+| Values        | O(n)       |
+| Print         | O(n)       |
+
+#### Implementation
+
+C#:
+
+```csharp
+public class KeyValuePair<TKey, TValue>
+{
+    public TKey Key { get; set; } // Key of the key-value pair
+    public TValue Value { get; set; } // Value of the key-value pair
+
+    public KeyValuePair(TKey key, TValue value)
+    {
+        Key = key;
+        Value = value;
+    }
+}
+
+public class Map<TKey, TValue>
+{
+    // Already implemented above
+}
+
+public class Node<TValue>
+{
+    public TValue Value { get; set; } // Value of the node
+    public Node<TValue> Previous { get; set; } // Previous node in the list
+    public Node<TValue> Next { get; set; } // Next node in the list
+
+    public Node(TValue value)
+    {
+        Value = value;
+    }
+}
+
+public class LRU<TKey, TValue>
+{
+    private Dictionary<TKey, Node<KeyValuePair<TKey, TValue>>> _lookup;
+    private Node<KeyValuePair<TKey, TValue>> _head;
+    private Node<KeyValuePair<TKey, TValue>> _tail;
+    private int _capacity;
+
+    public LRU(int capacity)
+    {
+        _lookup = new Dictionary<TKey, Node<KeyValuePair<TKey, TValue>>>(capacity);
+        _capacity = capacity;
+    }
+
+    public void Insert(TKey key, TValue value)
+    {
+        if (_lookup.ContainsKey(key))
+        {
+            // Update the value and move node to head
+            var node = _lookup[key];
+            node.Value.Value = value;
+            MoveToHead(node);
+            return;
+        }
+
+        if (_lookup.Count == _capacity)
+        {
+            // Evict from tail
+            _lookup.Remove(_tail.Value.Key);
+            Remove(_tail);
+        }
+
+        var newNode = new Node<KeyValuePair<TKey, TValue>>(new KeyValuePair<TKey, TValue>(key, value));
+        AddToHead(newNode);
+        _lookup[key] = newNode;
+    }
+
+    public TValue Get(TKey key)
+    {
+        if (!_lookup.ContainsKey(key))
+        {
+            throw new KeyNotFoundException($"Key {key} not found in cache.");
+        }
+
+        var node = _lookup[key];
+        MoveToHead(node);
+        return node.Value.Value;
+    }
+
+    private void AddToHead(Node<KeyValuePair<TKey, TValue>> node)
+    {
+        node.Next = _head;
+        node.Previous = null;
+
+        if (_head != null)
+        {
+            _head.Previous = node;
+        }
+
+        _head = node;
+
+        if (_tail == null)
+        {
+            _tail = node;
+        }
+    }
+
+    private void Remove(Node<KeyValuePair<TKey, TValue>> node)
+    {
+        if (node.Previous != null)
+        {
+            node.Previous.Next = node.Next;
+        }
+        else
+        {
+            _head = node.Next;
+        }
+
+        if (node.Next != null)
+        {
+            node.Next.Previous = node.Previous;
+        }
+        else
+        {
+            _tail = node.Previous;
+        }
+    }
+
+    private void MoveToHead(Node<KeyValuePair<TKey, TValue>> node)
+    {
+        Remove(node);
+        AddToHead(node);
+    }
+
+    // ContainsKey method to check if the LRU cache contains a key
+    public bool ContainsKey(TKey key)
+    {
+        return _lookup.ContainsKey(key);
+    }
+
+    // ContainsValue method to check if the LRU cache contains a value
+    public bool ContainsValue(TValue value)
+    {
+        return _reverseLookup.ContainsValue(value);
+    }
+
+    // Get method to get the value of a key
+    public TValue Get(TKey key)
+    {
+        // Get the node from the lookup map
+        var node = _lookup.Get(key);
+
+        // Remove the node from the list
+        Remove(node);
+
+        // Insert the node at the head of the list
+        Insert(node);
+
+        return node.Value.Value;
+    }
+
+    // Set method to set the value of a key
+    public void Set(TKey key, TValue value)
+    {
+        // Get the node from the lookup map
+        var node = _lookup.Get(key);
+
+        // Remove the node from the list
+        Remove(node);
+
+        // Insert the node at the head of the list
+        Insert(node);
+
+        // Set the value of the node
+        node.Value.Value = value;
+    }
+
+    // Clear method to remove all the key-value pairs from the LRU cache
+    public void Clear()
+    {
+        // Loop through the keys in the lookup map
+        foreach (var key in _lookup.Keys())
+        {
+            // Remove the key-value pair
+            Remove(key);
+        }
+    }
+
+    // Size method to get the number of key-value pairs in the LRU cache
+    public int Size()
+    {
+        return _lookup.Size();
+    }
+
+    // IsEmpty method to check if the LRU cache is empty
+    public bool IsEmpty()
+    {
+        return _lookup.IsEmpty();
+    }
+
+    // Keys method to get the keys in the LRU cache
+    public List<TKey> Keys()
+    {
+        return _lookup.Keys();
+    }
+
+    // Values method to get the values in the LRU cache
+    public List<TValue> Values()
+    {
+        return _reverseLookup.Values();
+    }
+
+    // Print method to print the LRU cache
+    public void Print()
+    {
+        // Loop through the keys in the lookup map
+        foreach (var key in _lookup.Keys())
+        {
+            // Print the key-value pair
+            Console.WriteLine(key + ": " + _lookup.Get(key).Value.Value);
+        }
+    }
+
+    // Insert method to insert a node into the list
+    private void Insert(Node<KeyValuePair<TKey, TValue>> node)
+    {
+        // Check if the list is empty
+        if (_head == null)
+        {
+            // Set the head and tail of the list
+            _head = node;
+            _tail = node;
+            return;
+        }
+
+        // Insert the node at the head of the list
+        node.Next = _head;
+        _head.Previous = node;
+        _head = node;
+    }
+
+    // Remove method to remove a node from the list
+    private void Remove(Node<KeyValuePair<TKey, TValue>> node)
+    {
+        // Check if the list is empty
+        if (_head == null)
+        {
+            return;
+        }
+
+        // Check if the node is the head of the list
+        if (node == _head)
+        {
+            // Remove the node from the head of the list
+            _head = _head.Next;
+            return;
+        }
+
+        // Check if the node is the tail of the list
+        if (node == _tail)
+        {
+            // Remove the node from the tail of the list
+            _tail = _tail.Previous;
+            return;
+        }
+
+        // Remove the node from the list
+        node.Previous.Next = node.Next;
+        node.Next.Previous = node.Previous;
+    }
+
+    // GetHash method to get the hash code of a key
+    private int GetHash(TKey key)
+    {
+        return key.GetHashCode() % _capacity;
     }
 }
 ```
