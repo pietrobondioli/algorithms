@@ -128,6 +128,19 @@
     - [Binary Search Tree](#binary-search-tree)
       - [Description](#description-17)
       - [Implementation](#implementation-15)
+  - [Binary Heap](#binary-heap)
+    - [Description](#description-18)
+    - [Real-World Examples](#real-world-examples-6)
+    - [Characteristics](#characteristics-6)
+    - [Interface](#interface-7)
+    - [Complexity](#complexity-12)
+    - [Implementation](#implementation-16)
+  - [Trie Tree](#trie-tree)
+    - [Description](#description-19)
+    - [Real-World Examples](#real-world-examples-7)
+    - [Interface](#interface-8)
+    - [Complexity](#complexity-13)
+    - [Implementation](#implementation-17)
 
 ## Notes
 
@@ -2828,6 +2841,452 @@ public class BinarySearchTree
         }
 
         return Contains(node, data);
+    }
+}
+```
+
+## Binary Heap
+
+### Description
+
+A binary heap is a binary tree in which the parent node is greater than or equal to the child nodes (max-heap), or the parent node is less than or equal to the child nodes (min-heap). It's often used to implement a priority queue. It's also called heap. That property allows us to find the maximum element in O(1) time. This search algorithm is called max-heap. Whenever a node is added or deleted, the heap must be reorganized to maintain the heap property. This reorganization is called heapify. There is no traversal algorithm for heaps.
+
+### Real-World Examples
+
+- **Priority Queue:** Heaps are used to implement priority queues. Each element in the priority queue is a node in the heap. The priority of each element is determined by the value of the node. The maximum element in the priority queue is the root node of the heap.
+- **Heap Sort:** Heaps are used to implement heap sort. Each element in the array is a node in the heap. The maximum element in the array is the root node of the heap.
+- **Graph Algorithms:** Heaps are used to implement graph algorithms. Each vertex in the graph is a node in the heap. The maximum element in the graph is the root node of the heap.
+
+### Characteristics
+
+- It's a binary tree, meaning that each node has at most two child nodes.
+- It's a complete tree, meaning that every level, except possibly the last, is completely filled, and all nodes are as far left as possible.
+- It's a balanced tree, meaning that the height of the left and right subtrees of every node differs by at most one.
+
+### Interface
+
+- **Insert:** Inserts a new element into the heap.
+- **Remove:** Removes an element from the heap.
+- **Find:** Finds an element in the heap.
+- **Print:** Prints the heap.
+
+### Complexity
+
+| Operation | Complexity |
+| --------- | ---------- |
+| Insert    | O(log n)   |
+| Remove    | O(log n)   |
+| Find      | O(n)       |
+| Print     | O(n)       |
+
+### Implementation
+
+C#:
+
+```csharp
+public class BinaryHeap
+{
+    private int[] _array; // Array to store the elements in the heap
+    private int _count; // Number of elements in the heap
+
+    // Constructor to initialize the heap
+    public BinaryHeap(int capacity)
+    {
+        _array = new int[capacity];
+    }
+
+    // Insert method to add a new element to the heap
+    public void Insert(int value)
+    {
+        // Check if the heap is full
+        if (_count == _array.Length)
+        {
+            // Resize the array
+            var array = new int[_array.Length * 2];
+
+            // Copy the elements from the old array to the new array
+            for (int i = 0; i < _array.Length; i++)
+            {
+                array[i] = _array[i];
+            }
+
+            // Set the new array as the array of the heap
+            _array = array;
+        }
+
+        // Add the new element to the end of the heap
+        _array[_count] = value;
+
+        // Heapify the heap
+        HeapifyUp(_count);
+
+        // Increment the count of elements in the heap
+        _count++;
+    }
+
+    // Remove method to remove an element from the heap
+    public void Remove(int value)
+    {
+        // Find the index of the element to be removed
+        var index = Find(value);
+
+        // Check if the element is not found
+        if (index == -1)
+        {
+            return;
+        }
+
+        // Replace the element with the last element in the heap
+        _array[index] = _array[_count - 1];
+
+        // Decrement the count of elements in the heap
+        _count--;
+
+        // Heapify the heap
+        HeapifyDown(index);
+    }
+
+    // Find method to find an element in the heap
+    public int Find(int value)
+    {
+        // Loop through the elements in the heap
+        for (int i = 0; i < _count; i++)
+        {
+            // Check if the current element is equal to the value
+            if (_array[i] == value)
+            {
+                // Return the index of the element
+                return i;
+            }
+        }
+
+        // Return -1 if the element is not found
+        return -1;
+    }
+
+    // HeapifyUp method to reorganize the heap after inserting an element
+    private void HeapifyUp(int index)
+    {
+        // Find the index of the parent node
+        var parent = (index - 1) / 2;
+
+        // Check if the parent node is greater than the current node
+        if (_array[parent] > _array[index])
+        {
+            // Swap the parent node with the current node
+            Swap(parent, index);
+
+            // Heapify the heap from the parent node
+            HeapifyUp(parent);
+        }
+    }
+
+    // HeapifyDown method to reorganize the heap after removing an element
+    private void HeapifyDown(int index)
+    {
+        // Find the index of the left and right child nodes
+        var left = 2 * index + 1;
+        var right = 2 * index + 2;
+
+        // Check if the left child node is greater than the current node
+        if (left < _count && _array[left] < _array[index])
+        {
+            // Swap the left child node with the current node
+            Swap(left, index);
+
+            // Heapify the heap from the left child node
+            HeapifyDown(left);
+        }
+
+        // Check if the right child node is greater than the current node
+        if (right < _count && _array[right] < _array[index])
+        {
+            // Swap the right child node with the current node
+            Swap(right, index);
+
+            // Heapify the heap from the right child node
+            HeapifyDown(right);
+        }
+    }
+
+    // Swap method to swap two elements in the heap
+    private void Swap(int index1, int index2)
+    {
+        var temp = _array[index1];
+        _array[index1] = _array[index2];
+        _array[index2] = temp;
+    }
+
+    // Print method to print the heap
+    public void Print()
+    {
+        // Loop through the elements in the heap
+        for (int i = 0; i < _count; i++)
+        {
+            // Print the current element
+            Console.Write(_array[i] + " ");
+        }
+
+        // Print a new line
+        Console.WriteLine();
+    }
+}
+```
+
+## Trie Tree
+
+### Description
+
+A trie tree is a tree in which each node represents a character in a string. It's often used to store a collection of strings. It's also called radix tree, prefix tree, or digital tree. That property allows us to search for a string in O(m) time, where m is the length of the string. This search algorithm is called trie search. It looks very similar to the binary search algorithm for arrays, but it's slightly different.
+
+### Real-World Examples
+
+- **Spell Checker:** Tries are used to implement spell checkers. Each word in the dictionary is a node in the trie. The spell checker can then check if a word is spelled correctly by searching for it in the trie.
+- **Auto-Complete:** Tries are used to implement auto-complete. Each word in the dictionary is a node in the trie. The auto-complete can then suggest words by searching for them in the trie.
+- **IP Routing:** Tries are used to implement IP routing. Each IP address is a node in the trie. The IP routing can then find the next hop by searching for the IP address in the trie.
+- **Prefix Matching:** Tries are used to implement prefix matching. Each prefix is a node in the trie. The prefix matching can then find the longest prefix by searching for it in the trie.
+- **Longest Prefix Matching:** Tries are used to implement longest prefix matching. Each prefix is a node in the trie. The longest prefix matching can then find the longest prefix by searching for it in the trie.
+
+### Interface
+
+- **Insert:** Inserts a new string into the trie.
+- **Remove:** Removes a string from the trie.
+- **Contains:** Returns true if the trie contains the specified string.
+- **Print:** Prints the trie.
+
+### Complexity
+
+| Operation | Complexity |
+| --------- | ---------- |
+| Insert    | O(m)       |
+| Remove    | O(m)       |
+| Contains  | O(m)       |
+| Print     | O(n)       |
+
+### Implementation
+
+C#:
+
+```csharp
+public class Node
+{
+    public char Data { get; set; } // Character stored in the node
+    public bool IsEnd { get; set; } // Flag to indicate if the node is the end of a string
+    public Dictionary<char, Node> Children { get; set; } // Dictionary to store the children of the node
+    public int Score { get; set; } // Score of the node
+
+    public Node(char data)
+    {
+        Data = data;
+        Children = new Dictionary<char, Node>();
+    }
+}
+
+public class Trie
+{
+    private Node _root; // Root node of the trie
+
+    // Constructor to initialize the trie
+    public Trie()
+    {
+        _root = new Node('^');
+    }
+
+    // Insert method to add a new string to the trie
+    public void Insert(string word, int score)
+    {
+        var current = _root;
+
+        // Loop through the characters in the string
+        foreach (var ch in word)
+        {
+            // Check if the current character is not in the trie
+            if (!current.Children.ContainsKey(ch))
+            {
+                // Add the current character to the trie
+                current.Children.Add(ch, new Node(ch));
+            }
+
+            // Move to the next node
+            current = current.Children[ch];
+        }
+
+        // Set the end flag to true
+        current.IsEnd = true;
+
+        // Set the score of the node
+        current.Score = score;
+    }
+
+    // Remove method to remove a string from the trie
+    public void Remove(string word)
+    {
+        var current = _root;
+
+        // Loop through the characters in the string
+        foreach (var ch in word)
+        {
+            // Check if the current character is not in the trie
+            if (!current.Children.ContainsKey(ch))
+            {
+                // Return if the string is not found
+                return;
+            }
+
+            // Move to the next node
+            current = current.Children[ch];
+        }
+
+        // Check if the current node is not the end of a string
+        if (!current.IsEnd)
+        {
+            // Return if the string is not found
+            return;
+        }
+
+        // Set the end flag to false
+        current.IsEnd = false;
+    }
+
+    // Contains method to check if the trie contains a string
+    public bool Contains(string word)
+    {
+        var current = _root;
+
+        // Loop through the characters in the string
+        foreach (var ch in word)
+        {
+            // Check if the current character is not in the trie
+            if (!current.Children.ContainsKey(ch))
+            {
+                // Return false if the string is not found
+                return false;
+            }
+
+            // Move to the next node
+            current = current.Children[ch];
+        }
+
+        // Return true if the string is found
+        return true;
+    }
+
+    public int Score(string word)
+    {
+        var current = _root;
+
+        // Loop through the characters in the string
+        foreach (var ch in word)
+        {
+            // Check if the current character is not in the trie
+            if (!current.Children.ContainsKey(ch))
+            {
+                // Return 0 if the string is not found
+                return 0;
+            }
+
+            // Move to the next node
+            current = current.Children[ch];
+        }
+
+        // Return the score of the node
+        return current.Score;
+    }
+
+    private void IncrementScore(string word, int score)
+    {
+        var current = _root;
+
+        // Loop through the characters in the string
+        foreach (var ch in word)
+        {
+            // Check if the current character is not in the trie
+            if (!current.Children.ContainsKey(ch))
+            {
+                // Return if the string is not found
+                return;
+            }
+
+            // Move to the next node
+            current = current.Children[ch];
+        }
+
+        // Increment the score of the node
+        current.Score += score;
+    }
+
+    public string[] AutoComplete(string prefix)
+    {
+        var current = _root;
+
+        // Loop through the characters in the prefix
+        foreach (var ch in prefix)
+        {
+            // Check if the current character is not in the trie
+            if (!current.Children.ContainsKey(ch))
+            {
+                // Return an empty array if the prefix is not found
+                return new string[0];
+            }
+
+            // Move to the next node
+            current = current.Children[ch];
+        }
+
+        // Create a list to store the words
+        var words = new List<string>();
+
+        // Recursively find the words
+        AutoComplete(current, prefix, words);
+
+        // Return the words
+        return words.ToArray();
+    }
+
+    private void AutoComplete(Node node, string prefix, List<string> words)
+    {
+        // Check if the current node is the end of a string
+        if (node.IsEnd)
+        {
+            // Add the word to the list
+            words.Add(prefix);
+            IncrementScore(prefix, 1);
+        }
+
+        // Loop through the children of the current node
+        foreach (var child in node.Children)
+        {
+            // Recursively find the words
+            AutoComplete(child.Value, prefix + child.Key, words);
+        }
+    }
+
+    // Print method to print the trie
+    public void Print()
+    {
+        Print(_root);
+    }
+
+    // Recursive helper method to print the trie
+    private void Print(Node node)
+    {
+        // Print the current node
+        Console.Write(node.Data + " ");
+
+        // Check if the current node is the end of a string
+        if (node.IsEnd)
+        {
+            Console.Write("[" + node.Score + "]");
+        }
+
+        Console.WriteLine();
+
+        // Loop through the children of the current node
+        foreach (var child in node.Children)
+        {
+            // Recursively print the trie
+            Print(child.Value);
+        }
     }
 }
 ```
